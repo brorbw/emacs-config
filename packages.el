@@ -58,6 +58,10 @@
   :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c")
 ;; Large files:1 ends here
 
+;; [[file:config.org::*Definitions][Definitions:1]]
+(package! sdcv-mode :recipe (:local-repo "lisp" :no-byte-compile t))
+;; Definitions:1 ends here
+
 ;; [[file:config.org::*Email][Email:1]]
 (package! org-msg)
 ;; Email:1 ends here

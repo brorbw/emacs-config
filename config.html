@@ -2743,6 +2743,7 @@ table {
 <li><a href="#magit-delta">3.2.3.4. Magit Delta</a></li>
 <li><a href="#info-colours">3.2.3.5. Info colours</a></li>
 <li><a href="#large-files">3.2.3.6. Large files</a></li>
+<li><a href="#definitions">3.2.3.7. Definitions</a></li>
 </ul>
 </li>
 <li><a href="#email">3.2.4. Email</a></li>
@@ -2821,23 +2822,24 @@ table {
 </li>
 <li><a href="#org-chef">4.15. Org Chef</a></li>
 <li><a href="#projectile">4.16. Projectile</a></li>
-<li><a href="#smart-parentheses">4.17. Smart Parentheses</a></li>
-<li><a href="#spray">4.18. Spray</a></li>
-<li><a href="#theme-magic">4.19. Theme magic</a></li>
-<li><input type='checkbox' id='toc--tramp'/><label for='toc--tramp'><a href="#tramp">4.20. Tramp</a></label>
+<li><a href="#stardict">4.17. StarDict</a></li>
+<li><a href="#smart-parentheses">4.18. Smart Parentheses</a></li>
+<li><a href="#spray">4.19. Spray</a></li>
+<li><a href="#theme-magic">4.20. Theme magic</a></li>
+<li><input type='checkbox' id='toc--tramp'/><label for='toc--tramp'><a href="#tramp">4.21. Tramp</a></label>
 <ul>
-<li><input type='checkbox' id='toc--troubleshooting'/><label for='toc--troubleshooting'><a href="#troubleshooting">4.20.1. Troubleshooting</a></label>
+<li><input type='checkbox' id='toc--troubleshooting'/><label for='toc--troubleshooting'><a href="#troubleshooting">4.21.1. Troubleshooting</a></label>
 <ul>
-<li><a href="#zsh">4.20.1.1. Zsh</a></li>
+<li><a href="#zsh">4.21.1.1. Zsh</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#treemacs">4.21. Treemacs</a></li>
-<li><a href="#vterm">4.22. VTerm</a></li>
-<li><a href="#which-key">4.23. Which-key</a></li>
-<li><a href="#xkcd">4.24. xkcd</a></li>
-<li><a href="#yasnippet">4.25. YASnippet</a></li>
+<li><a href="#treemacs">4.22. Treemacs</a></li>
+<li><a href="#vterm">4.23. VTerm</a></li>
+<li><a href="#which-key">4.24. Which-key</a></li>
+<li><a href="#xkcd">4.25. xkcd</a></li>
+<li><a href="#yasnippet">4.26. YASnippet</a></li>
 </ul>
 </li>
 <li><input type='checkbox' id='toc--language-configuration'/><label for='toc--language-configuration'><a href="#language-configuration">5. Language configuration</a></label>
@@ -4332,7 +4334,47 @@ To make VLF available without delaying startup, we&rsquo;ll just load it in quie
 </details>
 </div>
 </div>
+<div id="outline-container-definitions" class="outline-5">
+<h5 id="definitions"><span class="section-number-5">3.2.3.7</span> Definitions<a aria-hidden="true" href="#definitions">#</a> </h5>
+<div class="outline-text-5" id="text-3-2-3-7">
+<p>
+Doom already loads <kbd>define-word</kbd>, and provides it&rsquo;s own definition service using
+<a href="https://github.com/gromnitsky/wordnut">wordnut</a>. However, using an offline dictionary possess a few compelling
+advantages, namely:
+</p>
+<ul class="org-ul">
+<li>speed</li>
+<li>integration of multiple dictionaries</li>
+</ul>
+<p>
+<a href="http://goldendict.org/">GoldenDict</a> seems like the best option currently avalible, but lacks a CLI.
+Hence, we&rsquo;ll fall back to <a href="https://dushistov.github.io/sdcv/">sdcv</a> (a CLI version of StarDict) for now.
+To interface with this, we&rsquo;ll use a local copy of <a href="https://github.com/gucong/emacs-sdcv">emacs-sdcv</a> (to enable easy
+modification).
+</p>
+<details id='definitions,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#definitions,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">package!</span> sdcv-mode <span class="org-builtin">:recipe</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-builtin">:local-repo</span> <span class="org-string">"lisp"</span> <span class="org-builtin">:no-byte-compile</span> t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
 </div>
+</details>
+
+<p>
+Given that a request for a CLI is the most upvoted issue on GitHub for
+GoldenDict, it&rsquo;s likely we&rsquo;ll be able to switch from <code>sdcv</code> to that in the future.
+</p>
+
+<p>
+Since GoldenDict supports StarDict files, I expect this will be a relatively
+painless switch.
+</p>
+</div>
+</div>
+</div>
+
 <div id="outline-container-email" class="outline-4">
 <h4 id="email"><span class="section-number-4">3.2.4</span> Email<a aria-hidden="true" href="#email">#</a> </h4>
 <div class="outline-text-4" id="text-3-2-4">
@@ -6936,9 +6978,28 @@ add package src directories to projectile. This isn&rsquo;t desirable in my opin
 </details>
 </div>
 </div>
-<div id="outline-container-smart-parentheses" class="outline-3">
-<h3 id="smart-parentheses"><span class="section-number-3">4.17</span> Smart Parentheses<a aria-hidden="true" href="#smart-parentheses">#</a> </h3>
+<div id="outline-container-stardict" class="outline-3">
+<h3 id="stardict"><span class="section-number-3">4.17</span> StarDict<a aria-hidden="true" href="#stardict">#</a> </h3>
 <div class="outline-text-3" id="text-4-17">
+<p>
+We start off my loading <kbd>sdcv-mode</kbd>, then we&rsquo;ll integrate it into pre-existing
+definition functionality (like <code>+lookup/dictionary-definition</code>).
+</p>
+<details id='stardict,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#stardict,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package!</span> sdcv-mode
+  <span class="org-builtin">:commands</span> sdcv-search sdcv-list-dictionary<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+<div id="outline-container-smart-parentheses" class="outline-3">
+<h3 id="smart-parentheses"><span class="section-number-3">4.18</span> Smart Parentheses<a aria-hidden="true" href="#smart-parentheses">#</a> </h3>
+<div class="outline-text-3" id="text-4-18">
 <details id='smart-parentheses,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
 <a href='#smart-parentheses,code--1'>#</a>
@@ -6954,8 +7015,8 @@ add package src directories to projectile. This isn&rsquo;t desirable in my opin
 </div>
 </div>
 <div id="outline-container-spray" class="outline-3">
-<h3 id="spray"><span class="section-number-3">4.18</span> Spray<a aria-hidden="true" href="#spray">#</a> </h3>
-<div class="outline-text-3" id="text-4-18">
+<h3 id="spray"><span class="section-number-3">4.19</span> Spray<a aria-hidden="true" href="#spray">#</a> </h3>
+<div class="outline-text-3" id="text-4-19">
 <p>
 Let&rsquo;s make this suit me slightly better.
 </p>
@@ -6972,8 +7033,8 @@ Let&rsquo;s make this suit me slightly better.
 </div>
 </div>
 <div id="outline-container-theme-magic" class="outline-3">
-<h3 id="theme-magic"><span class="section-number-3">4.19</span> Theme magic<a aria-hidden="true" href="#theme-magic">#</a> </h3>
-<div class="outline-text-3" id="text-4-19">
+<h3 id="theme-magic"><span class="section-number-3">4.20</span> Theme magic<a aria-hidden="true" href="#theme-magic">#</a> </h3>
+<div class="outline-text-3" id="text-4-20">
 <p>
 Let&rsquo;s automatically update terminals on theme change
 </p>
@@ -6989,8 +7050,8 @@ Let&rsquo;s automatically update terminals on theme change
 </div>
 </div>
 <div id="outline-container-tramp" class="outline-3">
-<h3 id="tramp"><span class="section-number-3">4.20</span> Tramp<a aria-hidden="true" href="#tramp">#</a> </h3>
-<div class="outline-text-3" id="text-4-20">
+<h3 id="tramp"><span class="section-number-3">4.21</span> Tramp<a aria-hidden="true" href="#tramp">#</a> </h3>
+<div class="outline-text-3" id="text-4-21">
 <p>
 Let&rsquo;s try to make tramp handle prompts better
 </p>
@@ -7007,15 +7068,15 @@ Let&rsquo;s try to make tramp handle prompts better
 </details>
 </div>
 <div id="outline-container-troubleshooting" class="outline-4">
-<h4 id="troubleshooting"><span class="section-number-4">4.20.1</span> Troubleshooting<a aria-hidden="true" href="#troubleshooting">#</a> </h4>
-<div class="outline-text-4" id="text-4-20-1">
+<h4 id="troubleshooting"><span class="section-number-4">4.21.1</span> Troubleshooting<a aria-hidden="true" href="#troubleshooting">#</a> </h4>
+<div class="outline-text-4" id="text-4-21-1">
 <p>
 In case the remote shell is misbehaving, here are some things to try
 </p>
 </div>
 <div id="outline-container-zsh" class="outline-5">
-<h5 id="zsh"><span class="section-number-5">4.20.1.1</span> Zsh<a aria-hidden="true" href="#zsh">#</a> </h5>
-<div class="outline-text-5" id="text-4-20-1-1">
+<h5 id="zsh"><span class="section-number-5">4.21.1.1</span> Zsh<a aria-hidden="true" href="#zsh">#</a> </h5>
+<div class="outline-text-5" id="text-4-21-1-1">
 <p>
 There are some escape code you don&rsquo;t want, let&rsquo;s make it behave more considerately.
 </p>
@@ -7038,8 +7099,8 @@ There are some escape code you don&rsquo;t want, let&rsquo;s make it behave more
 </div>
 </div>
 <div id="outline-container-treemacs" class="outline-3">
-<h3 id="treemacs"><span class="section-number-3">4.21</span> Treemacs<a aria-hidden="true" href="#treemacs">#</a> </h3>
-<div class="outline-text-3" id="text-4-21">
+<h3 id="treemacs"><span class="section-number-3">4.22</span> Treemacs<a aria-hidden="true" href="#treemacs">#</a> </h3>
+<div class="outline-text-3" id="text-4-22">
 <p>
 Quite often there are superfluous files I&rsquo;m not that interested in. There&rsquo;s no
 good reason for them to take up space. Let&rsquo;s add a mechanism to ignore them.
@@ -7112,8 +7173,8 @@ Now, we just identify the files in question.
 </div>
 </div>
 <div id="outline-container-vterm" class="outline-3">
-<h3 id="vterm"><span class="section-number-3">4.22</span> VTerm<a aria-hidden="true" href="#vterm">#</a> </h3>
-<div class="outline-text-3" id="text-4-22">
+<h3 id="vterm"><span class="section-number-3">4.23</span> VTerm<a aria-hidden="true" href="#vterm">#</a> </h3>
+<div class="outline-text-3" id="text-4-23">
 <p>
 On my system, I want to use the <code>vterm</code> lib in <kbd>/usr/bin/libvterm.so</kbd>. This is not
 default behaviour. Without this I see the following error message.
@@ -7150,8 +7211,8 @@ do this yet.
 </div>
 </div>
 <div id="outline-container-which-key" class="outline-3">
-<h3 id="which-key"><span class="section-number-3">4.23</span> Which-key<a aria-hidden="true" href="#which-key">#</a> </h3>
-<div class="outline-text-3" id="text-4-23">
+<h3 id="which-key"><span class="section-number-3">4.24</span> Which-key<a aria-hidden="true" href="#which-key">#</a> </h3>
+<div class="outline-text-3" id="text-4-24">
 <p>
 Let&rsquo;s make this popup a bit faster
 </p>
@@ -7185,8 +7246,8 @@ I also think that having <kbd>evil-</kbd> appear in so many popups is a bit too 
 </div>
 </div>
 <div id="outline-container-xkcd" class="outline-3">
-<h3 id="xkcd"><span class="section-number-3">4.24</span> xkcd<a aria-hidden="true" href="#xkcd">#</a> </h3>
-<div class="outline-text-3" id="text-4-24">
+<h3 id="xkcd"><span class="section-number-3">4.25</span> xkcd<a aria-hidden="true" href="#xkcd">#</a> </h3>
+<div class="outline-text-3" id="text-4-25">
 <p>
 We want to set this up so it loads nicely in <a href="#extra-links">Extra links</a>.
 </p>
@@ -7483,8 +7544,8 @@ Let&rsquo;s also extend the functionality a whole bunch.
 </div>
 </div>
 <div id="outline-container-yasnippet" class="outline-3">
-<h3 id="yasnippet"><span class="section-number-3">4.25</span> YASnippet<a aria-hidden="true" href="#yasnippet">#</a> </h3>
-<div class="outline-text-3" id="text-4-25">
+<h3 id="yasnippet"><span class="section-number-3">4.26</span> YASnippet<a aria-hidden="true" href="#yasnippet">#</a> </h3>
+<div class="outline-text-3" id="text-4-26">
 <p>
 Nested snippets are good, enable that.
 </p>

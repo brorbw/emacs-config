@@ -1088,6 +1088,11 @@ Usefull for affecting some of my HTML export config.")
   (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
 ;; Projectile:1 ends here
 
+;; [[file:config.org::*StarDict][StarDict:1]]
+(use-package! sdcv-mode
+  :commands sdcv-search sdcv-list-dictionary)
+;; StarDict:1 ends here
+
 ;; [[file:config.org::*Smart Parentheses][Smart Parentheses:1]]
 (sp-local-pair
      '(org-mode)
