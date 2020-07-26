@@ -1,10 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 
-;; [[file:config.org::*Prettification][Prettification:1]]
-(package! prettify-utils ; simplify messing with prettify-mode
-  :recipe (:host github :repo "Ilazki/prettify-utils.el") :pin "8b783d316c23bffdf2b9e6f52635482c4812ee43")
-;; Prettification:1 ends here
-
 ;; [[file:config.org::*Window management][Window management:1]]
 (package! rotate :pin "091b5ac4fc310773253efb317e3dbe8e46959ba6")
 ;; Window management:1 ends here
