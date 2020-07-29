@@ -4248,6 +4248,9 @@ theme.
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package!</span> gif-screencast
   <span class="org-builtin">:commands</span> <span class="org-variable-name">gif-screencast-mode</span>
   <span class="org-builtin">:config</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">map!</span> <span class="org-builtin">:map</span> <span class="org-variable-name">gif-screencast-mode-map</span>
+        <span class="org-builtin">:g</span> <span class="org-string">"&lt;f8&gt;"</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">gif-screencast-toggle-pause</span>
+        <span class="org-builtin">:g</span> <span class="org-string">"&lt;f9&gt;"</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">gif-screencast-stop</span><span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">gif-screencast-program</span> <span class="org-string">"maim"</span>
         <span class="org-variable-name">gif-screencast-args</span> <span class="org-highlight-quoted-quote">`</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-string">"--quality"</span> <span class="org-string">"3"</span> <span class="org-string">"-i"</span> ,<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">string-trim-right</span>
                                                      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">shell-command-to-string</span>
@@ -4261,7 +4264,7 @@ theme.
                             <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">cadr</span> c<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-variable-name">doom-themes--colors</span> <span class="org-string">"\n"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
      <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">utf-8</span>
      <span class="org-string">"/tmp/doom-color-theme"</span> <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>gif-screencast-write-colormap<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">gif-screencast-write-colormap</span><span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">doom-load-theme-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">gif-screencast-write-colormap</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
