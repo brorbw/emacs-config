@@ -63,7 +63,8 @@
 ;; Large files:1 ends here
 
 ;; [[file:config.org::*Definitions][Definitions:1]]
-(package! sdcv-mode :recipe (:local-repo "lisp" :no-byte-compile t))
+(package! sdcv-mode :recipe (:host github :repo "tecosaur/sdcv")
+  :pin "7fabf83c74afbd0d0c9f2f0cd16967c9b8bb37d5")
 ;; Definitions:1 ends here
 
 ;; [[file:config.org::*Email][Email:1]]

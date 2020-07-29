@@ -1110,9 +1110,34 @@ Usefull for affecting some of my HTML export config.")
 ;; Projectile:1 ends here
 
 ;; [[file:config.org::*StarDict][StarDict:1]]
-(use-package! sdcv-mode
-  :commands sdcv-search sdcv-list-dictionary)
+(use-package! sdcv
+  :commands sdcv-search sdcv-list-dictionary
+  :config
+  (map! :map sdcv-mode-map
+        :n "q" #'sdcv-return-from-sdcv
+        :nv "RET" #'sdcv-search-word-at-point
+        :n "a" #'outline-show-all
+        :n "h" (cmd! (outline-hide-sublevels 3))
+        :n "o" #'sdcv-toggle-entry
+        :n "n" #'sdcv-next-entry
+        :n "N" (cmd! (sdcv-next-entry t))
+        :n "p" #'sdcv-previous-entry
+        :n "P" (cmd! (sdcv-previous-entry t))
+        :n "b" #'sdcv-search-history-backwards
+        :n "f" #'sdcv-search-history-forwards
+        :n "/" (cmd! (call-interactively #'sdcv-search))))
 ;; StarDict:1 ends here
+
+;; [[file:config.org::*StarDict][StarDict:2]]
+(defadvice! +lookup/dictionary-definition-cdcv (identifier &optional arg)
+  "Look up the definition of the word at point (or selection) using `sdcv-search'."
+  :override #'+lookup/dictionary-definition
+  (interactive
+   (list (or (doom-thing-at-point-or-region 'word)
+             (read-string "Look up in dictionary: "))
+         current-prefix-arg))
+  (sdcv-search identifier nil nil t))
+;; StarDict:2 ends here
 
 ;; [[file:config.org::*Smart Parentheses][Smart Parentheses:1]]
 (sp-local-pair
