@@ -4208,6 +4208,64 @@ let&rsquo;s just make sure this is lazy-loaded appropriately.
 </pre>
 </div>
 </details>
+
+<p>
+In a similar manner, <a href="https://gitlab.com/ambrevar/emacs-gif-screencast">gif-screencast</a> may come in handy.
+</p>
+<details id='fun,code--9' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#fun,code--9'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">package!</span> gif-screencast<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+
+<p>
+We can lazy load this using the start/stop commands.
+</p>
+
+<p>
+I initially installed <code>scrot</code> for this, since it was the default capture program.
+However it raised <code>glib error: Saving to file ... failed</code> each time it was run.
+Google didn&rsquo;t reveal any easy fixed, so I switched to <a href="https://github.com/naelstrof/maim">maim</a>. We now need to pass
+it the window ID. This doesn&rsquo;t change throughout the lifetime of an emacs
+instance, so as long as a single window is used <code>xdotool getactivewindow</code> will
+give a satisfactory result.
+</p>
+
+<p>
+It seems that when new colours appear, that tends to make <code>gifsicle</code> introduce
+artefacts. To avoid this we pre-populate the colour map using the current doom
+theme.
+</p>
+<details id='fun,code--10' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#fun,code--10'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package!</span> gif-screencast
+  <span class="org-builtin">:commands</span> <span class="org-variable-name">gif-screencast-mode</span>
+  <span class="org-builtin">:config</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">gif-screencast-program</span> <span class="org-string">"maim"</span>
+        <span class="org-variable-name">gif-screencast-args</span> <span class="org-highlight-quoted-quote">`</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-string">"--quality"</span> <span class="org-string">"3"</span> <span class="org-string">"-i"</span> ,<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">string-trim-right</span>
+                                                     <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">shell-command-to-string</span>
+                                                      <span class="org-string">"xdotool getactivewindow"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+        <span class="org-variable-name">gif-screencast-optimize-args</span> <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-string">"--batch"</span> <span class="org-string">"--optimize=3"</span> <span class="org-string">"--usecolormap=/tmp/doom-color-theme"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defun</span> <span class="org-function-name">gif-screencast-write-colormap</span> <span class="org-rainbow-delimiters-depth-3">()</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">f-write-text</span>
+     <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">replace-regexp-in-string</span>
+      <span class="org-string">"\n+"</span> <span class="org-string">"\n"</span>
+      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">mapconcat</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-1">(</span>c<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">listp</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> c<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                            <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">cadr</span> c<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-variable-name">doom-themes--colors</span> <span class="org-string">"\n"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+     <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">utf-8</span>
+     <span class="org-string">"/tmp/doom-color-theme"</span> <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>gif-screencast-write-colormap<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">doom-load-theme-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">gif-screencast-write-colormap</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
 </div>
 </div>
 <div id="outline-container-improving-features" class="outline-4">

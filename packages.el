@@ -32,6 +32,10 @@
 (package! keycast :pin "038475c178e90c7bad64d113db26d42cad60e149")
 ;; Fun:7 ends here
 
+;; [[file:config.org::*Fun][Fun:9]]
+(package! gif-screencast)
+;; Fun:9 ends here
+
 ;; [[file:config.org::*Flyspell-lazy][Flyspell-lazy:1]]
 (package! flyspell-lazy :pin "3ebf68cc9eb10c972a2de8d7861cbabbbce69570")
 ;; Flyspell-lazy:1 ends here
