@@ -3014,88 +3014,111 @@ JUSTIFICATION is a symbol for 'left, 'center or 'right."
   (ox-extras-activate '(ignore-headlines)))
 ;; Exporting (general):2 ends here
 
+;; [[file:config.org::*Exporting to HTML][Exporting to HTML:1]]
+(define-minor-mode org-fancy-html-export-mode
+  "Toggle my fabulous org export tweaks. While this mode itself does a little bit,
+the vast majority of the change in behaviour comes from switch statements in:
+ - `org-html-template-fancier'
+ - `org-html--build-meta-info-extended'
+ - `org-html-src-block-collapsable'
+ - `org-html-block-collapsable'
+ - `org-html-table-wrapped'
+ - `org-html--format-toc-headline-colapseable'
+ - `org-html--toc-text-stripped-leaves'
+ - `org-export-html-headline-anchor'"
+  :global t
+  :init-value t
+  (if org-fancy-html-export-mode
+      (setq org-html-style-default org-html-style-fancy
+            org-html-checkbox-type 'html-span)
+    (setq org-html-style-default org-html-style-plain
+          org-html-checkbox-type 'html)))
+;; Exporting to HTML:1 ends here
+
 ;; [[file:config.org::*Extra header content][Extra header content:1]]
-(defadvice! org-html-template-fancier (contents info)
+(defadvice! org-html-template-fancier (orig-fn contents info)
   "Return complete document string after HTML conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options. Adds a few extra things to the body
 compared to the default implementation."
-  :override #'org-html-template
-  (concat
-   (when (and (not (org-html-html5-p info)) (org-html-xhtml-p info))
-     (let* ((xml-declaration (plist-get info :html-xml-declaration))
-      (decl (or (and (stringp xml-declaration) xml-declaration)
-          (cdr (assoc (plist-get info :html-extension)
-          xml-declaration))
-          (cdr (assoc "html" xml-declaration))
-          "")))
-       (when (not (or (not decl) (string= "" decl)))
-   (format "%s\n"
-     (format decl
-       (or (and org-html-coding-system
-          (fboundp 'coding-system-get)
-          (coding-system-get org-html-coding-system 'mime-charset))
-           "iso-8859-1"))))))
-   (org-html-doctype info)
-   "\n"
-   (concat "<html"
-     (cond ((org-html-xhtml-p info)
-      (format
-       " xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"%s\" xml:lang=\"%s\""
-       (plist-get info :language) (plist-get info :language)))
-     ((org-html-html5-p info)
-      (format " lang=\"%s\"" (plist-get info :language))))
-     ">\n")
-   "<head>\n"
-   (org-html--build-meta-info info)
-   (org-html--build-head info)
-   (org-html--build-mathjax-config info)
-   "</head>\n"
-   "<body>\n<input type='checkbox' id='theme-switch'><div id='page'><label id='switch-label' for='theme-switch'></label>"
-   (let ((link-up (org-trim (plist-get info :html-link-up)))
-   (link-home (org-trim (plist-get info :html-link-home))))
-     (unless (and (string= link-up "") (string= link-home ""))
-       (format (plist-get info :html-home/up-format)
-         (or link-up link-home)
-         (or link-home link-up))))
-   ;; Preamble.
-   (org-html--build-pre/postamble 'preamble info)
-   ;; Document contents.
-   (let ((div (assq 'content (plist-get info :html-divs))))
-     (format "<%s id=\"%s\">\n" (nth 1 div) (nth 2 div)))
-   ;; Document title.
-   (when (plist-get info :with-title)
-     (let ((title (and (plist-get info :with-title)
-           (plist-get info :title)))
-     (subtitle (plist-get info :subtitle))
-     (html5-fancy (org-html--html5-fancy-p info)))
-       (when title
-   (format
-    "<div class='page-header'><div class='page-meta'>%s, %s</div><h1 class=\"title\">%s%s</h1></div>\n"
-    (format-time-string "%Y-%m-%d %A %-I:%M%p")
-    (org-export-data (plist-get info :author) info)
-    (org-export-data title info)
-    (if subtitle
-        (format
-         (if html5-fancy
-       "<p class=\"subtitle\">%s</p>\n"
-     (concat "\n" (org-html-close-tag "br" nil info) "\n"
-       "<span class=\"subtitle\">%s</span>\n"))
-         (org-export-data subtitle info))
-      "")))))
-   contents
-   (format "</%s>\n" (nth 1 (assq 'content (plist-get info :html-divs))))
-   ;; Postamble.
-   (org-html--build-pre/postamble 'postamble info)
-   ;; Possibly use the Klipse library live code blocks.
-   (when (plist-get info :html-klipsify-src)
-     (concat "<script>" (plist-get info :html-klipse-selection-script)
-       "</script><script src=\""
-       org-html-klipse-js
-       "\"></script><link rel=\"stylesheet\" type=\"text/css\" href=\""
-       org-html-klipse-css "\"/>"))
-   ;; Closing document.
-   "</div>\n</body>\n</html>"))
+  :around #'org-html-template
+  (if (not org-fancy-html-export-mode)
+      (funcall orig-fn contents info)
+    (concat
+     (when (and (not (org-html-html5-p info)) (org-html-xhtml-p info))
+       (let* ((xml-declaration (plist-get info :html-xml-declaration))
+              (decl (or (and (stringp xml-declaration) xml-declaration)
+                        (cdr (assoc (plist-get info :html-extension)
+                                    xml-declaration))
+                        (cdr (assoc "html" xml-declaration))
+                        "")))
+         (when (not (or (not decl) (string= "" decl)))
+           (format "%s\n"
+                   (format decl
+                           (or (and org-html-coding-system
+                                    (fboundp 'coding-system-get)
+                                    (coding-system-get org-html-coding-system 'mime-charset))
+                               "iso-8859-1"))))))
+     (org-html-doctype info)
+     "\n"
+     (concat "<html"
+             (cond ((org-html-xhtml-p info)
+                    (format
+                     " xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"%s\" xml:lang=\"%s\""
+                     (plist-get info :language) (plist-get info :language)))
+                   ((org-html-html5-p info)
+                    (format " lang=\"%s\"" (plist-get info :language))))
+             ">\n")
+     "<head>\n"
+     (org-html--build-meta-info info)
+     (org-html--build-head info)
+     (org-html--build-mathjax-config info)
+     "</head>\n"
+     "<body>\n<input type='checkbox' id='theme-switch'><div id='page'><label id='switch-label' for='theme-switch'></label>"
+     (let ((link-up (org-trim (plist-get info :html-link-up)))
+           (link-home (org-trim (plist-get info :html-link-home))))
+       (unless (and (string= link-up "") (string= link-home ""))
+         (format (plist-get info :html-home/up-format)
+                 (or link-up link-home)
+                 (or link-home link-up))))
+     ;; Preamble.
+     (org-html--build-pre/postamble 'preamble info)
+     ;; Document contents.
+     (let ((div (assq 'content (plist-get info :html-divs))))
+       (format "<%s id=\"%s\">\n" (nth 1 div) (nth 2 div)))
+     ;; Document title.
+     (when (plist-get info :with-title)
+       (let ((title (and (plist-get info :with-title)
+                         (plist-get info :title)))
+             (subtitle (plist-get info :subtitle))
+             (html5-fancy (org-html--html5-fancy-p info)))
+         (when title
+           (format
+            "<div class='page-header'><div class='page-meta'>%s, %s</div><h1 class=\"title\">%s%s</h1></div>\n"
+            (format-time-string "%Y-%m-%d %A %-I:%M%p")
+            (org-export-data (plist-get info :author) info)
+            (org-export-data title info)
+            (if subtitle
+                (format
+                 (if html5-fancy
+                     "<p class=\"subtitle\">%s</p>\n"
+                   (concat "\n" (org-html-close-tag "br" nil info) "\n"
+                           "<span class=\"subtitle\">%s</span>\n"))
+                 (org-export-data subtitle info))
+              "")))))
+     contents
+     (format "</%s>\n" (nth 1 (assq 'content (plist-get info :html-divs))))
+     ;; Postamble.
+     (org-html--build-pre/postamble 'postamble info)
+     ;; Possibly use the Klipse library live code blocks.
+     (when (plist-get info :html-klipsify-src)
+       (concat "<script>" (plist-get info :html-klipse-selection-script)
+               "</script><script src=\""
+               org-html-klipse-js
+               "\"></script><link rel=\"stylesheet\" type=\"text/css\" href=\""
+               org-html-klipse-css "\"/>"))
+     ;; Closing document.
+     "</div>\n</body>\n</html>")))
 ;; Extra header content:1 ends here
 
 ;; [[file:config.org::*Extra header content][Extra header content:2]]
@@ -3168,29 +3191,33 @@ INFO is a plist used as a communication channel."
      (when (org-string-nw-p keywords)
        (org-html--build-meta-entry "name" "keywords" keywords))
 
-     (org-html--build-meta-entry "name" "theme-color" "#77aa99")
+     (when org-fancy-html-export-mode
+       (concat
+        (org-html--build-meta-entry "name" "theme-color" "#77aa99")
 
-     (org-html--build-meta-entry "property" "og:title" title)
-     (org-html--build-meta-entry "property" "og:type" "article")
-     (org-html--build-meta-entry "property" "og:image" "https://tecosaur.com/resources/org/nib.png")
-     (when (org-string-nw-p author)
-       (org-html--build-meta-entry "property" "og:article:author:first_name" (car (s-split " " author))))
-     (when (and (org-string-nw-p author) (s-contains-p " " author))
-       (org-html--build-meta-entry "property" "og:article:author:first_name" (cdr (s-split-up-to " " author 2))))
-     (org-html--build-meta-entry "property" "og:article:published_time" (format-time-string "%FT%T%z"))
-     (when (org-string-nw-p subtitle)
-       (org-html--build-meta-entry "property" "og:description" subtitle)))))
+        (org-html--build-meta-entry "property" "og:title" title)
+        (org-html--build-meta-entry "property" "og:type" "article")
+        (org-html--build-meta-entry "property" "og:image" "https://tecosaur.com/resources/org/nib.png")
+        (when (org-string-nw-p author)
+          (org-html--build-meta-entry "property" "og:article:author:first_name" (car (s-split " " author))))
+        (when (and (org-string-nw-p author) (s-contains-p " " author))
+          (org-html--build-meta-entry "property" "og:article:author:first_name" (cdr (s-split-up-to " " author 2))))
+        (org-html--build-meta-entry "property" "og:article:published_time" (format-time-string "%FT%T%z"))
+        (when (org-string-nw-p subtitle)
+          (org-html--build-meta-entry "property" "og:description" subtitle)))))))
 ;; Extra header content:2 ends here
 
 ;; [[file:config.org::*Custom CSS/JS][Custom CSS/JS:2]]
 (after! org
-  (setq org-html-style-default
+  (setq org-html-style-fancy
         (concat (f-read-text (expand-file-name "misc/org-export-header.html" doom-private-dir))
               "<script>\n"
               (f-read-text (expand-file-name "misc/pile-css-theme/main.js" doom-private-dir))
               "</script>\n<style>\n"
               (f-read-text (expand-file-name "misc/pile-css-theme/main.css" doom-private-dir))
               "</style>")
+        org-html-style-plain org-html-style-default
+        org-html-style-default  org-html-style-fancy
         org-html-htmlize-output-type 'css
         org-html-doctype "html5"
         org-html-html5-fancy t))
@@ -3200,31 +3227,33 @@ INFO is a plist used as a communication channel."
 (defadvice! org-html-src-block-collapsable (orig-fn src-block contents info)
   "Wrap the usual <pre> block in a <details>"
   :around #'org-html-src-block
-  (let* ((properties (cadr src-block))
-         (lang (mode-name-to-lang-name
-          (plist-get properties :language)))
-         (name (plist-get properties :name))
-         (ref (org-export-get-reference src-block info)))
-    (format
-     "<details id='%s' class='code'%s><summary%s>%s</summary>
+  (if (not org-fancy-html-export-mode)
+      (funcall orig-fn src-block contents info)
+    (let* ((properties (cadr src-block))
+           (lang (mode-name-to-lang-name
+                  (plist-get properties :language)))
+           (name (plist-get properties :name))
+           (ref (org-export-get-reference src-block info)))
+      (format
+       "<details id='%s' class='code'%s><summary%s>%s</summary>
 <div class='gutter'>
 <a href='#%s'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button>\
 </div>
 %s
 </details>"
-     ref
-     (if (member (org-export-read-attribute :attr_html src-block :collapsed)
-                 '("y" "yes" "t" "true"))
-         "" " open")
-     (if name " class='named'" "")
-     (if (not name) (concat "<span class='lang'>" lang "</span>")
-       (format "<span class='name'>%s</span><span class='lang'>%s</span>" name lang))
-     ref
-     (if name
-         (replace-regexp-in-string (format "<pre\\( class=\"[^\"]+\"\\)? id=\"%s\">" ref) "<pre\\1>"
-                                   (funcall orig-fn src-block contents info))
-       (funcall orig-fn src-block contents info)))))
+       ref
+       (if (member (org-export-read-attribute :attr_html src-block :collapsed)
+                   '("y" "yes" "t" "true"))
+           "" " open")
+       (if name " class='named'" "")
+       (if (not name) (concat "<span class='lang'>" lang "</span>")
+         (format "<span class='name'>%s</span><span class='lang'>%s</span>" name lang))
+       ref
+       (if name
+           (replace-regexp-in-string (format "<pre\\( class=\"[^\"]+\"\\)? id=\"%s\">" ref) "<pre\\1>"
+                                     (funcall orig-fn src-block contents info))
+         (funcall orig-fn src-block contents info))))))
 
 (defun mode-name-to-lang-name (mode)
   (or (cadr (assoc mode
@@ -3316,15 +3345,17 @@ INFO is a plist used as a communication channel."
 (after! org
   (defun org-html-block-collapsable (orig-fn block contents info)
     "Wrap the usual block in a <details>"
-    (let ((ref (org-export-get-reference block info))
-          (type (case (car block)
-                  ('property-drawer "Properties")))
-          (collapsed-default (case (car block)
-                  ('property-drawer t)
-                  (t nil)))
-          (collapsed-value (org-export-read-attribute :attr_html block :collapsed)))
-      (format
-       "<details id='%s' class='code'%s>
+    (if (not org-fancy-html-export-mode)
+        (funcall orig-fn block contents info)
+      (let ((ref (org-export-get-reference block info))
+            (type (case (car block)
+                    ('property-drawer "Properties")))
+            (collapsed-default (case (car block)
+                                 ('property-drawer t)
+                                 (t nil)))
+            (collapsed-value (org-export-read-attribute :attr_html block :collapsed)))
+        (format
+         "<details id='%s' class='code'%s>
 <summary%s>%s</summary>
 <div class='gutter'>\
 <a href='#%s'>#</a>
@@ -3332,14 +3363,14 @@ INFO is a plist used as a communication channel."
 </div>
 %s\n
 </details>"
-       ref
-       (if (or (and collapsed-value (member collapsed-value '("y" "yes" "t" "true")))
-               collapsed-default)
-               "" " open")
-       (if type " class='named'" "")
-       (if type (format "<span class='type'>%s</span>" type) "")
-       ref
-       (funcall orig-fn block contents info))))
+         ref
+         (if (or (and collapsed-value (member collapsed-value '("y" "yes" "t" "true")))
+                 collapsed-default)
+             "" " open")
+         (if type " class='named'" "")
+         (if type (format "<span class='type'>%s</span>" type) "")
+         ref
+         (funcall orig-fn block contents info)))))
 
   (advice-add 'org-html-example-block   :around #'org-html-block-collapsable)
   (advice-add 'org-html-fixed-width     :around #'org-html-block-collapsable)
@@ -3350,19 +3381,21 @@ INFO is a plist used as a communication channel."
 (defadvice! org-html-table-wrapped (orig-fn table contents info)
   "Wrap the usual <table> in a <div>"
   :around #'org-html-table
-  (let* ((name (plist-get (cadr table) :name))
-         (ref (org-export-get-reference table info)))
-    (format "<div id='%s' class='table'>
+  (if (not org-fancy-html-export-mode)
+      (funcall orig-fn table contents info)
+    (let* ((name (plist-get (cadr table) :name))
+           (ref (org-export-get-reference table info)))
+      (format "<div id='%s' class='table'>
 <div class='gutter'><a href='#%s'>#</a></div>
 <div class='tabular'>
 %s
 </div>\
 </div>"
-            ref ref
-            (if name
-                (replace-regexp-in-string (format "<table id=\"%s\"" ref) "<table"
-                                          (funcall orig-fn table contents info))
-              (funcall orig-fn table contents info)))))
+              ref ref
+              (if name
+                  (replace-regexp-in-string (format "<table id=\"%s\"" ref) "<table"
+                                            (funcall orig-fn table contents info))
+                (funcall orig-fn table contents info))))))
 ;; Handle table overflow:1 ends here
 
 ;; [[file:config.org::*TOC as a collapsable tree][TOC as a collapsable tree:1]]
@@ -3370,18 +3403,22 @@ INFO is a plist used as a communication channel."
   "Add a label and checkbox to `org-html--format-toc-headline's usual output,
 to allow the TOC to be a collapseable tree."
   :around #'org-html--format-toc-headline
-  (let ((id (or (org-element-property :CUSTOM_ID headline)
-                (org-export-get-reference headline info))))
-    (format "<input type='checkbox' id='toc--%s'/><label for='toc--%s'>%s</label>"
-            id id (funcall orig-fn headline info))))
+  (if (not org-fancy-html-export-mode)
+      (funcall orig-fn headline info)
+    (let ((id (or (org-element-property :CUSTOM_ID headline)
+                  (org-export-get-reference headline info))))
+      (format "<input type='checkbox' id='toc--%s'/><label for='toc--%s'>%s</label>"
+              id id (funcall orig-fn headline info)))))
 ;; TOC as a collapsable tree:1 ends here
 
 ;; [[file:config.org::*TOC as a collapsable tree][TOC as a collapsable tree:2]]
 (defadvice! org-html--toc-text-stripped-leaves (orig-fn toc-entries)
   "Remove label"
   :around #'org-html--toc-text
-  (replace-regexp-in-string "<input [^>]+><label [^>]+>\\(.+?\\)</label></li>" "\\1</li>"
-                            (funcall orig-fn toc-entries)))
+  (if (not org-fancy-html-export-mode)
+      (funcall orig-fn toc-entries)
+    (replace-regexp-in-string "<input [^>]+><label [^>]+>\\(.+?\\)</label></li>" "\\1</li>"
+                              (funcall orig-fn toc-entries))))
 ;; TOC as a collapsable tree:2 ends here
 
 ;; [[file:config.org::*Make verbatim different to code][Make verbatim different to code:1]]
@@ -3405,8 +3442,9 @@ to allow the TOC to be a collapseable tree."
 
 ;; [[file:config.org::*Header anchors][Header anchors:1]]
 (after! org
-  (defun tec/org-export-html-headline-anchor (text backend info)
-    (when (org-export-derived-backend-p backend 'html)
+  (defun org-export-html-headline-anchor (text backend info)
+    (when (and (org-export-derived-backend-p backend 'html)
+               org-fancy-html-export-mode)
       (unless org-msg-currently-exporting
         (replace-regexp-in-string
          "<h\\([0-9]\\) id=\"\\([a-z0-9-]+\\)\">\\(.*[^ ]\\)<\\/h[0-9]>" ; this is quite restrictive, but due to `org-heading-contraction' I can do this
@@ -3414,7 +3452,7 @@ to allow the TOC to be a collapseable tree."
          text))))
 
   (add-to-list 'org-export-filter-headline-functions
-               'tec/org-export-html-headline-anchor))
+               'org-export-html-headline-anchor))
 ;; Header anchors:1 ends here
 
 ;; [[file:config.org::*LaTeX Rendering][LaTeX Rendering:1]]
