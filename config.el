@@ -63,15 +63,15 @@
 (map! :map evil-window-map
       "SPC" #'rotate-layout
        ;; Navigation
-       "C-<left>"     #'evil-window-left
-       "C-<down>"     #'evil-window-down
-       "C-<up>"       #'evil-window-up
-       "C-<right>"    #'evil-window-right
+       "<left>"     #'evil-window-left
+       "<down>"     #'evil-window-down
+       "<up>"       #'evil-window-up
+       "<right>"    #'evil-window-right
        ;; Swapping windows
-       "<left>"       #'+evil/window-move-left
-       "<down>"       #'+evil/window-move-down
-       "<up>"         #'+evil/window-move-up
-       "<right>"      #'+evil/window-move-right)
+       "C-<left>"       #'+evil/window-move-left
+       "C-<down>"       #'+evil/window-move-down
+       "C-<up>"         #'+evil/window-move-up
+       "C-<right>"      #'+evil/window-move-right)
 ;; Windows:4 ends here
 
 ;; [[file:config.org::*Buffer defaults][Buffer defaults:1]]
