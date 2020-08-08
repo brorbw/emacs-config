@@ -1781,7 +1781,8 @@ SQL can be either the emacsql vector representation, or a string."
       org-log-done 'time                          ; having the time a item is done sounds convininet
       org-list-allow-alphabetical t               ; have a. A. a) A) list bullets
       org-export-in-background t                  ; run export processes in external emacs process
-      org-catch-invisible-edits 'smart)           ; try not to accidently do weird stuff in invisible regions
+      org-catch-invisible-edits 'smart            ; try not to accidently do weird stuff in invisible regions
+      org-re-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
 ;; Tweaking defaults:1 ends here
 
 ;; [[file:config.org::*Tweaking defaults][Tweaking defaults:2]]
@@ -1827,7 +1828,7 @@ SQL can be either the emacsql vector representation, or a string."
 ;; Org buffer creation:1 ends here
 
 ;; [[file:config.org::*List bullet sequence][List bullet sequence:1]]
-(setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+")))
+(setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a.")))
 ;; List bullet sequence:1 ends here
 
 ;; [[file:config.org::*Citation][Citation:1]]
