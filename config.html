@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-07-30 Thu 00:03 -->
+<!-- 2020-08-08 Sat 17:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
@@ -12,7 +12,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:image" content="https://tecosaur.com/resources/org/nib.png" />
 <meta property="og:article:author:first_name" content="tecosaur" />
-<meta property="og:article:published_time" content="2020-07-30T00:03:18+0800" />
+<meta property="og:article:published_time" content="2020-08-08T17:05:29+0800" />
 <meta property="og:description" content="The Methods, Management, and Menagerie of Madness" />
 <link rel="icon" href="https://tecosaur.com/resources/org/nib.ico" type="image/ico" />
 
@@ -2661,7 +2661,7 @@ table {
 </head>
 <body>
 <input type='checkbox' id='theme-switch'><div id='page'><label id='switch-label' for='theme-switch'></label><div id="content">
-<div class='page-header'><div class='page-meta'>2020-07-30 Thursday 12:03AM, tecosaur</div><h1 class="title">Doom Emacs Configuration<p class="subtitle">The Methods, Management, and Menagerie of Madness</p>
+<div class='page-header'><div class='page-meta'>2020-08-08 Saturday 5:05PM, tecosaur</div><h1 class="title">Doom Emacs Configuration<p class="subtitle">The Methods, Management, and Menagerie of Madness</p>
 </h1></div>
 <nav id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -2775,7 +2775,7 @@ table {
 <li><a href="#company-ess">4.4.2. ESS</a></li>
 </ul>
 </li>
-<li><input type='checkbox' id='toc--circe-irc'/><label for='toc--circe-irc'><a href="#circe-irc">4.5. Circe (IRC)</a></label>
+<li><input type='checkbox' id='toc--circe'/><label for='toc--circe'><a href="#circe">4.5. Circe</a></label>
 <ul>
 <li><a href="#org-style-emphasis">4.5.1. Org-style emphasis</a></li>
 <li><a href="#emojis">4.5.2. Emojis</a></li>
@@ -4929,15 +4929,62 @@ We then configure the dictionary we&rsquo;re using in <a href="#ispell">Ispell</
 </div>
 </div>
 </div>
-<div id="outline-container-circe-irc" class="outline-3">
-<h3 id="circe-irc"><span class="section-number-3">4.5</span> Circe (IRC)<a aria-hidden="true" href="#circe-irc">#</a> </h3>
+<div id="outline-container-circe" class="outline-3">
+<h3 id="circe"><span class="section-number-3">4.5</span> Circe<a aria-hidden="true" href="#circe">#</a> </h3>
 <div class="outline-text-3" id="text-4-5">
+<p>
+Circe is a client for IRC in Emacs (hey, isn&rsquo;t that a nice project
+name+acronym), and a greek enchantress who turned humans into animals.
+</p>
+
+<p>
+Let&rsquo;s use the former to chat to <del>recluses</del> discerning individuals online.
+</p>
+
 <p>
 <img class='invertable' src='https://imgs.xkcd.com/comics/team_chat.png' title="2078: He announces that he's finally making the jump from screen+irssi to tmux+weechat." alt='Team Chat'>
 </p>
-<details id='circe-irc,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+
+<p>
+Before we start seeing and sending messages, we need to authenticate with our
+IRC servers. The circe manual provided a snippet for putting some of the auth
+details in <kbd>.authinfo.gpg</kbd> &#x2014; but I think we should go further than that: have
+the entire server info in our authinfo.
+</p>
+
+<p>
+First, a reasonable format by which we can specify:
+</p>
+<ul class="org-ul">
+<li>server</li>
+<li>port</li>
+<li>SASL username</li>
+<li>SASL password</li>
+<li>channels to join</li>
+</ul>
+
+<p>
+We can have these stored like so
+</p>
+<details id='circe,code--1' class='code' open><summary><span class='lang'>authinfo</span></summary>
 <div class='gutter'>
-<a href='#circe-irc,code--1'>#</a>
+<a href='#circe,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-authinfo"><span class="org-variable-name">machine</span> <span class="org-builtin">chat.freenode.net</span> <span class="org-keyword">login</span> <span class="org-string">USERNAME</span> <span class="org-constant">password</span> <span class="org-doc">PASSWORD</span> <span class="org-type">port</span> <span class="org-type">PORT</span> for irc channels emacs,org-mode
+</pre>
+</div>
+</details>
+
+<p>
+The <code>for irc</code> bit is used so we can uniquely identify all IRC auth info. By
+omitting the <kbd>#</kbd> in channel names we can have a list of channels comma-separated
+(no space!) which the secrets API will return as a single string.
+</p>
+
+<details id='irc-authinfo-reader' class='code' open><summary class='named'><span class='name'>irc-authinfo-reader</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#irc-authinfo-reader'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">auth-server-pass</span> <span class="org-rainbow-delimiters-depth-2">(</span>server<span class="org-rainbow-delimiters-depth-2">)</span>
@@ -4951,12 +4998,12 @@ We then configure the dictionary we&rsquo;re using in <a href="#ispell">Ispell</
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">require</span> <span class="org-highlight-quoted-quote">'</span><span class="org-constant">dash</span><span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-1">(</span>accounts <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">-filter</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-1">(</span>a<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">string=</span> <span class="org-string">"irc"</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">plist-get</span> a <span class="org-builtin">:for</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
                            <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">auth-source-search</span> <span class="org-builtin">:require</span> <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-builtin">:for</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-builtin">:max</span> <span class="org-highlight-numbers-number">10</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
-    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">appendq!</span> <span class="org-variable-name">circe-network-options</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">appendq!</span> circe-network-options
               <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">mapcar</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">(</span>entry<span class="org-rainbow-delimiters-depth-3">)</span>
                         <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">let*</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">(</span>host <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:host</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                                <span class="org-rainbow-delimiters-depth-2">(</span>label <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:label</span><span class="org-rainbow-delimiters-depth-1">)</span> host<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                                <span class="org-rainbow-delimiters-depth-2">(</span>_ports <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">mapcar</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">string-to-number</span>
-                                              <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">s-split</span> <span class="org-string">","</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:port</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                                               <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">s-split</span> <span class="org-string">","</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:port</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                                <span class="org-rainbow-delimiters-depth-2">(</span>port <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">=</span> <span class="org-highlight-numbers-number">1</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">length</span> _ports<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">car</span> _ports<span class="org-rainbow-delimiters-depth-1">)</span> _ports<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                                <span class="org-rainbow-delimiters-depth-2">(</span>user <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:user</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                                <span class="org-rainbow-delimiters-depth-2">(</span>nick <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:nick</span><span class="org-rainbow-delimiters-depth-1">)</span> user<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
@@ -4967,18 +5014,34 @@ We then configure the dictionary we&rsquo;re using in <a href="#ispell">Ispell</
                             <span class="org-builtin">:sasl-username</span> ,user <span class="org-builtin">:sasl-password</span> auth-server-pass
                             <span class="org-builtin">:channels</span> ,channels<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                       accounts<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> circe
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq-default</span> <span class="org-variable-name">circe-use-tls</span> t<span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">circe-notifications-alert-icon</span> <span class="org-string">"/usr/share/icons/breeze/actions/24/network-connect.svg"</span>
-        <span class="org-variable-name">lui-logging-directory</span> <span class="org-string">"~/.emacs.d/.local/etc/irc"</span>
-        <span class="org-variable-name">lui-logging-file-format</span> <span class="org-string">"{buffer}/%Y/%m-%d.txt"</span>
-        <span class="org-variable-name">circe-format-self-say</span> <span class="org-string">"{nick:+13s} &#9475; {body}"</span><span class="org-rainbow-delimiters-depth-2">)</span>
+<p>
+We&rsquo;ll just call <code>(register-irc-auths)</code> on a hook when we start Circe up.
+</p>
+
+<p>
+Now we&rsquo;re ready to go, let&rsquo;s actually wire-up Circe, with one or two
+configuration tweaks.
+</p>
+<details id='circe,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#circe,code--2'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> circe
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq-default</span> circe-use-tls t<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> circe-notifications-alert-icon <span class="org-string">"/usr/share/icons/breeze/actions/24/network-connect.svg"</span>
+        lui-logging-directory <span class="org-string">"~/.emacs.d/.local/etc/irc"</span>
+        lui-logging-file-format <span class="org-string">"{buffer}/%Y/%m-%d.txt"</span>
+        circe-format-self-say <span class="org-string">"{nick:+13s} &#9475; {body}"</span><span class="org-rainbow-delimiters-depth-2">)</span>
 
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">custom-set-faces!</span>
     <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span>circe-my-message-face <span class="org-builtin">:weight</span> unspecified<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
 
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">enable-lui-logging-globally</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>enable-lui-logging-globally<span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">enable-circe-display-images</span><span class="org-rainbow-delimiters-depth-2">)</span>
 
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defun</span> <span class="org-function-name">lui-org-to-irc</span> <span class="org-rainbow-delimiters-depth-3">()</span>
@@ -5157,15 +5220,43 @@ We then configure the dictionary we&rsquo;re using in <a href="#ispell">Ispell</
       <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">":-|"</span>  . <span class="org-string">"expressionless"</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
 
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defun</span> <span class="org-function-name">named-circe-prompt</span> <span class="org-rainbow-delimiters-depth-3">()</span>
-    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">lui-set-prompt</span>
-     <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">concat</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">propertize</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">format</span> <span class="org-string">"%13s &gt; "</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-variable-name">circe-nick</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span>lui-set-prompt
+     <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">concat</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">propertize</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">format</span> <span class="org-string">"%13s &gt; "</span> <span class="org-rainbow-delimiters-depth-1">(</span>circe-nick<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
                          <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">face</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">circe-prompt-face</span><span class="org-rainbow-delimiters-depth-2">)</span>
              <span class="org-string">""</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">circe-chat-mode-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">named-circe-prompt</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">circe-chat-mode-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">named-circe-prompt</span><span class="org-rainbow-delimiters-depth-2">)</span>
 
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">appendq!</span> <span class="org-variable-name">all-the-icons-mode-icon-alist</span>
-            <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">circe-channel-mode</span> all-the-icons-material <span class="org-string">"message"</span> <span class="org-builtin">:face</span> all-the-icons-lblue<span class="org-rainbow-delimiters-depth-1">)</span>
-              <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">circe-server-mode</span> all-the-icons-material <span class="org-string">"chat_bubble_outline"</span> <span class="org-builtin">:face</span> all-the-icons-purple<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+            <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-1">(</span>circe-channel-mode all-the-icons-material <span class="org-string">"message"</span> <span class="org-builtin">:face</span> all-the-icons-lblue<span class="org-rainbow-delimiters-depth-1">)</span>
+              <span class="org-rainbow-delimiters-depth-1">(</span>circe-server-mode all-the-icons-material <span class="org-string">"chat_bubble_outline"</span> <span class="org-builtin">:face</span> all-the-icons-purple<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">auth-server-pass</span> <span class="org-rainbow-delimiters-depth-2">(</span>server<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">if-let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-1">(</span>secret <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">plist-get</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">car</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">auth-source-search</span> <span class="org-builtin">:host</span> server<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-builtin">:secret</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+      <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">functionp</span> secret<span class="org-rainbow-delimiters-depth-1">)</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">funcall</span> secret<span class="org-rainbow-delimiters-depth-1">)</span> secret<span class="org-rainbow-delimiters-depth-3">)</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">error</span> <span class="org-string">"Could not fetch password for host %s"</span> server<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">register-irc-auths</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">require</span> <span class="org-highlight-quoted-quote">'</span><span class="org-constant">circe</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">require</span> <span class="org-highlight-quoted-quote">'</span><span class="org-constant">dash</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-1">(</span>accounts <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">-filter</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-1">(</span>a<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">string=</span> <span class="org-string">"irc"</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">plist-get</span> a <span class="org-builtin">:for</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+                           <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">auth-source-search</span> <span class="org-builtin">:require</span> <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-builtin">:for</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-builtin">:max</span> <span class="org-highlight-numbers-number">10</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">appendq!</span> circe-network-options
+              <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">mapcar</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">(</span>entry<span class="org-rainbow-delimiters-depth-3">)</span>
+                        <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">let*</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">(</span>host <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:host</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                               <span class="org-rainbow-delimiters-depth-2">(</span>label <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:label</span><span class="org-rainbow-delimiters-depth-1">)</span> host<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                               <span class="org-rainbow-delimiters-depth-2">(</span>_ports <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">mapcar</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">string-to-number</span>
+                                               <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">s-split</span> <span class="org-string">","</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:port</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                               <span class="org-rainbow-delimiters-depth-2">(</span>port <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">=</span> <span class="org-highlight-numbers-number">1</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">length</span> _ports<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">car</span> _ports<span class="org-rainbow-delimiters-depth-1">)</span> _ports<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                               <span class="org-rainbow-delimiters-depth-2">(</span>user <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:user</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                               <span class="org-rainbow-delimiters-depth-2">(</span>nick <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:nick</span><span class="org-rainbow-delimiters-depth-1">)</span> user<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                               <span class="org-rainbow-delimiters-depth-2">(</span>channels <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">mapcar</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-2">(</span>c<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span> <span class="org-string">"#"</span> c<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                                                 <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">s-split</span> <span class="org-string">","</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">plist-get</span> entry <span class="org-builtin">:channels</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                          <span class="org-highlight-quoted-quote">`</span><span class="org-rainbow-delimiters-depth-1">(</span>,label
+                            <span class="org-builtin">:host</span> ,host <span class="org-builtin">:port</span> ,port <span class="org-builtin">:nick</span> ,nick
+                            <span class="org-builtin">:sasl-username</span> ,user <span class="org-builtin">:sasl-password</span> auth-server-pass
+                            <span class="org-builtin">:channels</span> ,channels<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                      accounts<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 
 <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">add-transient-hook!</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">=irc</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">register-irc-auths</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
@@ -5406,8 +5497,8 @@ Now, some actual emojis to use.
 </div>
 </div>
 <div id="outline-container-emacs-anywhere-configuration" class="outline-3">
-<h3 id="emacs-anywhere-configuration"><span class="section-number-3">4.6</span> <a href="https://github.com/zachcurry/emacs-anywhere">Emacs Anywhere</a> configuration<a aria-hidden="true" href="#emacs-anywhere-configuration">#</a> </h3>
-<div class="outline-text-3" id="text-4-6">
+<h3 id="emacs-anywhere-configuration"><span class="section-number-3">4.7</span> <a href="https://github.com/zachcurry/emacs-anywhere">Emacs Anywhere</a> configuration<a aria-hidden="true" href="#emacs-anywhere-configuration">#</a> </h3>
+<div class="outline-text-3" id="text-4-7">
 <p>
 To start with, let&rsquo;s install this.
 </p>
@@ -5543,8 +5634,8 @@ for <code>GFM</code>, otherwise let&rsquo;s just use <code>markdown</code>.
 </div>
 </div>
 <div id="outline-container-eros-eval" class="outline-3">
-<h3 id="eros-eval"><span class="section-number-3">4.7</span> Eros-eval<a aria-hidden="true" href="#eros-eval">#</a> </h3>
-<div class="outline-text-3" id="text-4-7">
+<h3 id="eros-eval"><span class="section-number-3">4.8</span> Eros-eval<a aria-hidden="true" href="#eros-eval">#</a> </h3>
+<div class="outline-text-3" id="text-4-8">
 <p>
 This makes the result of evals with <kbd>gr</kbd> and <kbd>gR</kbd> just slightly prettier. Every bit
 counts right?
@@ -5561,8 +5652,8 @@ counts right?
 </div>
 </div>
 <div id="outline-container-evil" class="outline-3">
-<h3 id="evil"><span class="section-number-3">4.8</span> EVIL<a aria-hidden="true" href="#evil">#</a> </h3>
-<div class="outline-text-3" id="text-4-8">
+<h3 id="evil"><span class="section-number-3">4.9</span> EVIL<a aria-hidden="true" href="#evil">#</a> </h3>
+<div class="outline-text-3" id="text-4-9">
 <p>
 I don&rsquo;t use <code>evil-escape-mode</code>, so I may as well turn it off, I&rsquo;ve heard it
 contributes a typing delay. I&rsquo;m not sure it&rsquo;s much, but it is an extra
@@ -5580,8 +5671,8 @@ contributes a typing delay. I&rsquo;m not sure it&rsquo;s much, but it is an ext
 </div>
 </div>
 <div id="outline-container-flyspell" class="outline-3">
-<h3 id="flyspell"><span class="section-number-3">4.9</span> Flyspell<a aria-hidden="true" href="#flyspell">#</a> </h3>
-<div class="outline-text-3" id="text-4-9">
+<h3 id="flyspell"><span class="section-number-3">4.10</span> Flyspell<a aria-hidden="true" href="#flyspell">#</a> </h3>
+<div class="outline-text-3" id="text-4-10">
 <p>
 At one point, typing became noticeably laggy, Profiling revealed
 <code>flyspell-post-command-hook</code> was responsible for 47% of CPU cycles by itself!
@@ -5599,8 +5690,8 @@ So I&rsquo;m going to make use of <code>flyspell-lazy</code>
 </div>
 </div>
 <div id="outline-container-info-colors" class="outline-3">
-<h3 id="info-colors"><span class="section-number-3">4.10</span> Info colors<a aria-hidden="true" href="#info-colors">#</a> </h3>
-<div class="outline-text-3" id="text-4-10">
+<h3 id="info-colors"><span class="section-number-3">4.11</span> Info colors<a aria-hidden="true" href="#info-colors">#</a> </h3>
+<div class="outline-text-3" id="text-4-11">
 <details id='info-colors,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
 <a href='#info-colors,code--1'>#</a>
@@ -5609,21 +5700,21 @@ So I&rsquo;m going to make use of <code>flyspell-lazy</code>
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package!</span> info-colors
   <span class="org-builtin">:commands</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">info-colors-fontify-node</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">Info-selection-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">info-colors-fontify-node</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">Info-selection-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">info-colors-fontify-node</span><span class="org-rainbow-delimiters-depth-1">)</span>
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">Info-mode-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-variable-name">mixed-pitch-mode</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">Info-mode-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-variable-name">mixed-pitch-mode</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </details>
 </div>
 </div>
 <div id="outline-container-ispell" class="outline-3">
-<h3 id="ispell"><span class="section-number-3">4.11</span> Ispell<a aria-hidden="true" href="#ispell">#</a> </h3>
-<div class="outline-text-3" id="text-4-11">
+<h3 id="ispell"><span class="section-number-3">4.12</span> Ispell<a aria-hidden="true" href="#ispell">#</a> </h3>
+<div class="outline-text-3" id="text-4-12">
 </div>
 <div id="outline-container-downloading-dictionaries" class="outline-4">
-<h4 id="downloading-dictionaries"><span class="section-number-4">4.11.1</span> Downloading dictionaries<a aria-hidden="true" href="#downloading-dictionaries">#</a> </h4>
-<div class="outline-text-4" id="text-4-11-1">
+<h4 id="downloading-dictionaries"><span class="section-number-4">4.12.1</span> Downloading dictionaries<a aria-hidden="true" href="#downloading-dictionaries">#</a> </h4>
+<div class="outline-text-4" id="text-4-12-1">
 <p>
 Let&rsquo;s get a nice big dictionary from <a href="http://app.aspell.net/create">SCOWL Custom List/Dictionary Creator</a> with
 the following configuration
@@ -5638,8 +5729,8 @@ the following configuration
 </div>
 
 <div id="outline-container-hunspell" class="outline-5">
-<h5 id="hunspell"><span class="section-number-5">4.11.1.1</span> Hunspell<a aria-hidden="true" href="#hunspell">#</a> </h5>
-<div class="outline-text-5" id="text-4-11-1-1">
+<h5 id="hunspell"><span class="section-number-5">4.12.1.1</span> Hunspell<a aria-hidden="true" href="#hunspell">#</a> </h5>
+<div class="outline-text-5" id="text-4-12-1-1">
 <details id='hunspell,code--1' class='code' open><summary><span class='lang'>Shell Script</span></summary>
 <div class='gutter'>
 <a href='#hunspell,code--1'>#</a>
@@ -5657,8 +5748,8 @@ unzip <span class="org-string">"hunspell-en-custom.zip"</span>
 </div>
 </div>
 <div id="outline-container-aspell" class="outline-5">
-<h5 id="aspell"><span class="section-number-5">4.11.1.2</span> Aspell<a aria-hidden="true" href="#aspell">#</a> </h5>
-<div class="outline-text-5" id="text-4-11-1-2">
+<h5 id="aspell"><span class="section-number-5">4.12.1.2</span> Aspell<a aria-hidden="true" href="#aspell">#</a> </h5>
+<div class="outline-text-5" id="text-4-12-1-2">
 <details id='aspell,code--1' class='code' open><summary><span class='lang'>Shell Script</span></summary>
 <div class='gutter'>
 <a href='#aspell,code--1'>#</a>
@@ -5677,8 +5768,8 @@ tar -xjf <span class="org-string">"aspell6-en-custom.tar.bz2"</span>
 </div>
 </div>
 <div id="outline-container-configuration" class="outline-4">
-<h4 id="configuration"><span class="section-number-4">4.11.2</span> Configuration<a aria-hidden="true" href="#configuration">#</a> </h4>
-<div class="outline-text-4" id="text-4-11-2">
+<h4 id="configuration"><span class="section-number-4">4.12.2</span> Configuration<a aria-hidden="true" href="#configuration">#</a> </h4>
+<div class="outline-text-4" id="text-4-12-2">
 <details id='configuration,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
 <a href='#configuration,code--1'>#</a>
@@ -5712,8 +5803,8 @@ nearby (also means that if I change the &rsquo;main&rsquo; dictionary I keep my 
 </div>
 </div>
 <div id="outline-container-ivy" class="outline-3">
-<h3 id="ivy"><span class="section-number-3">4.12</span> Ivy<a aria-hidden="true" href="#ivy">#</a> </h3>
-<div class="outline-text-3" id="text-4-12">
+<h3 id="ivy"><span class="section-number-3">4.13</span> Ivy<a aria-hidden="true" href="#ivy">#</a> </h3>
+<div class="outline-text-3" id="text-4-13">
 <p>
 While in an ivy mini-buffer <kbd>C-o</kbd> shows a list of all possible actions one may take.
 By default this is <code>#'ivy-read-action-by-key</code> however a better interface to this
@@ -5746,8 +5837,8 @@ increase the maximum number of items ivy will sort to 40k + a bit, this way
 </div>
 </div>
 <div id="outline-container-magit" class="outline-3">
-<h3 id="magit"><span class="section-number-3">4.13</span> Magit<a aria-hidden="true" href="#magit">#</a> </h3>
-<div class="outline-text-3" id="text-4-13">
+<h3 id="magit"><span class="section-number-3">4.14</span> Magit<a aria-hidden="true" href="#magit">#</a> </h3>
+<div class="outline-text-3" id="text-4-14">
 <p>
 Magit is pretty nice by default. The diffs don&rsquo;t get any
 syntax-highlighting-love though which is a bit sad. Thankfully
@@ -5770,16 +5861,16 @@ into later.
 </div>
 </div>
 <div id="outline-container-mail" class="outline-3">
-<h3 id="mail"><span class="section-number-3">4.14</span> Mail<a aria-hidden="true" href="#mail">#</a> </h3>
-<div class="outline-text-3" id="text-4-14">
+<h3 id="mail"><span class="section-number-3">4.15</span> Mail<a aria-hidden="true" href="#mail">#</a> </h3>
+<div class="outline-text-3" id="text-4-15">
 <p>
 <img class='invertable' src='https://imgs.xkcd.com/comics/email.png' title="My New Year's resolution for 2014-54-12/30/14 Dec:12:1420001642 is to learn these stupid time formatting strings." alt='Email'>
 </p>
 </div>
 
 <div id="outline-container-fetching" class="outline-4">
-<h4 id="fetching"><span class="section-number-4">4.14.1</span> Fetching<a aria-hidden="true" href="#fetching">#</a> </h4>
-<div class="outline-text-4" id="text-4-14-1">
+<h4 id="fetching"><span class="section-number-4">4.15.1</span> Fetching<a aria-hidden="true" href="#fetching">#</a> </h4>
+<div class="outline-text-4" id="text-4-15-1">
 <p>
 The contenders for this seem to be:
 </p>
@@ -5861,8 +5952,8 @@ Let&rsquo;s start off by handling the elisp side of things
 </div>
 
 <div id="outline-container-rebuild-mail-index" class="outline-5">
-<h5 id="rebuild-mail-index"><span class="section-number-5">4.14.1.1</span> Rebuild mail index while using mu4e<a aria-hidden="true" href="#rebuild-mail-index">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-1-1">
+<h5 id="rebuild-mail-index"><span class="section-number-5">4.15.1.1</span> Rebuild mail index while using mu4e<a aria-hidden="true" href="#rebuild-mail-index">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-1-1">
 <details id='rebuild-mail-index,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
 <a href='#rebuild-mail-index,code--1'>#</a>
@@ -5924,8 +6015,8 @@ Let&rsquo;s start off by handling the elisp side of things
 </div>
 
 <div id="outline-container-config-transcoding-" class="outline-5">
-<h5 id="config-transcoding-"><span class="section-number-5">4.14.1.2</span> Config transcoding &amp; service management<a aria-hidden="true" href="#config-transcoding-">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-1-2">
+<h5 id="config-transcoding-"><span class="section-number-5">4.15.1.2</span> Config transcoding &amp; service management<a aria-hidden="true" href="#config-transcoding-">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-1-2">
 <p>
 As long as the <kbd>mbsyncrc</kbd> file exists, this is as easy as running
 </p>
@@ -6327,8 +6418,8 @@ imapnotifyConfigFolder.mkdir(exist_ok=<span class="org-constant">True</span>)
 </div>
 
 <div id="outline-container-fetching-systemd" class="outline-5">
-<h5 id="fetching-systemd"><span class="section-number-5">4.14.1.3</span> Systemd<a aria-hidden="true" href="#fetching-systemd">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-1-3">
+<h5 id="fetching-systemd"><span class="section-number-5">4.15.1.3</span> Systemd<a aria-hidden="true" href="#fetching-systemd">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-1-3">
 <p>
 We then have a service file to run <code>goimapnotify</code> on all of these generated config files.
 We&rsquo;ll use a template service file so we can enable a unit per-account.
@@ -6428,8 +6519,8 @@ Enabling (and starting) this is as simple as
 </div>
 </div>
 <div id="outline-container-indexing-searching" class="outline-4">
-<h4 id="indexing-searching"><span class="section-number-4">4.14.2</span> Indexing/Searching<a aria-hidden="true" href="#indexing-searching">#</a> </h4>
-<div class="outline-text-4" id="text-4-14-2">
+<h4 id="indexing-searching"><span class="section-number-4">4.15.2</span> Indexing/Searching<a aria-hidden="true" href="#indexing-searching">#</a> </h4>
+<div class="outline-text-4" id="text-4-15-2">
 <p>
 This is performed by <a href="https://www.djcbsoftware.nl/code/mu/">Mu</a>. This is a tool for finding emails stored in the <a href="http://en.wikipedia.org/wiki/Maildir">Maildir</a> format.
 According to the homepage, it&rsquo;s main features are
@@ -6484,8 +6575,8 @@ mu --version | head -n <span class="org-highlight-numbers-number">1</span> | sed
 </div>
 </div>
 <div id="outline-container-sending" class="outline-4">
-<h4 id="sending"><span class="section-number-4">4.14.3</span> Sending<a aria-hidden="true" href="#sending">#</a> </h4>
-<div class="outline-text-4" id="text-4-14-3">
+<h4 id="sending"><span class="section-number-4">4.15.3</span> Sending<a aria-hidden="true" href="#sending">#</a> </h4>
+<div class="outline-text-4" id="text-4-15-3">
 <p>
 <a href="https://www.nongnu.org/smtpmail/">SmtpMail</a> seems to be the &rsquo;default&rsquo; starting point, but that&rsquo;s not packaged for
 me. <a href="https://marlam.de/msmtp/">msmtp</a> is however, so I&rsquo;ll give that a shot. Reading around a bit (googling
@@ -6506,8 +6597,8 @@ The config file is <a href="file:///home/tec/.msmtprc">~/.msmtprc</a>
 </div>
 
 <div id="outline-container-system-hackery" class="outline-5">
-<h5 id="system-hackery"><span class="section-number-5">4.14.3.1</span> System hackery<a aria-hidden="true" href="#system-hackery">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-3-1">
+<h5 id="system-hackery"><span class="section-number-5">4.15.3.1</span> System hackery<a aria-hidden="true" href="#system-hackery">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-3-1">
 <p>
 Unfortunately, I seem to have run into a <a href="https://bugs.archlinux.org/task/44994">bug</a> present in my packaged version, so
 we&rsquo;ll just install the latest from source.
@@ -6584,8 +6675,8 @@ earlier on in my <code>$PATH</code>.
 </div>
 
 <div id="outline-container-mu4e" class="outline-4">
-<h4 id="mu4e"><span class="section-number-4">4.14.4</span> Mu4e<a aria-hidden="true" href="#mu4e">#</a> </h4>
-<div class="outline-text-4" id="text-4-14-4">
+<h4 id="mu4e"><span class="section-number-4">4.15.4</span> Mu4e<a aria-hidden="true" href="#mu4e">#</a> </h4>
+<div class="outline-text-4" id="text-4-15-4">
 <p>
 Webmail clients are nice and all, but I still don&rsquo;t believe that SPAs in my
 browser can replaced desktop apps &#x2026; sorry Gmail. I&rsquo;m also liking google less
@@ -6628,8 +6719,8 @@ As I installed mu4e from source, I need to add the <kbd>/usr/local/</kbd> loadpa
 </div>
 
 <div id="outline-container-viewing-mail" class="outline-5">
-<h5 id="viewing-mail"><span class="section-number-5">4.14.4.1</span> Viewing Mail<a aria-hidden="true" href="#viewing-mail">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-4-1">
+<h5 id="viewing-mail"><span class="section-number-5">4.15.4.1</span> Viewing Mail<a aria-hidden="true" href="#viewing-mail">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-4-1">
 <p>
 There seem to be some advantages with using Gnus&rsquo; article view (such as inline
 images), and judging from <a href="https://github.com/djcb/mu/pull/1442#issuecomment-591695814">djcb/mu!1442 (comment)</a> this seems to be the &rsquo;way of
@@ -6894,8 +6985,8 @@ before switching if it is empty.
 </div>
 </div>
 <div id="outline-container-sending-mail" class="outline-5">
-<h5 id="sending-mail"><span class="section-number-5">4.14.4.2</span> Sending Mail<a aria-hidden="true" href="#sending-mail">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-4-2">
+<h5 id="sending-mail"><span class="section-number-5">4.15.4.2</span> Sending Mail<a aria-hidden="true" href="#sending-mail">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-4-2">
 <p>
 Let&rsquo;s send emails too.
 </p>
@@ -7009,8 +7100,8 @@ This may not quite function as intended for now due to <a href="https://github.c
 </div>
 </div>
 <div id="outline-container-getting-notified" class="outline-5">
-<h5 id="getting-notified"><span class="section-number-5">4.14.4.3</span> Getting notified<a aria-hidden="true" href="#getting-notified">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-4-3">
+<h5 id="getting-notified"><span class="section-number-5">4.15.4.3</span> Getting notified<a aria-hidden="true" href="#getting-notified">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-4-3">
 <p>
 For this we can use <kbd>mu4e-alert</kbd>. We can also perform a few tweaks to make it a
 bit more visually appealing.
@@ -7099,8 +7190,8 @@ bit more visually appealing.
 </div>
 </div>
 <div id="outline-container-process-control" class="outline-5">
-<h5 id="process-control"><span class="section-number-5">4.14.4.4</span> Process control<a aria-hidden="true" href="#process-control">#</a> </h5>
-<div class="outline-text-5" id="text-4-14-4-4">
+<h5 id="process-control"><span class="section-number-5">4.15.4.4</span> Process control<a aria-hidden="true" href="#process-control">#</a> </h5>
+<div class="outline-text-5" id="text-4-15-4-4">
 <p>
 Here&rsquo;s what I want
 </p>
@@ -7213,8 +7304,8 @@ in the file and check for exitance too.
 </div>
 </div>
 <div id="outline-container-org-msg" class="outline-4">
-<h4 id="org-msg"><span class="section-number-4">4.14.5</span> Org Msg<a aria-hidden="true" href="#org-msg">#</a> </h4>
-<div class="outline-text-4" id="text-4-14-5">
+<h4 id="org-msg"><span class="section-number-4">4.15.5</span> Org Msg<a aria-hidden="true" href="#org-msg">#</a> </h4>
+<div class="outline-text-4" id="text-4-15-5">
 <details id='org-msg,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
 <a href='#org-msg,code--1'>#</a>
@@ -7474,8 +7565,8 @@ To make this look a little nicer, we will overwrite the default style.
 </div>
 </div>
 <div id="outline-container-org-chef" class="outline-3">
-<h3 id="org-chef"><span class="section-number-3">4.15</span> Org Chef<a aria-hidden="true" href="#org-chef">#</a> </h3>
-<div class="outline-text-3" id="text-4-15">
+<h3 id="org-chef"><span class="section-number-3">4.16</span> Org Chef<a aria-hidden="true" href="#org-chef">#</a> </h3>
+<div class="outline-text-3" id="text-4-16">
 <p>
 Loading after org seems a bit premature. Let&rsquo;s just load it when we try to use
 it, either by command or in a capture template.
@@ -7493,8 +7584,8 @@ it, either by command or in a capture template.
 </div>
 </div>
 <div id="outline-container-projectile" class="outline-3">
-<h3 id="projectile"><span class="section-number-3">4.16</span> Projectile<a aria-hidden="true" href="#projectile">#</a> </h3>
-<div class="outline-text-3" id="text-4-16">
+<h3 id="projectile"><span class="section-number-3">4.17</span> Projectile<a aria-hidden="true" href="#projectile">#</a> </h3>
+<div class="outline-text-3" id="text-4-17">
 <p>
 Looking at documentation via <kbd>SPC h f</kbd> and <kbd>SPC h v</kbd> and looking at the source can
 add package src directories to projectile. This isn&rsquo;t desirable in my opinion.
@@ -7514,8 +7605,8 @@ add package src directories to projectile. This isn&rsquo;t desirable in my opin
 </div>
 </div>
 <div id="outline-container-stardict" class="outline-3">
-<h3 id="stardict"><span class="section-number-3">4.17</span> StarDict<a aria-hidden="true" href="#stardict">#</a> </h3>
-<div class="outline-text-3" id="text-4-17">
+<h3 id="stardict"><span class="section-number-3">4.18</span> StarDict<a aria-hidden="true" href="#stardict">#</a> </h3>
+<div class="outline-text-3" id="text-4-18">
 <p>
 We start off my loading <kbd>sdcv</kbd>, then we&rsquo;ll integrate it into pre-existing
 definition functionality (like <code>+lookup/dictionary-definition</code>).
@@ -7567,8 +7658,8 @@ Now let&rsquo;s use this instead of wordnet.
 </div>
 </div>
 <div id="outline-container-smart-parentheses" class="outline-3">
-<h3 id="smart-parentheses"><span class="section-number-3">4.18</span> Smart Parentheses<a aria-hidden="true" href="#smart-parentheses">#</a> </h3>
-<div class="outline-text-3" id="text-4-18">
+<h3 id="smart-parentheses"><span class="section-number-3">4.19</span> Smart Parentheses<a aria-hidden="true" href="#smart-parentheses">#</a> </h3>
+<div class="outline-text-3" id="text-4-19">
 <details id='smart-parentheses,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
 <a href='#smart-parentheses,code--1'>#</a>
@@ -7584,8 +7675,8 @@ Now let&rsquo;s use this instead of wordnet.
 </div>
 </div>
 <div id="outline-container-spray" class="outline-3">
-<h3 id="spray"><span class="section-number-3">4.19</span> Spray<a aria-hidden="true" href="#spray">#</a> </h3>
-<div class="outline-text-3" id="text-4-19">
+<h3 id="spray"><span class="section-number-3">4.20</span> Spray<a aria-hidden="true" href="#spray">#</a> </h3>
+<div class="outline-text-3" id="text-4-20">
 <p>
 Let&rsquo;s make this suit me slightly better.
 </p>
@@ -7602,8 +7693,8 @@ Let&rsquo;s make this suit me slightly better.
 </div>
 </div>
 <div id="outline-container-theme-magic" class="outline-3">
-<h3 id="theme-magic"><span class="section-number-3">4.20</span> Theme magic<a aria-hidden="true" href="#theme-magic">#</a> </h3>
-<div class="outline-text-3" id="text-4-20">
+<h3 id="theme-magic"><span class="section-number-3">4.21</span> Theme magic<a aria-hidden="true" href="#theme-magic">#</a> </h3>
+<div class="outline-text-3" id="text-4-21">
 <p>
 Let&rsquo;s automatically update terminals on theme change
 </p>
@@ -7619,8 +7710,8 @@ Let&rsquo;s automatically update terminals on theme change
 </div>
 </div>
 <div id="outline-container-tramp" class="outline-3">
-<h3 id="tramp"><span class="section-number-3">4.21</span> Tramp<a aria-hidden="true" href="#tramp">#</a> </h3>
-<div class="outline-text-3" id="text-4-21">
+<h3 id="tramp"><span class="section-number-3">4.22</span> Tramp<a aria-hidden="true" href="#tramp">#</a> </h3>
+<div class="outline-text-3" id="text-4-22">
 <p>
 Let&rsquo;s try to make tramp handle prompts better
 </p>
@@ -7637,15 +7728,15 @@ Let&rsquo;s try to make tramp handle prompts better
 </details>
 </div>
 <div id="outline-container-troubleshooting" class="outline-4">
-<h4 id="troubleshooting"><span class="section-number-4">4.21.1</span> Troubleshooting<a aria-hidden="true" href="#troubleshooting">#</a> </h4>
-<div class="outline-text-4" id="text-4-21-1">
+<h4 id="troubleshooting"><span class="section-number-4">4.22.1</span> Troubleshooting<a aria-hidden="true" href="#troubleshooting">#</a> </h4>
+<div class="outline-text-4" id="text-4-22-1">
 <p>
 In case the remote shell is misbehaving, here are some things to try
 </p>
 </div>
 <div id="outline-container-zsh" class="outline-5">
-<h5 id="zsh"><span class="section-number-5">4.21.1.1</span> Zsh<a aria-hidden="true" href="#zsh">#</a> </h5>
-<div class="outline-text-5" id="text-4-21-1-1">
+<h5 id="zsh"><span class="section-number-5">4.22.1.1</span> Zsh<a aria-hidden="true" href="#zsh">#</a> </h5>
+<div class="outline-text-5" id="text-4-22-1-1">
 <p>
 There are some escape code you don&rsquo;t want, let&rsquo;s make it behave more considerately.
 </p>
@@ -7668,8 +7759,8 @@ There are some escape code you don&rsquo;t want, let&rsquo;s make it behave more
 </div>
 </div>
 <div id="outline-container-treemacs" class="outline-3">
-<h3 id="treemacs"><span class="section-number-3">4.22</span> Treemacs<a aria-hidden="true" href="#treemacs">#</a> </h3>
-<div class="outline-text-3" id="text-4-22">
+<h3 id="treemacs"><span class="section-number-3">4.23</span> Treemacs<a aria-hidden="true" href="#treemacs">#</a> </h3>
+<div class="outline-text-3" id="text-4-23">
 <p>
 Quite often there are superfluous files I&rsquo;m not that interested in. There&rsquo;s no
 good reason for them to take up space. Let&rsquo;s add a mechanism to ignore them.
@@ -7742,8 +7833,8 @@ Now, we just identify the files in question.
 </div>
 </div>
 <div id="outline-container-vterm" class="outline-3">
-<h3 id="vterm"><span class="section-number-3">4.23</span> VTerm<a aria-hidden="true" href="#vterm">#</a> </h3>
-<div class="outline-text-3" id="text-4-23">
+<h3 id="vterm"><span class="section-number-3">4.24</span> VTerm<a aria-hidden="true" href="#vterm">#</a> </h3>
+<div class="outline-text-3" id="text-4-24">
 <p>
 On my system, I want to use the <code>vterm</code> lib in <kbd>/usr/bin/libvterm.so</kbd>. This is not
 default behaviour. Without this I see the following error message.
@@ -7780,8 +7871,8 @@ do this yet.
 </div>
 </div>
 <div id="outline-container-which-key" class="outline-3">
-<h3 id="which-key"><span class="section-number-3">4.24</span> Which-key<a aria-hidden="true" href="#which-key">#</a> </h3>
-<div class="outline-text-3" id="text-4-24">
+<h3 id="which-key"><span class="section-number-3">4.25</span> Which-key<a aria-hidden="true" href="#which-key">#</a> </h3>
+<div class="outline-text-3" id="text-4-25">
 <p>
 Let&rsquo;s make this popup a bit faster
 </p>
@@ -7815,8 +7906,8 @@ I also think that having <kbd>evil-</kbd> appear in so many popups is a bit too 
 </div>
 </div>
 <div id="outline-container-xkcd" class="outline-3">
-<h3 id="xkcd"><span class="section-number-3">4.25</span> xkcd<a aria-hidden="true" href="#xkcd">#</a> </h3>
-<div class="outline-text-3" id="text-4-25">
+<h3 id="xkcd"><span class="section-number-3">4.26</span> xkcd<a aria-hidden="true" href="#xkcd">#</a> </h3>
+<div class="outline-text-3" id="text-4-26">
 <p>
 We want to set this up so it loads nicely in <a href="#extra-links">Extra links</a>.
 </p>
@@ -8113,8 +8204,8 @@ Let&rsquo;s also extend the functionality a whole bunch.
 </div>
 </div>
 <div id="outline-container-yasnippet" class="outline-3">
-<h3 id="yasnippet"><span class="section-number-3">4.26</span> YASnippet<a aria-hidden="true" href="#yasnippet">#</a> </h3>
-<div class="outline-text-3" id="text-4-26">
+<h3 id="yasnippet"><span class="section-number-3">4.27</span> YASnippet<a aria-hidden="true" href="#yasnippet">#</a> </h3>
+<div class="outline-text-3" id="text-4-27">
 <p>
 Nested snippets are good, enable that.
 </p>
@@ -12894,7 +12985,7 @@ Now we just need to load it appropriately.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: tecosaur</p>
-<p class="date">Created: 2020-07-30 Thu 00:03</p>
+<p class="date">Created: 2020-08-08 Sat 17:05</p>
 </div>
 </div>
 </body>
