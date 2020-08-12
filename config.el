@@ -2652,7 +2652,7 @@ appropriate.  In tables, insert a new row or end the table."
            (title (plist-get xkcd-info :title))
            (file (xkcd-download img (string-to-number num))))
       (cond ((org-export-derived-backend-p backend 'html)
-             (format "<img class='invertable' src='%s' title=\"%s\" alt='%s'>" img (subst-char-in-string ?\" ?“ alt) title))
+             (format "<img class='invertible' src='%s' title=\"%s\" alt='%s'>" img (subst-char-in-string ?\" ?“ alt) title))
             ((org-export-derived-backend-p backend 'latex)
              (format "\\begin{figure}[!htb]
   \\centering
