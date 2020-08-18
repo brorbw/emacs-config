@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-08-08 Sat 17:05 -->
+<!-- 2020-08-19 Wed 01:40 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
@@ -12,7 +12,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:image" content="https://tecosaur.com/resources/org/nib.png" />
 <meta property="og:article:author:first_name" content="tecosaur" />
-<meta property="og:article:published_time" content="2020-08-08T17:05:29+0800" />
+<meta property="og:article:published_time" content="2020-08-19T01:40:31+0800" />
 <meta property="og:description" content="The Methods, Management, and Menagerie of Madness" />
 <link rel="icon" href="https://tecosaur.com/resources/org/nib.ico" type="image/ico" />
 
@@ -2667,7 +2667,7 @@ table {
 </head>
 <body>
 <input type='checkbox' id='theme-switch'><div id='page'><label id='switch-label' for='theme-switch'></label><div id="content">
-<div class='page-header'><div class='page-meta'>2020-08-08 Saturday 5:05PM, tecosaur</div><h1 class="title">Doom Emacs Configuration<p class="subtitle">The Methods, Management, and Menagerie of Madness</p>
+<div class='page-header'><div class='page-meta'>2020-08-19 Wednesday 1:40AM, tecosaur</div><h1 class="title">Doom Emacs Configuration<p class="subtitle">The Methods, Management, and Menagerie of Madness</p>
 </h1></div>
 <nav id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -2891,12 +2891,13 @@ table {
 </li>
 <li><a href="#nicer-generated-heading">5.3.2.6. Nicer generated heading IDs</a></li>
 <li><a href="#nicer-org-return">5.3.2.7. Nicer <code>org-return</code></a></li>
-<li><a href="#org-plot">5.3.2.8. Org Plot</a></li>
-<li><input type='checkbox' id='toc--extra-links'/><label for='toc--extra-links'><a href="#extra-links">5.3.2.9. Extra links</a></label>
+<li><a href="#snippet-helper">5.3.2.8. Snippet Helper</a></li>
+<li><a href="#org-plot">5.3.2.9. Org Plot</a></li>
+<li><input type='checkbox' id='toc--extra-links'/><label for='toc--extra-links'><a href="#extra-links">5.3.2.10. Extra links</a></label>
 <ul>
-<li><a href="#extra-links-xkcd">5.3.2.9.1. xkcd</a></li>
-<li><a href="#music">5.3.2.9.2. Music</a></li>
-<li><a href="#youtube">5.3.2.9.3. YouTube</a></li>
+<li><a href="#extra-links-xkcd">5.3.2.10.1. xkcd</a></li>
+<li><a href="#music">5.3.2.10.2. Music</a></li>
+<li><a href="#youtube">5.3.2.10.3. YouTube</a></li>
 </ul>
 </li>
 </ul>
@@ -9808,9 +9809,84 @@ Once again, from <a href="https://github.com/alphapapa/unpackaged.el#org-return-
 </details>
 </div>
 </div>
-<div id="outline-container-org-plot" class="outline-5">
-<h5 id="org-plot"><span class="section-number-5">5.3.2.8</span> Org Plot<a aria-hidden="true" href="#org-plot">#</a> </h5>
+<div id="outline-container-snippet-helper" class="outline-5">
+<h5 id="snippet-helper"><span class="section-number-5">5.3.2.8</span> Snippet Helper<a aria-hidden="true" href="#snippet-helper">#</a> </h5>
 <div class="outline-text-5" id="text-5-3-2-8">
+<p>
+For snippets which want to depend on the <code>#+THING:</code> on the current line.
+This is mostly source blocks, and property args, so let&rsquo;s get fancy with them.
+</p>
+
+<p>
+One-letter snippets are super-convenient, but for them to not be a pain
+everywhere else we&rsquo;ll need a nice condition function to use in yasnippet.
+</p>
+
+<p>
+By having this function give slightly more than a simple <code>t</code> or <code>nil</code>, we can
+use in a second function to get the most popular language without explicit
+global header args.
+</p>
+<details id='snippet-helper,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#snippet-helper,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">+yas/org-src-lang</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Try to find the current language of the src/header at point.</span>
+<span class="org-doc">Return nil otherwise."</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">save-excursion</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">pcase</span>
+        <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">downcase</span>
+         <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">buffer-substring-no-properties</span>
+          <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">goto-char</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">line-beginning-position</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+          <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">ignore-errors</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">1-</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">search-forward</span> <span class="org-string">" "</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">line-end-position</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+              <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">1+</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">point</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">"#+property:"</span>
+       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">when</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">re-search-forward</span> <span class="org-string">"header-args:"</span><span class="org-rainbow-delimiters-depth-3">)</span>
+         <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">buffer-substring-no-properties</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">point</span><span class="org-rainbow-delimiters-depth-1">)</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">and</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">forward-word</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">point</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+              <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">1+</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">point</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">"#+begin_src"</span>
+       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">buffer-substring-no-properties</span>
+        <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">point</span><span class="org-rainbow-delimiters-depth-3">)</span>
+        <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">and</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">forward-word</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">point</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+            <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">1+</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">point</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">"#+header:"</span>
+       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">search-forward</span> <span class="org-string">"#+begin_src"</span><span class="org-rainbow-delimiters-depth-2">)</span>
+       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">+yas/org-src-lang</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span>t nil<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">+yas/org-most-common-no-property-lang</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Find the lang with the most source blocks that has no global header-args, else nil."</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span>src-langs header-langs<span class="org-rainbow-delimiters-depth-3">)</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">save-excursion</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">goto-char</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">point-min</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">search-forward</span> <span class="org-string">"#+begin_src"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span>
+        <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">push</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">+yas/org-src-lang</span><span class="org-rainbow-delimiters-depth-3">)</span> src-langs<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">goto-char</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">point-min</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">re-search-forward</span> <span class="org-string">"#\\+property: +header-args"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span>
+        <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">push</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">+yas/org-src-lang</span><span class="org-rainbow-delimiters-depth-3">)</span> header-langs<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">setq</span> src-langs
+          <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">mapcar</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">car</span>
+                  <span class="org-comment-delimiter">;; </span><span class="org-comment">sort alist by frequency (desc.)</span>
+                  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">sort</span>
+                   <span class="org-comment-delimiter">;; </span><span class="org-comment">generate alist with form (value . frequency)</span>
+                   <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">cl-loop</span> for <span class="org-rainbow-delimiters-depth-1">(</span>n . m<span class="org-rainbow-delimiters-depth-1">)</span> in <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">seq-group-by</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">identity</span> src-langs<span class="org-rainbow-delimiters-depth-1">)</span>
+                            collect <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">cons</span> n <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">length</span> m<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+                   <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-1">(</span>a b<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">&gt;</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">cdr</span> a<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">cdr</span> b<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">car</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">set-difference</span> src-langs header-langs <span class="org-builtin">:test</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">string=</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+<div id="outline-container-org-plot" class="outline-5">
+<h5 id="org-plot"><span class="section-number-5">5.3.2.9</span> Org Plot<a aria-hidden="true" href="#org-plot">#</a> </h5>
+<div class="outline-text-5" id="text-5-3-2-9">
 <p>
 There are two main bits of extra functionality I wan to add
 </p>
@@ -9860,12 +9936,12 @@ case no ticks are shown.</li>
 </div>
 </div>
 <div id="outline-container-extra-links" class="outline-5">
-<h5 id="extra-links"><span class="section-number-5">5.3.2.9</span> Extra links<a aria-hidden="true" href="#extra-links">#</a> </h5>
-<div class="outline-text-5" id="text-5-3-2-9">
+<h5 id="extra-links"><span class="section-number-5">5.3.2.10</span> Extra links<a aria-hidden="true" href="#extra-links">#</a> </h5>
+<div class="outline-text-5" id="text-5-3-2-10">
 </div>
 <div id="outline-container-extra-links-xkcd" class="outline-6">
-<h6 id="extra-links-xkcd"><span class="section-number-6">5.3.2.9.1</span> xkcd<a aria-hidden="true" href="#extra-links-xkcd">#</a> </h6>
-<div class="outline-text-6" id="text-5-3-2-9-1">
+<h6 id="extra-links-xkcd"><span class="section-number-6">5.3.2.10.1</span> xkcd<a aria-hidden="true" href="#extra-links-xkcd">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-2-10-1">
 <p>
 Because xkcd is cool, let&rsquo;s make it as easy and fun as possible to insert them.
 Saving seconds adds up after all! (but only so much)
@@ -9927,8 +10003,8 @@ Saving seconds adds up after all! (but only so much)
 </div>
 </div>
 <div id="outline-container-music" class="outline-6">
-<h6 id="music"><span class="section-number-6">5.3.2.9.2</span> Music<a aria-hidden="true" href="#music">#</a> </h6>
-<div class="outline-text-6" id="text-5-3-2-9-2">
+<h6 id="music"><span class="section-number-6">5.3.2.10.2</span> Music<a aria-hidden="true" href="#music">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-2-10-2">
 <p>
 First, we set up all the necessarily &rsquo;utility&rsquo; functions.
 </p>
@@ -10222,8 +10298,8 @@ Then we integrate this nicely with org-mode
 </div>
 </div>
 <div id="outline-container-youtube" class="outline-6">
-<h6 id="youtube"><span class="section-number-6">5.3.2.9.3</span> YouTube<a aria-hidden="true" href="#youtube">#</a> </h6>
-<div class="outline-text-6" id="text-5-3-2-9-3">
+<h6 id="youtube"><span class="section-number-6">5.3.2.10.3</span> YouTube<a aria-hidden="true" href="#youtube">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-2-10-3">
 <p>
 The <code>[[yt:...]]</code> links preview nicely, but don&rsquo;t export nicely. Thankfully, we can
 fix that.
@@ -13020,7 +13096,7 @@ Now we just need to load it appropriately.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: tecosaur</p>
-<p class="date">Created: 2020-08-08 Sat 17:05</p>
+<p class="date">Created: 2020-08-19 Wed 01:40</p>
 </div>
 </div>
 </body>

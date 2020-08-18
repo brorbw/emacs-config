@@ -2625,6 +2625,56 @@ appropriate.  In tables, insert a new row or end the table."
  :i [return] #'unpackaged/org-return-dwim)
 ;; Nicer ~org-return~:1 ends here
 
+;; [[file:config.org::*Snippet Helper][Snippet Helper:1]]
+(defun +yas/org-src-lang ()
+  "Try to find the current language of the src/header at point.
+Return nil otherwise."
+  (save-excursion
+    (pcase
+        (downcase
+         (buffer-substring-no-properties
+          (goto-char (line-beginning-position))
+          (or (ignore-errors (1- (search-forward " " (line-end-position))))
+              (1+ (point)))))
+      ("#+property:"
+       (when (re-search-forward "header-args:")
+         (buffer-substring-no-properties
+          (point)
+          (or (and (forward-word) (point))
+              (1+ (point))))))
+      ("#+begin_src"
+       (buffer-substring-no-properties
+        (point)
+        (or (and (forward-word) (point))
+            (1+ (point)))))
+      ("#+header:"
+       (search-forward "#+begin_src")
+       (+yas/org-src-lang))
+      (t nil))))
+
+(defun +yas/org-most-common-no-property-lang ()
+  "Find the lang with the most source blocks that has no global header-args, else nil."
+  (let (src-langs header-langs)
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward "#+begin_src" nil t)
+        (push (+yas/org-src-lang) src-langs))
+      (goto-char (point-min))
+      (while (re-search-forward "#\\+property: +header-args" nil t)
+        (push (+yas/org-src-lang) header-langs)))
+
+    (setq src-langs
+          (mapcar #'car
+                  ;; sort alist by frequency (desc.)
+                  (sort
+                   ;; generate alist with form (value . frequency)
+                   (cl-loop for (n . m) in (seq-group-by #'identity src-langs)
+                            collect (cons n (length m)))
+                   (lambda (a b) (> (cdr a) (cdr b))))))
+
+    (car (set-difference src-langs header-langs :test #'string=))))
+;; Snippet Helper:1 ends here
+
 ;; [[file:config.org::*xkcd][xkcd:1]]
 (after! org
   (org-link-set-parameters "xkcd"
