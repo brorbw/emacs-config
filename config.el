@@ -4604,6 +4604,8 @@ preview-default-preamble "\\fi}\"%' \"\\detokenize{\" %t \"}\""))
 ;; Beancount:1 ends here
 
 ;; [[file:config.org::*Authinfo][Authinfo:2]]
-(use-package! authinfo-mode
-  :mode ("authinfo\\.gpg\\'" . authinfo-mode))
+(use-package! authinfo-colour-mode
+  :mode ("authinfo\\.gpg\\'" . authinfo-colour-mode)
+  :config
+  (advice-add 'authinfo-mode :override #'authinfo-colour-mode))
 ;; Authinfo:2 ends here
