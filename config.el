@@ -316,7 +316,12 @@
   (add-hook 'als-post-snippet-expand-hook #'als-tex-fold-maybe))
 ;; LaTeX:3 ends here
 
-;; [[file:config.org::*Extra functionality][Extra functionality:7]]
+;; [[file:config.org::*Extra functionality][Extra functionality:6]]
+(use-package! org-pandoc-import
+  :after org)
+;; Extra functionality:6 ends here
+
+;; [[file:config.org::*Extra functionality][Extra functionality:8]]
 (use-package org-roam-server
   :after org-roam
   :config
@@ -332,7 +337,7 @@
     (interactive)
     (org-roam-server-mode 1)
     (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port))))
-;; Extra functionality:7 ends here
+;; Extra functionality:8 ends here
 
 ;; [[file:config.org::*Abbrev mode][Abbrev mode:1]]
 (use-package abbrev
@@ -1362,35 +1367,35 @@ Usefull for affecting some of my HTML export config.")
   (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
 ;; Projectile:1 ends here
 
-;; [[file:config.org::*StarDict][StarDict:1]]
-(use-package! sdcv
-  :commands sdcv-search sdcv-list-dictionary
+;; [[file:config.org::*Lexic][Lexic:1]]
+(use-package! lexic
+  :commands lexic-search lexic-list-dictionary
   :config
-  (map! :map sdcv-mode-map
-        :n "q" #'sdcv-return-from-sdcv
-        :nv "RET" #'sdcv-search-word-at-point
+  (map! :map lexic-mode-map
+        :n "q" #'lexic-return-from-lexic
+        :nv "RET" #'lexic-search-word-at-point
         :n "a" #'outline-show-all
         :n "h" (cmd! (outline-hide-sublevels 3))
-        :n "o" #'sdcv-toggle-entry
-        :n "n" #'sdcv-next-entry
-        :n "N" (cmd! (sdcv-next-entry t))
-        :n "p" #'sdcv-previous-entry
-        :n "P" (cmd! (sdcv-previous-entry t))
-        :n "b" #'sdcv-search-history-backwards
-        :n "f" #'sdcv-search-history-forwards
-        :n "/" (cmd! (call-interactively #'sdcv-search))))
-;; StarDict:1 ends here
+        :n "o" #'lexic-toggle-entry
+        :n "n" #'lexic-next-entry
+        :n "N" (cmd! (lexic-next-entry t))
+        :n "p" #'lexic-previous-entry
+        :n "P" (cmd! (lexic-previous-entry t))
+        :n "b" #'lexic-search-history-backwards
+        :n "f" #'lexic-search-history-forwards
+        :n "/" (cmd! (call-interactively #'lexic-search))))
+;; Lexic:1 ends here
 
-;; [[file:config.org::*StarDict][StarDict:2]]
-(defadvice! +lookup/dictionary-definition-cdcv (identifier &optional arg)
-  "Look up the definition of the word at point (or selection) using `sdcv-search'."
+;; [[file:config.org::*Lexic][Lexic:2]]
+(defadvice! +lookup/dictionary-definition-lexic (identifier &optional arg)
+  "Look up the definition of the word at point (or selection) using `lexic-search'."
   :override #'+lookup/dictionary-definition
   (interactive
    (list (or (doom-thing-at-point-or-region 'word)
              (read-string "Look up in dictionary: "))
          current-prefix-arg))
-  (sdcv-search identifier nil nil t))
-;; StarDict:2 ends here
+  (lexic-search identifier nil nil t))
+;; Lexic:2 ends here
 
 ;; [[file:config.org::*Smart Parentheses][Smart Parentheses:1]]
 (sp-local-pair

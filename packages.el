@@ -63,8 +63,7 @@
 ;; Large files:1 ends here
 
 ;; [[file:config.org::*Definitions][Definitions:1]]
-(package! sdcv-mode :recipe (:host github :repo "tecosaur/sdcv")
-  :pin "7fabf83c74afbd0d0c9f2f0cd16967c9b8bb37d5")
+(package! lexic :recipe (:local-repo "lisp/lexic"))
 ;; Definitions:1 ends here
 
 ;; [[file:config.org::*Email][Email:1]]
@@ -82,8 +81,7 @@
 
 ;; [[file:config.org::*LaTeX][LaTeX:2]]
 (package! auto-latex-snippets
-  :recipe (:local-repo "~/Desktop/TEC/Programming/GitHub/Auto-LaTeX-Snippets"
-           :no-byte-compile t))
+  :recipe (:local-repo "lisp/Auto-LaTeX-Snippets"))
 ;; LaTeX:2 ends here
 
 ;; [[file:config.org::*Org Mode][Org Mode:1]]
@@ -130,12 +128,13 @@
 ;; Extra functionality:4 ends here
 
 ;; [[file:config.org::*Extra functionality][Extra functionality:5]]
-;; (package! org-plot :recipe (:local-repo "lisp" :no-byte-compile t))
+(package! org-pandoc-import :recipe
+  (:local-repo "lisp/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
 ;; Extra functionality:5 ends here
 
-;; [[file:config.org::*Extra functionality][Extra functionality:6]]
+;; [[file:config.org::*Extra functionality][Extra functionality:7]]
 (package! org-roam-server :pin "bfc70327413948fb7e631f4424fb92c3dbdeafc0")
-;; Extra functionality:6 ends here
+;; Extra functionality:7 ends here
 
 ;; [[file:config.org::*Systemd][Systemd:1]]
 (package! systemd :pin "51c148e09a129ddf33d95276aa0e89d4ef6f8dd2")
