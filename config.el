@@ -3761,7 +3761,7 @@ to allow the TOC to be a collapseable tree."
                'org-export-html-headline-anchor))
 ;; Header anchors:1 ends here
 
-;; [[file:config.org::*LaTeX Rendering][LaTeX Rendering:1]]
+;; [[file:config.org::*Pre-rendered][Pre-rendered:1]]
 (after! org
   (defadvice! org-html-latex-fragment-scaled (latex-fragment _contents info)
     "Transcode a LATEX-FRAGMENT object from Org to HTML.
@@ -3827,11 +3827,43 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
                (org-html--format-image source attributes info)
                info caption label)))))
        (t (org-html--wrap-latex-environment latex-frag info caption label))))))
-;; LaTeX Rendering:1 ends here
+;; Pre-rendered:1 ends here
 
-;; [[file:config.org::*LaTeX Rendering][LaTeX Rendering:2]]
+;; [[file:config.org::*Pre-rendered][Pre-rendered:2]]
 ;; (setq-default org-html-with-latex `dvisvgm)
-;; LaTeX Rendering:2 ends here
+;; Pre-rendered:2 ends here
+
+;; [[file:config.org::*MathJax][MathJax:1]]
+(after! org
+  (setq org-html-mathjax-options
+        '((path "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" )
+          (scale "1")
+          (autonumber "ams")
+          (multlinewidth "85%")
+          (tagindent ".8em")
+          (tagside "right")))
+
+  (setq org-html-mathjax-template
+        "<script>
+MathJax = {
+  chtml: {
+    scale: %SCALE
+  },
+  svg: {
+    scale: %SCALE,
+    fontCache: \"global\"
+  },
+  tex: {
+    tags: \"%AUTONUMBER\",
+    multlineWidth: \"%MULTLINEWIDTH\",
+    tagSide: \"%TAGSIDE\",
+    tagIndent: \"%TAGINDENT\"
+  }
+};
+</script>
+<script type=\"text/javascript\" id=\"MathJax-script\" async
+        src=\"%PATH\"></script>"))
+;; MathJax:1 ends here
 
 ;; [[file:config.org::*Acronyms][Acronyms:1]]
 (after! org

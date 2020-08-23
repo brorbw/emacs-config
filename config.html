@@ -2669,28 +2669,25 @@ table {
     /*]]>*///-->
 // @license-end
 </script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+MathJax = {
+  chtml: {
+    scale: 1
+  },
+  svg: {
+    scale: 1,
+    fontCache: "global"
+  },
+  tex: {
+    tags: "ams",
+    multlineWidth: "85%",
+    tagSide: "right",
+    tagIndent: ".8em"
+  }
+};
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 <input type='checkbox' id='theme-switch'><div id='page'><label id='switch-label' for='theme-switch'></label><div id="content">
@@ -11799,17 +11796,31 @@ It&rsquo;s worth noting that <code>org-msg-currently-exporting</code> is defined
 </p>
 </div>
 </div>
+<div id="outline-container-acronyms" class="outline-6">
+<h6 id="acronyms"><span class="section-number-6">5.3.3.4.9</span> Acronyms<a aria-hidden="true" href="#acronyms">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-3-4-9">
+<p>
+I want to style acronyms nicely. For the sake of convenience in implementation
+I&rsquo;ve actually done this under the <a href="#org-latex-acronyms">LaTeX export section</a>, for the sake of
+convenance in implementation (this transformation was first added there).
+</p>
+</div>
+</div>
 <div id="outline-container-latex-rendering" class="outline-6">
-<h6 id="latex-rendering"><span class="section-number-6">5.3.3.3.9</span> LaTeX Rendering<a aria-hidden="true" href="#latex-rendering">#</a> </h6>
-<div class="outline-text-6" id="text-5-3-3-3-9">
+<h6 id="latex-rendering"><span class="section-number-6">5.3.3.4.10</span> LaTeX Rendering<a aria-hidden="true" href="#latex-rendering">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-3-4-10">
+</div>
+<ol class="org-ol">
+<li><a id="pre-rendered"></a>Pre-rendered<br>
+<div class="outline-text-7" id="text-5-3-3-4-10-1">
 <p>
 When displaying images, we want to resize by the reciprocal of <code>preview-scale</code>.
 Unfortunately that doesn&rsquo;t happen by default, but not to worry! Advice exists.
 </p>
 
-<details id='latex-rendering,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<details id='pre-rendered,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#latex-rendering,code--1'>#</a>
+<a href='#pre-rendered,code--1'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> org
@@ -11885,9 +11896,9 @@ Unfortunately that doesn&rsquo;t happen by default, but not to worry! Advice exi
 On the maths side of things, I consider <code>dvisvgm</code> to be a rather compelling
 option. However this isn&rsquo;t sized very well at the moment.
 </p>
-<details id='latex-rendering,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<details id='pre-rendered,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#latex-rendering,code--2'>#</a>
+<a href='#pre-rendered,code--2'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">(setq-default org-html-with-latex `dvisvgm)</span>
@@ -11895,6 +11906,57 @@ option. However this isn&rsquo;t sized very well at the moment.
 </div>
 </details>
 </div>
+</li>
+
+<li><a id="mathjax"></a>MathJax<br>
+<div class="outline-text-7" id="text-5-3-3-4-10-2">
+<p>
+If MathJax is used, we want to use version 3 instead of the default version 2.
+Looking at a <a href="https://www.intmath.com/cg5/katex-mathjax-comparison.php">comparison</a> we seem to find that it is ~5 times as fast, uses a
+single file instead of multiple, but seems to be a bit bigger unfortunately.
+Thankfully this can be mitigated my adding the <code>async</code> attribute to defer loading.
+</p>
+
+<details id='mathjax,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#mathjax,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> org
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">org-html-mathjax-options</span>
+        <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-1">(</span>path <span class="org-string">"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"</span> <span class="org-rainbow-delimiters-depth-1">)</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span>scale <span class="org-string">"1"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span>autonumber <span class="org-string">"ams"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span>multlinewidth <span class="org-string">"85%"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span>tagindent <span class="org-string">".8em"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+          <span class="org-rainbow-delimiters-depth-1">(</span>tagside <span class="org-string">"right"</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">org-html-mathjax-template</span>
+        <span class="org-string">"&lt;script&gt;</span>
+<span class="org-string">MathJax = {</span>
+<span class="org-string">  chtml: {</span>
+<span class="org-string">    scale: %SCALE</span>
+<span class="org-string">  },</span>
+<span class="org-string">  svg: {</span>
+<span class="org-string">    scale: %SCALE,</span>
+<span class="org-string">    fontCache: \"global\"</span>
+<span class="org-string">  },</span>
+<span class="org-string">  tex: {</span>
+<span class="org-string">    tags: \"%AUTONUMBER\",</span>
+<span class="org-string">    multlineWidth: \"%MULTLINEWIDTH\",</span>
+<span class="org-string">    tagSide: \"%TAGSIDE\",</span>
+<span class="org-string">    tagIndent: \"%TAGINDENT\"</span>
+<span class="org-string">  }</span>
+<span class="org-string">};</span>
+<span class="org-string">&lt;/script&gt;</span>
+<span class="org-string">&lt;script type=\"text/javascript\" id=\"MathJax-script\" async</span>
+<span class="org-string">        src=\"%PATH\"&gt;&lt;/script&gt;"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+</div>
+</li>
+</ol>
 </div>
 </div>
 
