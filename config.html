@@ -2679,19 +2679,27 @@ table {
 <ul>
 <li><input type='checkbox' id='toc--intro'/><label for='toc--intro'><a href="#intro">1. Intro</a></label>
 <ul>
-<li><input type='checkbox' id='toc--notes-unwary-adventurer'/><label for='toc--notes-unwary-adventurer'><a href="#notes-unwary-adventurer">1.1. Notes for the unwary adventurer</a></label>
+<li><input type='checkbox' id='toc--why-emacs'/><label for='toc--why-emacs'><a href="#why-emacs">1.1. Why Emacs?</a></label>
 <ul>
-<li><a href="#extra-requirements">1.1.1. Extra Requirements</a></li>
+<li><a href="#enveloping-editor">1.1.1. The enveloping editor</a></li>
+<li><a href="#some-notably-unique">1.1.2. Some notably unique features</a></li>
+<li><a href="#issues">1.1.3. Issues</a></li>
+<li><a href="#teach-man-fish">1.1.4. Teach a man to fish&#x2026;</a></li>
 </ul>
 </li>
-<li><input type='checkbox' id='toc--current-issues'/><label for='toc--current-issues'><a href="#current-issues">1.2. Current Issues</a></label>
+<li><a href="#editor-comparison">1.2. Editor comparison</a></li>
+<li><input type='checkbox' id='toc--notes-unwary-adventurer'/><label for='toc--notes-unwary-adventurer'><a href="#notes-unwary-adventurer">1.3. Notes for the unwary adventurer</a></label>
 <ul>
-<li><a href="#magit-push-daemon">1.2.1. Magit push in daemon</a></li>
-<li><a href="#calctex-brings-up">1.2.2. CalcTeX brings up compilation buffer</a></li>
-<li><a href="#unread-emails-doesnt">1.2.3. Unread emails doesn&rsquo;t work across Emacs instances</a></li>
+<li><a href="#extra-requirements">1.3.1. Extra Requirements</a></li>
 </ul>
 </li>
-<li><a href="#editor-comparison">1.3. Editor comparison</a></li>
+<li><input type='checkbox' id='toc--current-issues'/><label for='toc--current-issues'><a href="#current-issues">1.4. Current Issues</a></label>
+<ul>
+<li><a href="#magit-push-daemon">1.4.1. Magit push in daemon</a></li>
+<li><a href="#calctex-brings-up">1.4.2. CalcTeX brings up compilation buffer</a></li>
+<li><a href="#unread-emails-doesnt">1.4.3. Unread emails doesn&rsquo;t work across Emacs instances</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><input type='checkbox' id='toc--rudimentary-configuration'/><label for='toc--rudimentary-configuration'><a href="#rudimentary-configuration">2. Rudimentary configuration</a></label>
@@ -3033,155 +3041,171 @@ settled by the day. This is my config, and also a cautionary tale (just replace
 </p>
 </div>
 
-<div id="outline-container-notes-unwary-adventurer" class="outline-3">
-<h3 id="notes-unwary-adventurer"><span class="section-number-3">1.1</span> Notes for the unwary adventurer<a aria-hidden="true" href="#notes-unwary-adventurer">#</a> </h3>
+<div id="outline-container-why-emacs" class="outline-3">
+<h3 id="why-emacs"><span class="section-number-3">1.1</span> Why Emacs?<a aria-hidden="true" href="#why-emacs">#</a> </h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-If you like the look of this, that&rsquo;s marvellous, and I&rsquo;m really happy that I&rsquo;ve
-made something which you may find interesting, however:
-</p>
-<div class="warning">
-<p>
-This config is <i>insidious</i>. Copying the whole thing blindly can easily lead to
-undesired effects. I recommend copying chunks instead.
+Emacs is not a text editor, this is a common misnomer. It is far more apt to
+describe Emacs as Lisp machine providing a generic user-centric text
+manipulation environment.
+In simpler terms one can think of Emacs as a platform for text-related
+applications. It&rsquo;s a vague and generic definition because Emacs itself is
+generic.
 </p>
 
+<p>
+Good with text. How far does that go? A lot further than one initially thinks:
+</p>
+<ul class="org-ul">
+<li><a href="https://orgmode.org/">Task planning</a></li>
+<li><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html">File management</a></li>
+<li><a href="https://github.com/akermu/emacs-libvterm">Terminal emulation</a></li>
+<li><a href="https://www.djcbsoftware.nl/code/mu/mu4e.html">Email client</a></li>
+<li><a href="https://www.gnu.org/software/tramp/">Remote server tool</a></li>
+<li><a href="https://magit.vc/">Git frontend</a></li>
+<li>Web <a href="https://github.com/pashky/restclient.el">client</a>/<a href="https://github.com/skeeto/emacs-web-server">server</a></li>
+<li>and more&#x2026;</li>
+</ul>
+
+<p>
+Ideally, one may use Emacs as <i>the</i> interface to perform <kbd>input → transform →
+output</kbd> cycles, i.e. form a bridge between the human mind and information
+manipulation.
+</p>
 </div>
 
-<p>
-If you are so bold as to wish to steal bits of my config (or if I upgrade and
-wonder why things aren&rsquo;t working), here&rsquo;s a list of sections which rely on
-external setup (i.e. outside of this config).
-</p>
-
-<dl class="org-dl">
-<dt>libvterm</dt><dd>I rely on my distro-provided <kbd>libvterm.so</kbd>, <a href="#vterm">vterm</a> sets a compile flag.
-If this causes issues, just delete the <code>(setq term-module-cmake-args ...)</code> bit.</dd>
-<dt>dictionary</dt><dd>I&rsquo;ve downloaded a custom <a href="http://app.aspell.com/create">SCOWL</a> dictionary, which I use in <a href="#ispell">ispell</a>.
-If this causes issues, just delete the <code>(setq ispell-dictionary ...)</code> bit.</dd>
-<dt>uni-units file</dt><dd>I&rsquo;ve got a file in <kbd>~/.org/.uni-units</kbd> which I use in <code>org-capture</code>
-If this causes issues, just remove the reference to that file in <a href="#capture">Capture</a> and
-instances of <code>unit-prompt</code> used in  <code>(doct ...)</code></dd>
-</dl>
-
-<p>
-Oh, did I mention that I started this config when I didn&rsquo;t know any <kbd>elisp</kbd>, and
-this whole thing is a hack job? If you can suggest any improvements, please do
-so, no matter how much criticism you include I&rsquo;ll appreciate it :)
-</p>
-
-<p>
-<img class='invertible' src='https://imgs.xkcd.com/comics/code_quality.png' title="I honestly didn't think you could even USE emoji in variable names. Or that there were so many different crying ones." alt='Code Quality'>
-</p>
-</div>
-<div id="outline-container-extra-requirements" class="outline-4">
-<h4 id="extra-requirements"><span class="section-number-4">1.1.1</span> Extra Requirements<a aria-hidden="true" href="#extra-requirements">#</a> </h4>
+<div id="outline-container-enveloping-editor" class="outline-4">
+<h4 id="enveloping-editor"><span class="section-number-4">1.1.1</span> The enveloping editor<a aria-hidden="true" href="#enveloping-editor">#</a> </h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
-The lovely <code>doom doctor</code> is good at diagnosing most missing things, but here are a
-few extras.
+Emacs allows one to do more in one place than any other application. Why is this
+good?
 </p>
 <ul class="org-ul">
-<li><p>
-The <a href="https://github.com/dandavison/delta/">Delta</a> binary. It&rsquo;s packaged for some distributions but I installed it with
-</p>
-<details id=',code--1' class='code' open><summary><span class='lang'>Shell Script</span></summary>
-<div class='gutter'>
-<a href='#,code--1'>#</a>
-<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
-<div class="org-src-container">
-<pre class="src src-shell">cargo install git-delta
-</pre>
-</div>
-</details></li>
-<li>A <a href="https://www.tug.org/texlive/">LaTeX Compiler</a> is required for the mathematics rendering performed in <a href="#org">Org</a>,
-and by <a href="#calctex">CalcTeX</a>.</li>
-<li>I use the <a href="https://overpassfont.org/">Overpass</a> font as a go-to sans serif.
-It&rsquo;s used as my <code>doom-variable-pitch-font</code> and in the graph generated by <a href="#roam">Roam</a>.
-I have chosen it because it possesses a few characteristics I consider
-desirable, namely:
-<ul class="org-ul">
-<li>A clean, and legible style. Highway-style fonts tend to be designed to be
-clear at a glance, and work well with a thicker weight, and this is inspired
-by <i>Highway Gothic</i>.</li>
-<li>It&rsquo;s slightly quirky. Look at the diagonal cut on stems for example.
-Helvetica is a masterful design, but I like a bit more pizzazz now and then.</li>
-</ul></li>
-<li>A few LSP servers. Take a look at <a href="init.el">init.el</a> to see which modules have the <code>+lsp</code> flag.</li>
-<li><p>
-The <kbd>cargo-script</kbd> rust crate is required for evaluation of rust blocks by babel.
-As described in the README for <a href="https://github.com/micanzhang/ob-rust">ob-rust</a>. Like <code>delta</code>, this can just be installed
-using cargo.
-</p>
-<details id=',code--2' class='code' open><summary><span class='lang'>Shell Script</span></summary>
-<div class='gutter'>
-<a href='#,code--2'>#</a>
-<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
-<div class="org-src-container">
-<pre class="src src-shell">cargo install cargo-script
-</pre>
-</div>
-</details></li>
+<li>Enables one to complete tasks with a consistent, standard set of keybindings,
+<span class='acr'>gui</span> and editing methods &#x2014; learn once, use everywhere</li>
+<li>Reduced context-switching</li>
+<li>Compressing the stages of a project &#x2014; a more centralised workflow can progress
+with greater ease</li>
+<li>Integration between tasks previously relegated to different applications, but
+with a common subject &#x2014; e.g. linking to an email in a to-do list</li>
 </ul>
 </div>
 </div>
+
+<div id="outline-container-some-notably-unique" class="outline-4">
+<h4 id="some-notably-unique"><span class="section-number-4">1.1.2</span> Some notably unique features<a aria-hidden="true" href="#some-notably-unique">#</a> </h4>
+<div class="outline-text-4" id="text-1-1-2">
+<ul class="org-ul">
+<li>Recursive editing</li>
+<li>Completely introspectable, with pervasive docstrings</li>
+<li>Mutable environment, which can be incrementally modified</li>
+<li>Functionality without applications</li>
+<li>Client-server seperation allows for a daemon, giving near-instant perceived
+startup time.</li>
+</ul>
 </div>
-<div id="outline-container-current-issues" class="outline-3">
-<h3 id="current-issues"><span class="section-number-3">1.2</span> Current Issues<a aria-hidden="true" href="#current-issues">#</a> </h3>
-<div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-magit-push-daemon" class="outline-4">
-<h4 id="magit-push-daemon"><span class="section-number-4">1.2.1</span> Magit push in daemon<a aria-hidden="true" href="#magit-push-daemon">#</a> </h4>
-<div class="outline-text-4" id="text-1-2-1">
+
+<div id="outline-container-issues" class="outline-4">
+<h4 id="issues"><span class="section-number-4">1.1.3</span> Issues<a aria-hidden="true" href="#issues">#</a> </h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li>Emacs has irritating quirks</li>
+<li>Some aspects are showing their age (naming conventions, <span class='acr'>api</span><small>s</small>)</li>
+<li>Emacs is (<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Threads.html">mostly</a>) single-threaded, meaning that when something holds that
+thread up the whole application freezes</li>
+<li>A few other nuisances</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-teach-man-fish" class="outline-4">
+<h4 id="teach-man-fish"><span class="section-number-4">1.1.4</span> Teach a man to fish&#x2026;<a aria-hidden="true" href="#teach-man-fish">#</a> </h4>
+<div class="outline-text-4" id="text-1-1-4">
+<blockquote>
 <p>
-Quite often trying to push to a remote in the Emacs daemon produces as error like this:
+Give a man a fish, and you feed him for a day. Teach a man to fish, and you feed
+him for a lifetime. &#x2014; Anne Isabella
 </p>
-<details id='magit-push-daemon,code--1' class='code' open><summary><span class='lang'>fundamental</span></summary>
+</blockquote>
+
+<p>
+Most popular editors have a simple and pretty <a href="https://code.visualstudio.com/docs/getstarted/settings">settings interface</a>, filled with
+check-boxes, selects, and the occasional text-box. This makes it easy for the
+user to pick between common desirable behaviours. To me this is now like <i>giving
+a man a fish</i>.
+</p>
+
+<p>
+What if you want one of those &rsquo;check-box&rsquo; settings to be only on in certain
+conditions? Some editors have workspace settings, but that requires you to
+manually set the value for <i>every single instance</i>. Urgh, <a href="https://github.com/microsoft/vscode/issues/93153">what</a> <a href="https://github.com/microsoft/vscode/issues/93628">a</a> <a href="https://github.com/microsoft/vscode/issues/5595">pain</a>.
+</p>
+
+<p>
+What if you could set the value of that &rsquo;check-box&rsquo; setting to be the result of
+an arbitrary expression evaluated for each file? This is where an editor like
+Emacs comes in.
+Configuration for Emacs isn&rsquo;t a list of settings in <span class='acr'>json</span> etc. it&rsquo;s <b>an executable
+program which modifies the behaviour of the editor to suit your liking</b>.
+This is &rsquo;teaching a man to fish&rsquo;.
+</p>
+
+<p>
+Emacs is built in the same language you configure it in (Emacs <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a>, or <a href="https://www.gnu.org/software/emacs/manual/html_node/eintr/">elisp</a>).
+It comes with a broad array of useful functions for text-editing, and Doom adds
+a few handy little convenience functions.
+</p>
+
+<p>
+Want to add a keybinding to delete the previous line? It&rsquo;s as easy as
+</p>
+<details id='keybinding-delete-previous' class='code' open><summary class='named'><span class='name'>Keybinding to delete the previous line</span><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#magit-push-daemon,code--1'>#</a>
+<a href='#keybinding-delete-previous'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
-<pre class="src src-fundamental">128 git &#8230; push -v origin refs/heads/master\:refs/heads/master
-Pushing to git@github.com:tecosaur/emacs-config.git
-
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">map!</span> <span class="org-string">"C-d"</span>
+      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">cmd!</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">previous-line</span><span class="org-rainbow-delimiters-depth-3">)</span>
+            <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">kill-line</span><span class="org-rainbow-delimiters-depth-3">)</span>
+            <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">forward-line</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </details>
-</div>
-</div>
-<div id="outline-container-calctex-brings-up" class="outline-4">
-<h4 id="calctex-brings-up"><span class="section-number-4">1.2.2</span> CalcTeX brings up compilation buffer<a aria-hidden="true" href="#calctex-brings-up">#</a> </h4>
-<div class="outline-text-4" id="text-1-2-2">
+
 <p>
-With my <a href="#calc">Calc</a> hook, the first call of <kbd>M-x calc</kbd> brings up a compilation buffer
-from CalcTeX. I&rsquo;m guessing this is from the compilation of the preamble / <code>.fmt</code> file.
+How about another example, say you want to be presented with a list of currently
+open <i>buffers</i> (think files, almost) when you split the window. It&rsquo;s as simple as
 </p>
+<details id='prompt-buffer-after' class='code' open><summary class='named'><span class='name'>Prompt for buffer after split</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#prompt-buffer-after'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defadvice!</span> prompt-for-buffer <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-type">&amp;rest</span> _<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-builtin">:after</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">window-split</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">switch-to-buffer</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
 </div>
-</div>
-<div id="outline-container-unread-emails-doesnt" class="outline-4">
-<h4 id="unread-emails-doesnt"><span class="section-number-4">1.2.3</span> Unread emails doesn&rsquo;t work across Emacs instances<a aria-hidden="true" href="#unread-emails-doesnt">#</a> </h4>
-<div class="outline-text-4" id="text-1-2-3">
+</details>
+
 <p>
-It would be nice if it did, so that I could have the Emacs-daemon hold the
-active mu4e session, but still get that information. In this case I&rsquo;d want to
-change the action to open the Emacs daemon, but it should be possible.
+Want to test it out? You don&rsquo;t need to save and restart, you can just <i>evaluate
+the expression</i> within your current Emacs instance and try it immediately! This
+editor is, after all, a Lisp interpreter.
 </p>
 
 <p>
-This would probably involve hooking into the daemon&rsquo;s modeline update function
-to write to a temporary file, and having a file watcher started in other Emacs
-instances, in a similar manner to <a href="#rebuild-mail-index">Rebuild mail index while using mu4e</a>.
+Want to tweak the behaviour? Just re-evaluate your new version &#x2014; it&rsquo;s a
+super-tight iteration loop.
 </p>
 </div>
 </div>
 </div>
+
 <div id="outline-container-editor-comparison" class="outline-3">
-<h3 id="editor-comparison"><span class="section-number-3">1.3</span> Editor comparison<a aria-hidden="true" href="#editor-comparison">#</a> </h3>
-<div class="outline-text-3" id="text-1-3">
+<h3 id="editor-comparison"><span class="section-number-3">1.2</span> Editor comparison<a aria-hidden="true" href="#editor-comparison">#</a> </h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 <img class='invertible' src='https://imgs.xkcd.com/comics/real_programmers.png' title="Real programmers set the universal constants at the start such that the universe evolves to contain the disk with the data they want." alt='Real Programmers'>
 </p>
@@ -3295,7 +3319,157 @@ I have attempted to quantify aspects of my impressions of them below.
 </figure>
 </div>
 </div>
+
+<div id="outline-container-notes-unwary-adventurer" class="outline-3">
+<h3 id="notes-unwary-adventurer"><span class="section-number-3">1.3</span> Notes for the unwary adventurer<a aria-hidden="true" href="#notes-unwary-adventurer">#</a> </h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+If you like the look of this, that&rsquo;s marvellous, and I&rsquo;m really happy that I&rsquo;ve
+made something which you may find interesting, however:
+</p>
+<div class="warning">
+<p>
+This config is <i>insidious</i>. Copying the whole thing blindly can easily lead to
+undesired effects. I recommend copying chunks instead.
+</p>
+
 </div>
+
+<p>
+If you are so bold as to wish to steal bits of my config (or if I upgrade and
+wonder why things aren&rsquo;t working), here&rsquo;s a list of sections which rely on
+external setup (i.e. outside of this config).
+</p>
+
+<dl class="org-dl">
+<dt>libvterm</dt><dd>I rely on my distro-provided <kbd>libvterm.so</kbd>, <a href="#vterm">vterm</a> sets a compile flag.
+If this causes issues, just delete the <code>(setq term-module-cmake-args ...)</code> bit.</dd>
+<dt>dictionary</dt><dd>I&rsquo;ve downloaded a custom <a href="http://app.aspell.com/create"><span class='acr'>scowl</span></a> dictionary, which I use in <a href="#ispell">ispell</a>.
+If this causes issues, just delete the <code>(setq ispell-dictionary ...)</code> bit.</dd>
+<dt>uni-units file</dt><dd>I&rsquo;ve got a file in <kbd>~/.org/.uni-units</kbd> which I use in <code>org-capture</code>
+If this causes issues, just remove the reference to that file in <a href="#capture">Capture</a> and
+instances of <code>unit-prompt</code> used in  <code>(doct ...)</code></dd>
+</dl>
+
+<p>
+Oh, did I mention that I started this config when I didn&rsquo;t know any <kbd>elisp</kbd>, and
+this whole thing is a hack job? If you can suggest any improvements, please do
+so, no matter how much criticism you include I&rsquo;ll appreciate it :)
+</p>
+
+<p>
+<img class='invertible' src='https://imgs.xkcd.com/comics/code_quality.png' title="I honestly didn't think you could even USE emoji in variable names. Or that there were so many different crying ones." alt='Code Quality'>
+</p>
+</div>
+
+<div id="outline-container-extra-requirements" class="outline-4">
+<h4 id="extra-requirements"><span class="section-number-4">1.3.1</span> Extra Requirements<a aria-hidden="true" href="#extra-requirements">#</a> </h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+The lovely <code>doom doctor</code> is good at diagnosing most missing things, but here are a
+few extras.
+</p>
+<ul class="org-ul">
+<li><p>
+The <a href="https://github.com/dandavison/delta/">Delta</a> binary. It&rsquo;s packaged for some distributions but I installed it with
+</p>
+<details id=',code--1' class='code' open><summary><span class='lang'>Shell Script</span></summary>
+<div class='gutter'>
+<a href='#,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-shell">cargo install git-delta
+</pre>
+</div>
+</details></li>
+<li>A <a href="https://www.tug.org/texlive/">LaTeX Compiler</a> is required for the mathematics rendering performed in <a href="#org">Org</a>,
+and by <a href="#calctex">CalcTeX</a>.</li>
+<li>I use the <a href="https://overpassfont.org/">Overpass</a> font as a go-to sans serif.
+It&rsquo;s used as my <code>doom-variable-pitch-font</code> and in the graph generated by <a href="#roam">Roam</a>.
+I have chosen it because it possesses a few characteristics I consider
+desirable, namely:
+<ul class="org-ul">
+<li>A clean, and legible style. Highway-style fonts tend to be designed to be
+clear at a glance, and work well with a thicker weight, and this is inspired
+by <i>Highway Gothic</i>.</li>
+<li>It&rsquo;s slightly quirky. Look at the diagonal cut on stems for example.
+Helvetica is a masterful design, but I like a bit more pizzazz now and then.</li>
+</ul></li>
+<li>A few <span class='acr'>lsp</span> servers. Take a look at <a href="init.el">init.el</a> to see which modules have the <code>+lsp</code> flag.</li>
+<li><p>
+The <kbd>cargo-script</kbd> rust crate is required for evaluation of rust blocks by babel.
+As described in the <span class='acr'>readme</span> for <a href="https://github.com/micanzhang/ob-rust">ob-rust</a>. Like <code>delta</code>, this can just be installed
+using cargo.
+</p>
+<details id=',code--2' class='code' open><summary><span class='lang'>Shell Script</span></summary>
+<div class='gutter'>
+<a href='#,code--2'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-shell">cargo install cargo-script
+</pre>
+</div>
+</details></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-current-issues" class="outline-3">
+<h3 id="current-issues"><span class="section-number-3">1.4</span> Current Issues<a aria-hidden="true" href="#current-issues">#</a> </h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-magit-push-daemon" class="outline-4">
+<h4 id="magit-push-daemon"><span class="section-number-4">1.4.1</span> Magit push in daemon<a aria-hidden="true" href="#magit-push-daemon">#</a> </h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Quite often trying to push to a remote in the Emacs daemon produces as error like this:
+</p>
+<details id='magit-push-daemon,code--1' class='code' open><summary><span class='lang'>fundamental</span></summary>
+<div class='gutter'>
+<a href='#magit-push-daemon,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-fundamental">128 git &#8230; push -v origin refs/heads/master\:refs/heads/master
+Pushing to git@github.com:tecosaur/emacs-config.git
+
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</pre>
+</div>
+</details>
+</div>
+</div>
+<div id="outline-container-calctex-brings-up" class="outline-4">
+<h4 id="calctex-brings-up"><span class="section-number-4">1.4.2</span> CalcTeX brings up compilation buffer<a aria-hidden="true" href="#calctex-brings-up">#</a> </h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+With my <a href="#calc">Calc</a> hook, the first call of <kbd>M-x calc</kbd> brings up a compilation buffer
+from CalcTeX. I&rsquo;m guessing this is from the compilation of the preamble / <code>.fmt</code> file.
+</p>
+</div>
+</div>
+<div id="outline-container-unread-emails-doesnt" class="outline-4">
+<h4 id="unread-emails-doesnt"><span class="section-number-4">1.4.3</span> Unread emails doesn&rsquo;t work across Emacs instances<a aria-hidden="true" href="#unread-emails-doesnt">#</a> </h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+It would be nice if it did, so that I could have the Emacs-daemon hold the
+active mu4e session, but still get that information. In this case I&rsquo;d want to
+change the action to open the Emacs daemon, but it should be possible.
+</p>
+
+<p>
+This would probably involve hooking into the daemon&rsquo;s modeline update function
+to write to a temporary file, and having a file watcher started in other Emacs
+instances, in a similar manner to <a href="#rebuild-mail-index">Rebuild mail index while using mu4e</a>.
+</p>
+</div>
+</div>
+</div>
+</div>
+
 <div id="outline-container-rudimentary-configuration" class="outline-2">
 <h2 id="rudimentary-configuration"><span class="section-number-2">2</span> Rudimentary configuration<a aria-hidden="true" href="#rudimentary-configuration">#</a> </h2>
 <div class="outline-text-2" id="text-2">
