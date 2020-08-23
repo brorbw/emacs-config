@@ -3833,24 +3833,34 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 ;; (setq-default org-html-with-latex `dvisvgm)
 ;; LaTeX Rendering:2 ends here
 
-;; [[file:config.org::*Exporting to LaTeX][Exporting to LaTeX:1]]
-;; TODO make this /only/ apply to text (i.e. not URL)
+;; [[file:config.org::*Acronyms][Acronyms:1]]
 (after! org
   (defun tec/org-export-latex-filter-acronym (text backend info)
-    (when (org-export-derived-backend-p backend 'latex)
-      (let ((case-fold-search nil))
+    (let ((the-backend
+           (cond
+            ((org-export-derived-backend-p backend 'latex) 'latex)
+            ((org-export-derived-backend-p backend 'html) 'html)))
+          (case-fold-search nil))
+      (when the-backend
         (replace-regexp-in-string
          "[;\\\\]?\\b[A-Z][A-Z]+s?"
          (lambda (all-caps-str)
-           ; only \acr if str doesn't start with ";" or "\" (for LaTeX commands)
+           ;; only format as acronym if str doesn't start with ";" or "\" (for LaTeX commands)
            (cond ((equal (aref all-caps-str 0) ?\;) (substring all-caps-str 1))
                  ((equal (aref all-caps-str 0) ?\\) all-caps-str)
                  ((equal (aref all-caps-str (- (length all-caps-str) 1)) ?s)
-                  (concat "\\textls*[70]{\\textsc{"
-                            (s-downcase (substring all-caps-str 0 -1))
-                            "}\\protect\\scalebox{.91}[.84]{s}}"))
-                 (t (concat "\\textls*[70]{\\textsc{"
-                              (s-downcase all-caps-str) "}}"))))
+                  (case the-backend
+                    ('latex
+                     (concat "\\textls*[70]{\\textsc{" (s-downcase (substring all-caps-str 0 -1))
+                             "}\\protect\\scalebox{.91}[.84]{s}}"))
+                    ('html
+                     (concat "<span class='acr'>" (s-downcase (substring all-caps-str 0 -1))
+                             "</span><small>s</small>"))))
+                 (t
+                  (case the-backend
+                    ('latex
+                     (concat "\\textls*[70]{\\textsc{" (s-downcase all-caps-str) "}}"))
+                    ('html (concat "<span class='acr'>" (s-downcase all-caps-str) "</span>"))))))
          text t t))))
 
   (add-to-list 'org-export-filter-plain-text-functions
@@ -3859,7 +3869,7 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
   ;; (add-to-list 'org-export-filter-headline-functions
   ;;              'tec/org-export-latex-filter-acronym)
   )
-;; Exporting to LaTeX:1 ends here
+;; Acronyms:1 ends here
 
 ;; [[file:config.org::*Exporting to LaTeX][Exporting to LaTeX:2]]
 (after! org
