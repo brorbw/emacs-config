@@ -3854,18 +3854,18 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
                      (concat "\\textls*[70]{\\textsc{" (s-downcase (substring all-caps-str 0 -1))
                              "}\\protect\\scalebox{.91}[.84]{s}}"))
                     ('html
-                     (concat "<span class='acr'>" (s-downcase (substring all-caps-str 0 -1))
+                     (concat "<span class='acr'>" (substring all-caps-str 0 -1)
                              "</span><small>s</small>"))))
-                 (t
-                  (case the-backend
-                    ('latex
-                     (concat "\\textls*[70]{\\textsc{" (s-downcase all-caps-str) "}}"))
-                    ('html (concat "<span class='acr'>" (s-downcase all-caps-str) "</span>"))))))
+                 (t (case the-backend
+                      ('latex
+                       (concat "\\textls*[70]{\\textsc{" (s-downcase all-caps-str) "}}"))
+                      ('html (concat "<span class='acr'>" all-caps-str "</span>"))))))
          text t t))))
 
   (add-to-list 'org-export-filter-plain-text-functions
                'tec/org-export-latex-filter-acronym)
-  ;; FIXME I want to process headings, but this causes issues ATM
+  ;; FIXME I want to process headings, but this causes issues ATM,
+  ;;       specifically it passes (and formats) the entire section contents
   ;; (add-to-list 'org-export-filter-headline-functions
   ;;              'tec/org-export-latex-filter-acronym)
   )

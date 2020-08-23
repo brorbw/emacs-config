@@ -18,6 +18,9 @@
 
 <link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="https://tecosaur.com/resources/org/etbookot-roman-webfont.woff2">
 <link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="https://tecosaur.com/resources/org/etbookot-italic-webfont.woff2">
+<link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="https://tecosaur.com/resources/org/Merriweather-TextRegular.woff2">
+<link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="https://tecosaur.com/resources/org/Merriweather-TextItalic.woff2">
+<link rel="preload" as="font" crossorigin="crossorigin" type="font/woff2" href="https://tecosaur.com/resources/org/Merriweather-TextBold.woff2">
 <script>
 function copyPreToClipdord(btn) {
     const pre = btn.parentElement.parentElement.getElementsByTagName("PRE")[0];
@@ -69,7 +72,6 @@ window.addEventListener('DOMContentLoaded', () => {
  * 2. Prevent adjustments of font size after orientation changes in
  *    IE on Windows Phone and in iOS.
  */
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap");
 html {
   line-height: 1.15;
   /* 1 */
@@ -539,14 +541,35 @@ template {
   visibility: visible; }
 
 @font-face {
-  font-family: 'et-book';
+  font-family: "Merriweather";
+  src: url("https://tecosaur.com/resources/org/Merriweather-TextRegular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback; }
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("https://tecosaur.com/resources/org/Merriweather-TextItalic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: fallback; }
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("https://tecosaur.com/resources/org/Merriweather-TextBold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback; }
+
+@font-face {
+  font-family: "et-book";
   src: url("https://tecosaur.com/resources/org/etbookot-roman-webfont.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: fallback; }
 
 @font-face {
-  font-family: 'et-book';
+  font-family: "et-book";
   src: url("https://tecosaur.com/resources/org/etbookot-italic-webfont.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
@@ -2377,8 +2400,8 @@ td.org-center {
   text-align: center; }
 
 span.acr {
-  font-variant: small-caps;
-  letter-spacing: 0.06em; }
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.1em; }
 
 div.table {
   position: relative; }
@@ -3027,7 +3050,7 @@ Redditor2: Oh, there&rsquo;s an Emacs mode for that.
 <p>
 I tried out the <kbd>spacemacs</kbd> distribution a bit, but it wasn&rsquo;t quite to my liking.
 Then I heard about <kbd>doom emacs</kbd> and thought I may as well give that a try.
-<span class='acr'>tldr</span>; it&rsquo;s great.
+<span class='acr'>TLDR</span>; it&rsquo;s great.
 </p>
 
 <p>
@@ -3083,7 +3106,7 @@ good?
 </p>
 <ul class="org-ul">
 <li>Enables one to complete tasks with a consistent, standard set of keybindings,
-<span class='acr'>gui</span> and editing methods &#x2014; learn once, use everywhere</li>
+<span class='acr'>GUI</span> and editing methods &#x2014; learn once, use everywhere</li>
 <li>Reduced context-switching</li>
 <li>Compressing the stages of a project &#x2014; a more centralised workflow can progress
 with greater ease</li>
@@ -3112,7 +3135,7 @@ startup time.</li>
 <div class="outline-text-4" id="text-1-1-3">
 <ul class="org-ul">
 <li>Emacs has irritating quirks</li>
-<li>Some aspects are showing their age (naming conventions, <span class='acr'>api</span><small>s</small>)</li>
+<li>Some aspects are showing their age (naming conventions, <span class='acr'>API</span><small>s</small>)</li>
 <li>Emacs is (<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Threads.html">mostly</a>) single-threaded, meaning that when something holds that
 thread up the whole application freezes</li>
 <li>A few other nuisances</li>
@@ -3147,7 +3170,7 @@ manually set the value for <i>every single instance</i>. Urgh, <a href="https://
 What if you could set the value of that &rsquo;check-box&rsquo; setting to be the result of
 an arbitrary expression evaluated for each file? This is where an editor like
 Emacs comes in.
-Configuration for Emacs isn&rsquo;t a list of settings in <span class='acr'>json</span> etc. it&rsquo;s <b>an executable
+Configuration for Emacs isn&rsquo;t a list of settings in <span class='acr'>JSON</span> etc. it&rsquo;s <b>an executable
 program which modifies the behaviour of the editor to suit your liking</b>.
 This is &rsquo;teaching a man to fish&rsquo;.
 </p>
@@ -3215,7 +3238,7 @@ Over the years I have tried out (spent at least a year using as my primary
 editor) the following applications
 </p>
 <ul class="org-ul">
-<li>Python <span class='acr'>idle</span></li>
+<li>Python <span class='acr'>IDLE</span></li>
 <li>Komodo Edit</li>
 <li>Brackets</li>
 <li>VSCode</li>
@@ -3260,7 +3283,7 @@ I have attempted to quantify aspects of my impressions of them below.
 </thead>
 <tbody>
 <tr>
-<td class="org-left"><span class='acr'>idle</span></td>
+<td class="org-left"><span class='acr'>IDLE</span></td>
 <td class="org-right">1</td>
 <td class="org-right">1</td>
 <td class="org-right">3</td>
@@ -3344,7 +3367,7 @@ external setup (i.e. outside of this config).
 <dl class="org-dl">
 <dt>libvterm</dt><dd>I rely on my distro-provided <kbd>libvterm.so</kbd>, <a href="#vterm">vterm</a> sets a compile flag.
 If this causes issues, just delete the <code>(setq term-module-cmake-args ...)</code> bit.</dd>
-<dt>dictionary</dt><dd>I&rsquo;ve downloaded a custom <a href="http://app.aspell.com/create"><span class='acr'>scowl</span></a> dictionary, which I use in <a href="#ispell">ispell</a>.
+<dt>dictionary</dt><dd>I&rsquo;ve downloaded a custom <a href="http://app.aspell.com/create"><span class='acr'>SCOWL</span></a> dictionary, which I use in <a href="#ispell">ispell</a>.
 If this causes issues, just delete the <code>(setq ispell-dictionary ...)</code> bit.</dd>
 <dt>uni-units file</dt><dd>I&rsquo;ve got a file in <kbd>~/.org/.uni-units</kbd> which I use in <code>org-capture</code>
 If this causes issues, just remove the reference to that file in <a href="#capture">Capture</a> and
@@ -3395,10 +3418,10 @@ by <i>Highway Gothic</i>.</li>
 <li>It&rsquo;s slightly quirky. Look at the diagonal cut on stems for example.
 Helvetica is a masterful design, but I like a bit more pizzazz now and then.</li>
 </ul></li>
-<li>A few <span class='acr'>lsp</span> servers. Take a look at <a href="init.el">init.el</a> to see which modules have the <code>+lsp</code> flag.</li>
+<li>A few <span class='acr'>LSP</span> servers. Take a look at <a href="init.el">init.el</a> to see which modules have the <code>+lsp</code> flag.</li>
 <li><p>
 The <kbd>cargo-script</kbd> rust crate is required for evaluation of rust blocks by babel.
-As described in the <span class='acr'>readme</span> for <a href="https://github.com/micanzhang/ob-rust">ob-rust</a>. Like <code>delta</code>, this can just be installed
+As described in the <span class='acr'>README</span> for <a href="https://github.com/micanzhang/ob-rust">ob-rust</a>. Like <code>delta</code>, this can just be installed
 using cargo.
 </p>
 <details id=',code--2' class='code' open><summary><span class='lang'>Shell Script</span></summary>
@@ -4113,7 +4136,7 @@ with it, so I may as well eat the load time at startup. We also want to keep
 </p>
 
 <p>
-It would be good to start the <span class='acr'>irc</span> client (<kbd>circe</kbd>) too, but that seems to have
+It would be good to start the <span class='acr'>IRC</span> client (<kbd>circe</kbd>) too, but that seems to have
 issues when started in a non-graphical session.
 </p>
 
@@ -4167,16 +4190,16 @@ restart Emacs for your changes to take effect! Or at least, run <kbd>M-x doom/re
 </p>
 
 <p>
-<span class='acr'>warning</span>: Don&rsquo;t disable core packages listed in <code>~/.emacs.d/core/packages.el</code>.
+<span class='acr'>WARNING</span>: Don&rsquo;t disable core packages listed in <code>~/.emacs.d/core/packages.el</code>.
 Doom requires these, and disabling them may have terrible side effects.
 </p>
 </div>
 
 <div id="outline-container-packages-melpa-elpa" class="outline-4">
-<h4 id="packages-melpa-elpa"><span class="section-number-4">3.1.1</span> Packages in <span class='acr'>melpa</span>/<span class='acr'>elpa</span>/emacsmirror<a aria-hidden="true" href="#packages-melpa-elpa">#</a> </h4>
+<h4 id="packages-melpa-elpa"><span class="section-number-4">3.1.1</span> Packages in <span class='acr'>MELPA</span>/<span class='acr'>ELPA</span>/emacsmirror<a aria-hidden="true" href="#packages-melpa-elpa">#</a> </h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
-To install <code>some-package</code> from <span class='acr'>melpa</span>, <span class='acr'>elpa</span> or emacsmirror:
+To install <code>some-package</code> from <span class='acr'>MELPA</span>, <span class='acr'>ELPA</span> or emacsmirror:
 </p>
 <details id='packages-melpa-elpa,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -4246,7 +4269,7 @@ you can do so here with the <code>:disable</code> property:
 <p>
 You can override the recipe of a built in package without having to specify
 all the properties for <code>:recipe</code>. These will inherit the rest of its recipe
-from Doom or <span class='acr'>melpa</span>/<span class='acr'>elpa</span>/Emacsmirror:
+from Doom or <span class='acr'>MELPA</span>/<span class='acr'>ELPA</span>/Emacsmirror:
 </p>
 <details id='disabling-built-packages,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -4299,7 +4322,7 @@ our package manager can&rsquo;t deal with; see <a href="https://github.com/raxod
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 Sometimes one just wants a little fun.
-<span class='acr'>xkcd</span> comics are fun.
+<span class='acr'>XKCD</span> comics are fun.
 </p>
 <details id='fun,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -4327,7 +4350,7 @@ amuse oneself. Introducing: typewriter sounds!
 
 <p>
 Hey, let&rsquo;s get the weather in here while we&rsquo;re at it.
-Unfortunately this seems slightly unmaintained (<a href="https://github.com/bcbcarl/emacs-wttrin/pulls">few open bugfix <span class='acr'>pr</span><small>s</small></a>) so let&rsquo;s
+Unfortunately this seems slightly unmaintained (<a href="https://github.com/bcbcarl/emacs-wttrin/pulls">few open bugfix <span class='acr'>PR</span><small>s</small></a>) so let&rsquo;s
 roll our <a href="lisp/wttrin.el">own version</a>.
 </p>
 <details id='fun,code--3' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -4452,7 +4475,7 @@ We can lazy load this using the start/stop commands.
 I initially installed <code>scrot</code> for this, since it was the default capture program.
 However it raised <code>glib error: Saving to file ... failed</code> each time it was run.
 Google didn&rsquo;t reveal any easy fixed, so I switched to <a href="https://github.com/naelstrof/maim">maim</a>. We now need to pass
-it the window <span class='acr'>id</span>. This doesn&rsquo;t change throughout the lifetime of an emacs
+it the window <span class='acr'>ID</span>. This doesn&rsquo;t change throughout the lifetime of an emacs
 instance, so as long as a single window is used <code>xdotool getactivewindow</code> will
 give a satisfactory result.
 </p>
@@ -4534,7 +4557,7 @@ This is a nice extension to <code>calc</code>
 </div>
 </div>
 <div id="outline-container-ess" class="outline-5">
-<h5 id="ess"><span class="section-number-5">3.2.3.3</span> <span class='acr'>ess</span><a aria-hidden="true" href="#ess">#</a> </h5>
+<h5 id="ess"><span class="section-number-5">3.2.3.3</span> <span class='acr'>ESS</span><a aria-hidden="true" href="#ess">#</a> </h5>
 <div class="outline-text-5" id="text-3-2-3-3">
 <p>
 View data frames better with
@@ -4611,7 +4634,7 @@ ridiculously large files.
 </div>
 </details>
 <p>
-To make <span class='acr'>vlf</span> available without delaying startup, we&rsquo;ll just load it in quiet moments.
+To make <span class='acr'>VLF</span> available without delaying startup, we&rsquo;ll just load it in quiet moments.
 </p>
 <details id='large-files,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -4638,8 +4661,8 @@ advantages, namely:
 <li>integration of multiple dictionaries</li>
 </ul>
 <p>
-<a href="http://goldendict.org/">GoldenDict</a> seems like the best option currently avalible, but lacks a <span class='acr'>cli</span>.
-Hence, we&rsquo;ll fall back to <a href="https://dushistov.github.io/sdcv/">sdcv</a> (a <span class='acr'>cli</span> version of StarDict) for now.
+<a href="http://goldendict.org/">GoldenDict</a> seems like the best option currently avalible, but lacks a <span class='acr'>CLI</span>.
+Hence, we&rsquo;ll fall back to <a href="https://dushistov.github.io/sdcv/">sdcv</a> (a <span class='acr'>CLI</span> version of StarDict) for now.
 To interface with this, we&rsquo;ll use a my <kbd>lexic</kbd> package.
 </p>
 
@@ -4660,7 +4683,7 @@ To interface with this, we&rsquo;ll use a my <kbd>lexic</kbd> package.
 </details>
 
 <p>
-Given that a request for a <span class='acr'>cli</span> is the most upvoted issue on GitHub for
+Given that a request for a <span class='acr'>CLI</span> is the most upvoted issue on GitHub for
 GoldenDict, it&rsquo;s likely we&rsquo;ll be able to switch from <code>sdcv</code> to that in the future.
 </p>
 
@@ -4676,8 +4699,8 @@ painless switch.
 <h4 id="email"><span class="section-number-4">3.2.4</span> Email<a aria-hidden="true" href="#email">#</a> </h4>
 <div class="outline-text-4" id="text-3-2-4">
 <p>
-It&rsquo;s nice to send out fancy <span class='acr'>html</span> emails. The <kbd>org-msg</kbd> package allows to write
-emails in org mode, and send as an <span class='acr'>html</span> multipart email. We can setup some <span class='acr'>css</span>
+It&rsquo;s nice to send out fancy <span class='acr'>HTML</span> emails. The <kbd>org-msg</kbd> package allows to write
+emails in org mode, and send as an <span class='acr'>HTML</span> multipart email. We can setup some <span class='acr'>CSS</span>
 to be inlined, render LaTeX fragments, and all those goodies!
 </p>
 <details id='email,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -4723,7 +4746,7 @@ To actually get notifications, we can use <kbd>mu4e-alert</kbd>.
 </div>
 </details>
 <p>
-For mathematical convenience, <span class='acr'>wip</span>
+For mathematical convenience, <span class='acr'>WIP</span>
 </p>
 <details id='latex,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -4759,7 +4782,7 @@ And some basic config
 <h4 id="org-mode"><span class="section-number-4">3.3.2</span> Org Mode<a aria-hidden="true" href="#org-mode">#</a> </h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
-Use <span class='acr'>head</span> for development.
+Use <span class='acr'>HEAD</span> for development.
 </p>
 <details id='org-mode,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -4857,9 +4880,9 @@ For automatically toggling LaTeX fragment previews there&rsquo;s this nice packa
 <p>
 Because of the <i><a href="https://github.com/commonmark/commonmark-spec/wiki/markdown-flavors">lovely variety in markdown implementations</a></i> there isn&rsquo;t actually
 such a thing a standard table spec &#x2026; or standard anything really. Because
-<code>org-md</code> is a goody-two-shoes, it just uses <span class='acr'>html</span> for all these non-standardised
+<code>org-md</code> is a goody-two-shoes, it just uses <span class='acr'>HTML</span> for all these non-standardised
 elements (a lot of them). So <code>ox-gfm</code> is handy for exporting markdown with all the
-features that GitHub has. Initialised in <a href="#exporting-gfm">5.3.3.6</a>.
+features that GitHub has. Initialised in <a href="#exporting-gfm">5.3.3.7</a>.
 </p>
 <details id='extra-functionality,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -4898,7 +4921,7 @@ Came across this and &#x2026; it&rsquo;s cool
 </details>
 
 <p>
-I <b>need</b> this in my life. It take a <span class='acr'>url</span> to a recipe from a common site, and
+I <b>need</b> this in my life. It take a <span class='acr'>URL</span> to a recipe from a common site, and
 inserts an org-ified version at point. Isn&rsquo;t that just great.
 </p>
 <details id='extra-functionality,code--4' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -5147,7 +5170,7 @@ We then configure the dictionary we&rsquo;re using in <a href="#ispell">Ispell</
 </div>
 </div>
 <div id="outline-container-company-ess" class="outline-4">
-<h4 id="company-ess"><span class="section-number-4">4.4.2</span> <span class='acr'>ess</span><a aria-hidden="true" href="#company-ess">#</a> </h4>
+<h4 id="company-ess"><span class="section-number-4">4.4.2</span> <span class='acr'>ESS</span><a aria-hidden="true" href="#company-ess">#</a> </h4>
 <div class="outline-text-4" id="text-4-4-2">
 <p>
 <code>company-dabbrev-code</code> is nice. Let&rsquo;s have it.
@@ -5168,7 +5191,7 @@ We then configure the dictionary we&rsquo;re using in <a href="#ispell">Ispell</
 <h3 id="circe"><span class="section-number-3">4.5</span> Circe<a aria-hidden="true" href="#circe">#</a> </h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
-Circe is a client for <span class='acr'>irc</span> in Emacs (hey, isn&rsquo;t that a nice project
+Circe is a client for <span class='acr'>IRC</span> in Emacs (hey, isn&rsquo;t that a nice project
 name+acronym), and a greek enchantress who turned humans into animals.
 </p>
 
@@ -5182,7 +5205,7 @@ Let&rsquo;s use the former to chat to <del>recluses</del> discerning individuals
 
 <p>
 Before we start seeing and sending messages, we need to authenticate with our
-<span class='acr'>irc</span> servers. The circe manual provided a snippet for putting some of the auth
+<span class='acr'>IRC</span> servers. The circe manual provided a snippet for putting some of the auth
 details in <kbd>.authinfo.gpg</kbd> &#x2014; but I think we should go further than that: have
 the entire server info in our authinfo.
 </p>
@@ -5193,8 +5216,8 @@ First, a reasonable format by which we can specify:
 <ul class="org-ul">
 <li>server</li>
 <li>port</li>
-<li><span class='acr'>sasl</span> username</li>
-<li><span class='acr'>sasl</span> password</li>
+<li><span class='acr'>SASL</span> username</li>
+<li><span class='acr'>SASL</span> password</li>
 <li>channels to join</li>
 </ul>
 
@@ -5212,9 +5235,9 @@ We can have these stored like so
 </details>
 
 <p>
-The <code>for irc</code> bit is used so we can uniquely identify all <span class='acr'>irc</span> auth info. By
+The <code>for irc</code> bit is used so we can uniquely identify all <span class='acr'>IRC</span> auth info. By
 omitting the <kbd>#</kbd> in channel names we can have a list of channels comma-separated
-(no space!) which the secrets <span class='acr'>api</span> will return as a single string.
+(no space!) which the secrets <span class='acr'>API</span> will return as a single string.
 </p>
 
 <details id='irc-authinfo-reader' class='code' open><summary class='named'><span class='name'>irc-authinfo-reader</span><span class='lang'>Emacs Lisp</span></summary>
@@ -5503,7 +5526,7 @@ configuration tweaks.
 <h4 id="org-style-emphasis"><span class="section-number-4">4.5.1</span> Org-style emphasis<a aria-hidden="true" href="#org-style-emphasis">#</a> </h4>
 <div class="outline-text-4" id="text-4-5-1">
 <p>
-Let&rsquo;s do our <b>bold</b>, <i>italic</i>, and <span class="underline">underline</span> in org-syntax, using <span class='acr'>irc</span> control charachters
+Let&rsquo;s do our <b>bold</b>, <i>italic</i>, and <span class="underline">underline</span> in org-syntax, using <span class='acr'>IRC</span> control charachters
 </p>
 <details id='org-emph-irc' class='code' open><summary class='named'><span class='name'>org-emph-to-irc</span><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -5887,7 +5910,7 @@ counts right?
 </div>
 </div>
 <div id="outline-container-evil" class="outline-3">
-<h3 id="evil"><span class="section-number-3">4.9</span> <span class='acr'>evil</span><a aria-hidden="true" href="#evil">#</a> </h3>
+<h3 id="evil"><span class="section-number-3">4.9</span> <span class='acr'>EVIL</span><a aria-hidden="true" href="#evil">#</a> </h3>
 <div class="outline-text-3" id="text-4-9">
 <p>
 I don&rsquo;t use <code>evil-escape-mode</code>, so I may as well turn it off, I&rsquo;ve heard it
@@ -5910,7 +5933,7 @@ contributes a typing delay. I&rsquo;m not sure it&rsquo;s much, but it is an ext
 <div class="outline-text-3" id="text-4-10">
 <p>
 At one point, typing became noticeably laggy, Profiling revealed
-<code>flyspell-post-command-hook</code> was responsible for 47% of <span class='acr'>cpu</span> cycles by itself!
+<code>flyspell-post-command-hook</code> was responsible for 47% of <span class='acr'>CPU</span> cycles by itself!
 So I&rsquo;m going to make use of <code>flyspell-lazy</code>
 </p>
 <details id='flyspell,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -5951,7 +5974,7 @@ So I&rsquo;m going to make use of <code>flyspell-lazy</code>
 <h4 id="downloading-dictionaries"><span class="section-number-4">4.12.1</span> Downloading dictionaries<a aria-hidden="true" href="#downloading-dictionaries">#</a> </h4>
 <div class="outline-text-4" id="text-4-12-1">
 <p>
-Let&rsquo;s get a nice big dictionary from <a href="http://app.aspell.net/create"><span class='acr'>scowl</span> Custom List/Dictionary Creator</a> with
+Let&rsquo;s get a nice big dictionary from <a href="http://app.aspell.net/create"><span class='acr'>SCOWL</span> Custom List/Dictionary Creator</a> with
 the following configuration
 </p>
 <dl class="org-dl">
@@ -6764,7 +6787,7 @@ According to the homepage, it&rsquo;s main features are
 <li>Fast indexing</li>
 <li>Good searching</li>
 <li>Support for encrypted and signed messages</li>
-<li>Rich <span class='acr'>cli</span> tooling</li>
+<li>Rich <span class='acr'>CLI</span> tooling</li>
 <li>accent/case normalisation</li>
 <li>strong integration with email clients</li>
 </ul>
@@ -6913,7 +6936,7 @@ earlier on in my <code>$PATH</code>.
 <h4 id="mu4e"><span class="section-number-4">4.15.4</span> Mu4e<a aria-hidden="true" href="#mu4e">#</a> </h4>
 <div class="outline-text-4" id="text-4-15-4">
 <p>
-Webmail clients are nice and all, but I still don&rsquo;t believe that <span class='acr'>spa</span><small>s</small> in my
+Webmail clients are nice and all, but I still don&rsquo;t believe that <span class='acr'>SPA</span><small>s</small> in my
 browser can replaced desktop apps &#x2026; sorry Gmail. I&rsquo;m also liking google less
 and less.
 </p>
@@ -7436,7 +7459,7 @@ Here&rsquo;s what I want
 </ul>
 <p>
 I think a file watch etc. setup similar to that in <a href="#rebuild-mail-index">Rebuild mail index while
-using mu4e</a> is probably the cleanest way to operate. We can put the current <span class='acr'>pid</span>
+using mu4e</a> is probably the cleanest way to operate. We can put the current <span class='acr'>PID</span>
 in the file and check for exitance too.
 </p>
 <details id='process-control,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -8068,7 +8091,7 @@ Now, we just identify the files in question.
 </div>
 </div>
 <div id="outline-container-vterm" class="outline-3">
-<h3 id="vterm"><span class="section-number-3">4.24</span> <span class='acr'>vt</span>erm<a aria-hidden="true" href="#vterm">#</a> </h3>
+<h3 id="vterm"><span class="section-number-3">4.24</span> <span class='acr'>VT</span>erm<a aria-hidden="true" href="#vterm">#</a> </h3>
 <div class="outline-text-3" id="text-4-24">
 <p>
 On my system, I want to use the <code>vterm</code> lib in <kbd>/usr/bin/libvterm.so</kbd>. This is not
@@ -8439,7 +8462,7 @@ Let&rsquo;s also extend the functionality a whole bunch.
 </div>
 </div>
 <div id="outline-container-yasnippet" class="outline-3">
-<h3 id="yasnippet"><span class="section-number-3">4.27</span> <span class='acr'>yas</span>nippet<a aria-hidden="true" href="#yasnippet">#</a> </h3>
+<h3 id="yasnippet"><span class="section-number-3">4.27</span> <span class='acr'>YAS</span>nippet<a aria-hidden="true" href="#yasnippet">#</a> </h3>
 <div class="outline-text-3" id="text-4-27">
 <p>
 Nested snippets are good, enable that.
@@ -8487,7 +8510,7 @@ need to have a template assigned.
 <h3 id="plaintext"><span class="section-number-3">5.2</span> Plaintext<a aria-hidden="true" href="#plaintext">#</a> </h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
-It&rsquo;s nice to see <span class='acr'>ansi</span> colour codes displayed
+It&rsquo;s nice to see <span class='acr'>ANSI</span> colour codes displayed
 </p>
 <details id='plaintext,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -8873,10 +8896,10 @@ My spelling is atrocious, so let&rsquo;s get flycheck going.
 </div>
 </div>
 <div id="outline-container-lsp-support-src" class="outline-6">
-<h6 id="lsp-support-src"><span class="section-number-6">5.3.2.2.6</span> <span class='acr'>lsp</span> support in <code>src</code> blocks<a aria-hidden="true" href="#lsp-support-src">#</a> </h6>
+<h6 id="lsp-support-src"><span class="section-number-6">5.3.2.2.6</span> <span class='acr'>LSP</span> support in <code>src</code> blocks<a aria-hidden="true" href="#lsp-support-src">#</a> </h6>
 <div class="outline-text-6" id="text-5-3-2-2-6">
 <p>
-Now, by default, <span class='acr'>lsp</span><small>s</small> don&rsquo;t really function at all in <code>src</code> blocks.
+Now, by default, <span class='acr'>LSP</span><small>s</small> don&rsquo;t really function at all in <code>src</code> blocks.
 </p>
 <details id='lsp-support-src,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -9701,7 +9724,7 @@ the<a href="#window-title">Window title</a>.
 </div>
 </div>
 <div id="outline-container-nicer-generated-heading" class="outline-5">
-<h5 id="nicer-generated-heading"><span class="section-number-5">5.3.2.6</span> Nicer generated heading <span class='acr'>id</span><small>s</small><a aria-hidden="true" href="#nicer-generated-heading">#</a> </h5>
+<h5 id="nicer-generated-heading"><span class="section-number-5">5.3.2.6</span> Nicer generated heading <span class='acr'>ID</span><small>s</small><a aria-hidden="true" href="#nicer-generated-heading">#</a> </h5>
 <div class="outline-text-5" id="text-5-3-2-6">
 <p>
 Thanks to alphapapa&rsquo;s <a href="https://github.com/alphapapa/unpackaged.el#export-to-html-with-useful-anchors">unpackaged.el</a>.
@@ -10916,7 +10939,7 @@ Now let&rsquo;s combine this to see what&rsquo;s best
 
 <p>
 So, let&rsquo;s use <code>dvipng</code> for previewing LaTeX fragments in-Emacs, but <code>dvisvgm</code> for <a href="#exporting-html">LaTeX Rendering</a>.
-<i>Unfortunately: it seems that svg sizing is annoying <span class='acr'>atm</span>, so let&rsquo;s actually not do this right now.</i>
+<i>Unfortunately: it seems that svg sizing is annoying <span class='acr'>ATM</span>, so let&rsquo;s actually not do this right now.</i>
 </p>
 
 <p>
@@ -10946,7 +10969,7 @@ look better. Namely making sure that the colours switch when the theme does.
 </details>
 <p>
 It&rsquo;d be nice to make <code>mhchem</code> equations able to be rendered.
-<span class='acr'>nb</span>: This doesn&rsquo;t work at the moment.
+<span class='acr'>NB</span>: This doesn&rsquo;t work at the moment.
 </p>
 <details id='latex-fragments,code--4' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -11176,7 +11199,7 @@ relevant function.
 
 <p>
 This is done to allow me to add the date and author to the page header,
-implement a <span class='acr'>css</span>-only light/dark theme toggle, and a sprinkle of <a href="https://ogp.me/">Open Graph</a>
+implement a <span class='acr'>CSS</span>-only light/dark theme toggle, and a sprinkle of <a href="https://ogp.me/">Open Graph</a>
 metadata.
 </p>
 <details id='extra-header-content,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -11368,7 +11391,7 @@ metadata.
 <h6 id="custom-css-js"><span class="section-number-6">5.3.3.3.2</span> Custom CSS/JS<a aria-hidden="true" href="#custom-css-js">#</a> </h6>
 <div class="outline-text-6" id="text-5-3-3-3-2">
 <p>
-The default org <span class='acr'>html</span> export is &#x2026; alright, but we can really jazz it up.
+The default org <span class='acr'>HTML</span> export is &#x2026; alright, but we can really jazz it up.
 <a href="https://lepisma.xyz">lepisma.xyz</a> has a really nice style, and from and org export too!
 Suffice to say I&rsquo;ve snatched it, with a few of my own tweaks applied.
 </p>
@@ -11414,7 +11437,7 @@ Suffice to say I&rsquo;ve snatched it, with a few of my own tweaks applied.
 <div class="outline-text-6" id="text-5-3-3-3-3">
 <p>
 By wrapping the <code>&lt;pre&gt;</code> element in a <code>&lt;details&gt;</code> block, we can obtain collapsable
-blocks with no <span class='acr'>css</span>, though we will toss a little in anyway to have this looking
+blocks with no <span class='acr'>CSS</span>, though we will toss a little in anyway to have this looking
 somewhat spiffy.
 </p>
 
@@ -11637,9 +11660,9 @@ While we&rsquo;re at it, we can a link gutter, as we did with src blocks, and sh
 <h6 id="toc-as-collapsable"><span class="section-number-6">5.3.3.3.5</span> TOC as a collapsable tree<a aria-hidden="true" href="#toc-as-collapsable">#</a> </h6>
 <div class="outline-text-6" id="text-5-3-3-3-5">
 <p>
-The <span class='acr'>toc</span> is much nicer to navigate as a collapsable tree. Unfortunately we cannot
-achieve this with <span class='acr'>css</span> alone. Thankfully we can avoid <span class='acr'>js</span> though, by adapting the
-<span class='acr'>toc</span> generation code to use a <code>label</code> for each item, and a hidden <code>checkbox</code> to keep
+The <span class='acr'>TOC</span> is much nicer to navigate as a collapsable tree. Unfortunately we cannot
+achieve this with <span class='acr'>CSS</span> alone. Thankfully we can avoid <span class='acr'>JS</span> though, by adapting the
+<span class='acr'>TOC</span> generation code to use a <code>label</code> for each item, and a hidden <code>checkbox</code> to keep
 track of state.
 </p>
 
@@ -11722,7 +11745,7 @@ Since we have <kbd>verbatim</kbd> and <code>code</code>, let&rsquo;s use <kbd>ve
 <h6 id="change-checkbox-type"><span class="section-number-6">5.3.3.3.7</span> Change checkbox type<a aria-hidden="true" href="#change-checkbox-type">#</a> </h6>
 <div class="outline-text-6" id="text-5-3-3-3-7">
 <p>
-We also want to use <span class='acr'>html</span> checkboxes, however we want to get a bit fancier than default
+We also want to use <span class='acr'>HTML</span> checkboxes, however we want to get a bit fancier than default
 </p>
 <details id='change-checkbox-type,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -11878,44 +11901,64 @@ option. However this isn&rsquo;t sized very well at the moment.
 <div id="outline-container-exporting-latex" class="outline-5">
 <h5 id="exporting-latex"><span class="section-number-5">5.3.3.4</span> Exporting to LaTeX<a aria-hidden="true" href="#exporting-latex">#</a> </h5>
 <div class="outline-text-5" id="text-5-3-3-4">
+</div>
+<div id="outline-container-org-latex-acronyms" class="outline-6">
+<h6 id="org-latex-acronyms"><span class="section-number-6">5.3.3.5.1</span> Acronyms<a aria-hidden="true" href="#org-latex-acronyms">#</a> </h6>
+<div class="outline-text-6" id="text-org-latex-acronyms">
 <p>
 I like automatically using spaced small caps for acronyms. For strings I want to
 be unaffected let&rsquo;s use <code>;</code> as a prefix to prevent the transformation &#x2014; i.e.
 <code>;JFK</code> (as one would want for two-letter geographic locations and names).
 </p>
-<details id='exporting-latex,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+
+<p>
+While this is the LaTeX section, it&rsquo;s convenient to also provide <span class='acr'>HTML</span> acronyms here.
+</p>
+<details id='acronyms,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#exporting-latex,code--1'>#</a>
+<a href='#acronyms,code--1'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-bold"><span class="org-warning">TODO</span></span><span class="org-comment"> make this /only/ apply to text (i.e. not URL)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> org
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> org
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defun</span> <span class="org-function-name">tec/org-export-latex-filter-acronym</span> <span class="org-rainbow-delimiters-depth-3">(</span>text backend info<span class="org-rainbow-delimiters-depth-3">)</span>
-    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">when</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">org-export-derived-backend-p</span> backend <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">latex</span><span class="org-rainbow-delimiters-depth-1">)</span>
-      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-variable-name">case-fold-search</span> nil<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">(</span>the-backend
+           <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">cond</span>
+            <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">org-export-derived-backend-p</span> backend <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">latex</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">latex</span><span class="org-rainbow-delimiters-depth-1">)</span>
+            <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">org-export-derived-backend-p</span> backend <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">html</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">html</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-variable-name">case-fold-search</span> nil<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">when</span> the-backend
         <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">replace-regexp-in-string</span>
          <span class="org-string">"[;\\\\]?\\b[A-Z][A-Z]+s?"</span>
          <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-1">(</span>all-caps-str<span class="org-rainbow-delimiters-depth-1">)</span>
-           <span class="org-comment-delimiter">; </span><span class="org-comment">only \acr if str doesn't start with ";" or "\" (for LaTeX commands)</span>
+           <span class="org-comment-delimiter">;; </span><span class="org-comment">only format as acronym if str doesn't start with ";" or "\" (for LaTeX commands)</span>
            <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">cond</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">equal</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">aref</span> all-caps-str <span class="org-highlight-numbers-number">0</span><span class="org-rainbow-delimiters-depth-1">)</span> ?\;<span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">substring</span> all-caps-str <span class="org-highlight-numbers-number">1</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">equal</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">aref</span> all-caps-str <span class="org-highlight-numbers-number">0</span><span class="org-rainbow-delimiters-depth-1">)</span> ?\\<span class="org-rainbow-delimiters-depth-3">)</span> all-caps-str<span class="org-rainbow-delimiters-depth-2">)</span>
                  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">equal</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">aref</span> all-caps-str <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">-</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">length</span> all-caps-str<span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-highlight-numbers-number">1</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span> ?s<span class="org-rainbow-delimiters-depth-3">)</span>
-                  <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">concat</span> <span class="org-string">"\\textls*[70]{\\textsc{"</span>
-                            <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">s-downcase</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">substring</span> all-caps-str <span class="org-highlight-numbers-number">0</span> <span class="org-highlight-numbers-number">-1</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
-                            <span class="org-string">"}\\protect\\scalebox{.91}[.84]{s}}"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
-                 <span class="org-rainbow-delimiters-depth-2">(</span>t <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">concat</span> <span class="org-string">"\\textls*[70]{\\textsc{"</span>
-                              <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">s-downcase</span> all-caps-str<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-string">"}}"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+                  <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">case</span> the-backend
+                    <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">latex</span>
+                     <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span> <span class="org-string">"\\textls*[70]{\\textsc{"</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">s-downcase</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">substring</span> all-caps-str <span class="org-highlight-numbers-number">0</span> <span class="org-highlight-numbers-number">-1</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+                             <span class="org-string">"}\\protect\\scalebox{.91}[.84]{s}}"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                    <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">html</span>
+                     <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span> <span class="org-string">"&lt;span class='acr'&gt;"</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">substring</span> all-caps-str <span class="org-highlight-numbers-number">0</span> <span class="org-highlight-numbers-number">-1</span><span class="org-rainbow-delimiters-depth-3">)</span>
+                             <span class="org-string">"&lt;/span&gt;&lt;small&gt;s&lt;/small&gt;"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                 <span class="org-rainbow-delimiters-depth-2">(</span>t <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">case</span> the-backend
+                      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">latex</span>
+                       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span> <span class="org-string">"\\textls*[70]{\\textsc{"</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">s-downcase</span> all-caps-str<span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-string">"}}"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">html</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span> <span class="org-string">"&lt;span class='acr'&gt;"</span> all-caps-str <span class="org-string">"&lt;/span&gt;"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
          text t t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
 
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">add-to-list</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">org-export-filter-plain-text-functions</span>
                <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">tec/org-export-latex-filter-acronym</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-comment-delimiter">;; </span><span class="org-bold"><span class="org-error">FIXME</span></span><span class="org-comment"> I want to process headings, but this causes issues ATM</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-bold"><span class="org-error">FIXME</span></span><span class="org-comment"> I want to process headings, but this causes issues ATM,</span>
+  <span class="org-comment-delimiter">;;       </span><span class="org-comment">specifically it passes (and formats) the entire section contents</span>
   <span class="org-comment-delimiter">;; </span><span class="org-comment">(add-to-list 'org-export-filter-headline-functions</span>
   <span class="org-comment-delimiter">;;              </span><span class="org-comment">'tec/org-export-latex-filter-acronym)</span>
   <span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </details>
+</div>
+</div>
 
 <details id='exporting-latex,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
@@ -12545,7 +12588,7 @@ We also like auto-completion here
 </div>
 </div>
 <div id="outline-container-org-mode-ess" class="outline-4">
-<h4 id="org-mode-ess"><span class="section-number-4">5.3.5</span> <span class='acr'>ess</span><a aria-hidden="true" href="#org-mode-ess">#</a> </h4>
+<h4 id="org-mode-ess"><span class="section-number-4">5.3.5</span> <span class='acr'>ESS</span><a aria-hidden="true" href="#org-mode-ess">#</a> </h4>
 <div class="outline-text-4" id="text-5-3-5">
 <p>
 We don&rsquo;t want <code>R</code> evaluation to hang the editor, hence
@@ -12645,8 +12688,8 @@ filename as variable maybe?)</li>
 </details>
 
 <p>
-For viewing the <span class='acr'>pdf</span>, I rather like the pdf-tools viewer. While auctex is trying
-to be nice in recognising that I have some <span class='acr'>pdf</span> viewing apps installed, I&rsquo;d
+For viewing the <span class='acr'>PDF</span>, I rather like the pdf-tools viewer. While auctex is trying
+to be nice in recognising that I have some <span class='acr'>PDF</span> viewing apps installed, I&rsquo;d
 rather not have it default to using them, so let&rsquo;s re-order the preferences.
 </p>
 <details id='compilation,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -12969,7 +13012,7 @@ And enable shell escape for the preview
 </div>
 </div>
 <div id="outline-container-latex-cdlatex" class="outline-4">
-<h4 id="latex-cdlatex"><span class="section-number-4">5.4.5</span> <span class='acr'>cdl</span>aTeX<a aria-hidden="true" href="#latex-cdlatex">#</a> </h4>
+<h4 id="latex-cdlatex"><span class="section-number-4">5.4.5</span> <span class='acr'>CDL</span>aTeX<a aria-hidden="true" href="#latex-cdlatex">#</a> </h4>
 <div class="outline-text-4" id="text-5-4-5">
 <p>
 The symbols and modifies are very nice by default, but could do with a bit of
@@ -13066,7 +13109,7 @@ In case of Emacs28,
 <h3 id="python"><span class="section-number-3">5.5</span> Python<a aria-hidden="true" href="#python">#</a> </h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
-Since I&rsquo;m using <kbd>mypyls</kbd>, as suggested in <a href="file:///home/tec/.emacs.d/modules/lang/python/README.html#MissingReference">:lang python <span class='acr'>lsp</span> support</a> I&rsquo;ll tweak the
+Since I&rsquo;m using <kbd>mypyls</kbd>, as suggested in <a href="file:///home/tec/.emacs.d/modules/lang/python/README.html#MissingReference">:lang python <span class='acr'>LSP</span> support</a> I&rsquo;ll tweak the
 priority of <kbd>mypyls</kbd>
 </p>
 <details id='python,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
@@ -13181,7 +13224,7 @@ will do it&rsquo;s own line wrapping, hence we <i>only</i> want to use visual li
 </details>
 
 <p>
-Since markdown is often seen as rendered <span class='acr'>html</span>, let&rsquo;s try to somewhat mirror the
+Since markdown is often seen as rendered <span class='acr'>HTML</span>, let&rsquo;s try to somewhat mirror the
 style or markdown renderers.
 </p>
 
