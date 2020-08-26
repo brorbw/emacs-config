@@ -32,6 +32,8 @@
        hl-todo                      ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra                      ; quick documentation for related commands
        ;; indent-guides             ; highlighted indent columns, notoriously slow
+       ligatures                    ; ligatures and symbols to make your code pretty again
+       ;;minimap                    ; show a map of the code on the side
        modeline                     ; snazzy, Atom-inspired modeline, plus API
        nav-flash                    ; blink the current line after jumping
        ;;neotree                    ; a project drawer, like NERDTree for vim
@@ -108,6 +110,9 @@
        ;;tmux                       ; an API for interacting with tmux
        upload                       ; map local to remote projects via ssh/ftp
 
+       :os
+       ;;tty                        ; improve the terminal Emacs experience
+
        :lang
        ;;agda                       ; types of types of types of types...
        ;;cc                         ; C/C++/Obj-C madness
@@ -148,6 +153,7 @@
        ;;nix                        ; I hereby declare "nix geht mehr!"
        ;;ocaml                      ; an objective camel
        (org                         ; organize your plain life in plain text
+        +pretty                     ; yessss my pretties! (nice unicode symbols)
         +dragndrop                  ; drag & drop files/images into org buffers
         ;;+hugo                     ; use Emacs for hugo blogging
         +jupyter                    ; ipython/jupyter support for babel

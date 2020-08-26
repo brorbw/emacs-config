@@ -3075,9 +3075,9 @@ allowfullscreen>%s</iframe>" path (or "" desc)))
           (?E . 'all-the-icons-blue))))
 ;; Symbols:1 ends here
 
-;; [[file:config.org::*Symbols][Symbols:2]]
+;; [[file:/tmp/config.org.tWzFRd::*Symbols][Symbols:2]]
 (after! org
-  (appendq! +pretty-code-symbols
+  (appendq! +ligatures-extra-symbols
             `(:checkbox      "☐"
               :pending       "◼"
               :checkedbox    "☑"
@@ -3104,7 +3104,7 @@ allowfullscreen>%s</iframe>" path (or "" desc)))
               :priority_d   ,(propertize "⬇" 'face 'all-the-icons-green)
               :priority_e   ,(propertize "❓" 'face 'all-the-icons-blue)
               :em_dash       "—"))
-  (set-pretty-symbols! 'org-mode
+  (set-ligatures! 'org-mode
     :merge t
     :checkbox      "[ ]"
     :pending       "[-]"
@@ -3132,7 +3132,7 @@ allowfullscreen>%s</iframe>" path (or "" desc)))
     :priority_d    "[#D]"
     :priority_e    "[#E]"
     :em_dash       "---"))
-(plist-put +pretty-code-symbols :name "⁍") ; or › could be good?
+(plist-put +ligatures-extra-symbols :name "⁍") ; or › could be good?
 ;; Symbols:2 ends here
 
 ;; [[file:config.org::*Symbols][Symbols:3]]
@@ -4580,10 +4580,10 @@ preview-default-preamble "\\fi}\"%' \"\\detokenize{\" %t \"}\""))
 
 ;; [[file:config.org::*Editor Visuals][Editor Visuals:1]]
 (after! ess-r-mode
-  (appendq! +pretty-code-symbols
+  (appendq! +ligatures-extra-symbols
             '(:assign "⟵"
               :multiply "×"))
-  (set-pretty-symbols! 'ess-r-mode
+  (set-ligatures! 'ess-r-mode
     ;; Functional
     :def "function"
     ;; Types
