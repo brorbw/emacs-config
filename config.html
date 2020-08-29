@@ -2950,28 +2950,30 @@ MathJax = {
 <li><a href="#exporting-general">5.3.3.2. Exporting (general)</a></li>
 <li><input type='checkbox' id='toc--exporting-html'/><label for='toc--exporting-html'><a href="#exporting-html">5.3.3.3. Exporting to HTML</a></label>
 <ul>
-<li><a href="#extra-header-content">5.3.3.3.1. Extra header content</a></li>
-<li><a href="#custom-css-js">5.3.3.3.2. Custom CSS/JS</a></li>
-<li><a href="#collapsable-src-example">5.3.3.3.3. Collapsable src and example blocks</a></li>
-<li><a href="#handle-table-overflow">5.3.3.3.4. Handle table overflow</a></li>
-<li><a href="#toc-as-collapsable">5.3.3.3.5. TOC as a collapsable tree</a></li>
-<li><a href="#make-verbatim-different">5.3.3.3.6. Make verbatim different to code</a></li>
-<li><a href="#change-checkbox-type">5.3.3.3.7. Change checkbox type</a></li>
-<li><a href="#header-anchors">5.3.3.3.8. Header anchors</a></li>
-<li><a href="#latex-rendering">5.3.3.3.9. LaTeX Rendering</a></li>
+<li><a href="#extra-header-content">5.3.3.4.1. Extra header content</a></li>
+<li><a href="#custom-css-js">5.3.3.4.2. Custom CSS/JS</a></li>
+<li><a href="#collapsable-src-example">5.3.3.4.3. Collapsable src and example blocks</a></li>
+<li><a href="#handle-table-overflow">5.3.3.4.4. Handle table overflow</a></li>
+<li><a href="#toc-as-collapsable">5.3.3.4.5. TOC as a collapsable tree</a></li>
+<li><a href="#make-verbatim-different">5.3.3.4.6. Make verbatim different to code</a></li>
+<li><a href="#change-checkbox-type">5.3.3.4.7. Change checkbox type</a></li>
+<li><a href="#header-anchors">5.3.3.4.8. Header anchors</a></li>
 <li><a href="#acronyms">5.3.3.4.9. Acronyms</a></li>
 <li><a href="#latex-rendering">5.3.3.4.10. LaTeX Rendering</a></li>
 </ul>
 </li>
-<li><input type='checkbox' id='toc--exporting-latex'/><label for='toc--exporting-latex'><a href="#exporting-latex">5.3.3.4. Exporting to LaTeX</a></label>
+<li><input type='checkbox' id='toc--exporting-latex'/><label for='toc--exporting-latex'><a href="#exporting-latex">5.3.3.5. Exporting to LaTeX</a></label>
 <ul>
-<li><a href="#chameleon-aka-match">5.3.3.4.1. Chameleon &#x2014; aka. match theme</a></li>
-<li><a href="#exporting-latex-make">5.3.3.4.2. Make verbatim different to code</a></li>
 <li><a href="#org-latex-acronyms">5.3.3.5.1. Acronyms</a></li>
+<li><a href="#nicer-checkboxes">5.3.3.5.2. Nicer checkboxes</a></li>
+<li><a href="#class-templates">5.3.3.5.3. Class templates</a></li>
+<li><a href="#cleverer-preamble">5.3.3.5.4. A cleverer preamble</a></li>
+<li><a href="#chameleon-aka-match">5.3.3.5.5. Chameleon &#x2014; aka. match theme</a></li>
+<li><a href="#exporting-latex-make">5.3.3.5.6. Make verbatim different to code</a></li>
 </ul>
 </li>
-<li><a href="#exporting-beamer">5.3.3.5. Exporting to Beamer</a></li>
-<li><a href="#exporting-gfm">5.3.3.6. Exporting to GFM</a></li>
+<li><a href="#exporting-beamer">5.3.3.6. Exporting to Beamer</a></li>
+<li><a href="#exporting-gfm">5.3.3.7. Exporting to GFM</a></li>
 </ul>
 </li>
 <li><a href="#babel">5.3.4. Babel</a></li>
@@ -4542,6 +4544,7 @@ To alleviate some <a href="#flyspell">issues with flyspell</a>
 <p>
 This is a nice extension to <code>calc</code>
 </p>
+
 <details id='calctex,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
 <a href='#calctex,code--1'>#</a>
@@ -4962,18 +4965,18 @@ to make that right again, and this package makes that even easier to do.
 Org-roam is nice by itself, but there are so <i>extra</i> nice packages which integrate
 with it.
 </p>
-<details id='extra-functionality,code--6' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<details id='extra-functionality,code--7' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#extra-functionality,code--6'>#</a>
+<a href='#extra-functionality,code--7'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">package!</span> org-roam-server <span class="org-builtin">:pin</span> <span class="org-string">"bfc7032741..."</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </details>
-<details id='extra-functionality,code--7' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<details id='extra-functionality,code--8' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#extra-functionality,code--7'>#</a>
+<a href='#extra-functionality,code--8'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package</span> org-roam-server
@@ -5316,7 +5319,7 @@ configuration tweaks.
                <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-3">)</span>
                <span class="org-string">"&#15;"</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-warning">nil nil</span><span class="org-warning"><span class="org-rainbow-delimiters-depth-1">)</span></span><span class="org-warning"><span class="org-rainbow-delimiters-depth-3">)</span></span><span class="org-warning"><span class="org-rainbow-delimiters-depth-2">)</span></span>
   
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">lui-pre-input-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-org-to-irc</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">lui-pre-input-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-org-to-irc</span><span class="org-rainbow-delimiters-depth-2">)</span>
 
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defun</span> <span class="org-function-name">lui-ascii-to-emoji</span> <span class="org-rainbow-delimiters-depth-3">()</span>
     <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">goto-char</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">point-min</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
@@ -5324,7 +5327,7 @@ configuration tweaks.
       <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">replace-match</span>
        <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span>
         <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">1</span><span class="org-rainbow-delimiters-depth-3">)</span>
-        <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-variable-name">lui-emojis-alist</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+        <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-3">)</span> lui-emojis-alist<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
             <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">concat</span> <span class="org-string">":"</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-string">":"</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
         <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">3</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
        nil nil<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
@@ -5334,14 +5337,14 @@ configuration tweaks.
       <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">goto-char</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">point-min</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
       <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">re-search-forward</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">concat</span> <span class="org-string">" "</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">car</span> emoticon<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-string">"</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">(</span></span><span class="org-string"> </span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">)</span></span><span class="org-string">?"</span><span class="org-rainbow-delimiters-depth-3">)</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span>
         <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">replace-match</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">concat</span> <span class="org-string">" "</span>
-                               <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> emoticon<span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-variable-name">lui-emojis-alist</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                               <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> emoticon<span class="org-rainbow-delimiters-depth-3">)</span> lui-emojis-alist<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
                                <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">1</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
   
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">define-minor-mode</span> <span class="org-variable-name">lui-emojify</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">define-minor-mode</span> <span class="org-function-name">lui-emojify</span>
     <span class="org-doc">"Replace :emojis: and ;) emoticons with unicode emoji chars."</span>
     <span class="org-builtin">:global</span> t
     <span class="org-builtin">:init-value</span> t
-    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> <span class="org-variable-name">lui-emojify</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> lui-emojify
         <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">add-hook!</span> lui-pre-input <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-ascii-to-emoji</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-emoticon-to-emoji</span><span class="org-rainbow-delimiters-depth-1">)</span>
       <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">remove-hook!</span> lui-pre-input <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-ascii-to-emoji</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-emoticon-to-emoji</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defvar</span> <span class="org-variable-name">lui-emojis-alist</span>
@@ -5547,7 +5550,7 @@ Let&rsquo;s do our <b>bold</b>, <i>italic</i>, and <span class="underline">under
              <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-2">)</span>
              <span class="org-string">"&#15;"</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-warning">nil nil</span><span class="org-warning"><span class="org-rainbow-delimiters-depth-3">)</span></span><span class="org-warning"><span class="org-rainbow-delimiters-depth-2">)</span></span><span class="org-warning"><span class="org-rainbow-delimiters-depth-1">)</span></span>
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-variable-name">lui-pre-input-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-org-to-irc</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">add-hook</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">lui-pre-input-hook</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-org-to-irc</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </details>
@@ -5570,7 +5573,7 @@ Let&rsquo;s setup Circe to use some emojis
     <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">replace-match</span>
      <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">concat</span>
       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">1</span><span class="org-rainbow-delimiters-depth-2">)</span>
-      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-variable-name">lui-emojis-alist</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-2">)</span> lui-emojis-alist<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
           <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">concat</span> <span class="org-string">":"</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">2</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-string">":"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">3</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
      nil nil<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -5580,14 +5583,14 @@ Let&rsquo;s setup Circe to use some emojis
     <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">goto-char</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">point-min</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
     <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">while</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">re-search-forward</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span> <span class="org-string">" "</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">car</span> emoticon<span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-string">"</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">(</span></span><span class="org-string"> </span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">)</span></span><span class="org-string">?"</span><span class="org-rainbow-delimiters-depth-2">)</span> nil t<span class="org-rainbow-delimiters-depth-1">)</span>
       <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">replace-match</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">concat</span> <span class="org-string">" "</span>
-                             <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">cdr</span> emoticon<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-variable-name">lui-emojis-alist</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+                             <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">assoc</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">cdr</span> emoticon<span class="org-rainbow-delimiters-depth-2">)</span> lui-emojis-alist<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
                              <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">match-string</span> <span class="org-highlight-numbers-number">1</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">define-minor-mode</span> <span class="org-variable-name">lui-emojify</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">define-minor-mode</span> <span class="org-function-name">lui-emojify</span>
   <span class="org-doc">"Replace :emojis: and ;) emoticons with unicode emoji chars."</span>
   <span class="org-builtin">:global</span> t
   <span class="org-builtin">:init-value</span> t
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">if</span> <span class="org-variable-name">lui-emojify</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">if</span> lui-emojify
       <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">add-hook!</span> lui-pre-input <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-ascii-to-emoji</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-emoticon-to-emoji</span><span class="org-rainbow-delimiters-depth-3">)</span>
     <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">remove-hook!</span> lui-pre-input <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-ascii-to-emoji</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">lui-emoticon-to-emoji</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
@@ -7352,10 +7355,10 @@ We also want to define <code>mu4e-compose-from-mailto</code>.
          <span class="org-rainbow-delimiters-depth-1">(</span>to <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">assoc</span> <span class="org-string">"To"</span> mailto<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
          <span class="org-rainbow-delimiters-depth-1">(</span>subject <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">assoc</span> <span class="org-string">"Subject"</span> mailto<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-string">""</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
          <span class="org-rainbow-delimiters-depth-1">(</span>body <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">assoc</span> <span class="org-string">"Body"</span> mailto<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
-         <span class="org-rainbow-delimiters-depth-1">(</span>org-msg-greeting-fmt <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">assoc</span> <span class="org-string">"Body"</span> mailto<span class="org-rainbow-delimiters-depth-3">)</span>
+         <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-variable-name">org-msg-greeting-fmt</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">assoc</span> <span class="org-string">"Body"</span> mailto<span class="org-rainbow-delimiters-depth-3">)</span>
                                    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">replace-regexp-in-string</span> <span class="org-string">"%"</span> <span class="org-string">"%%"</span>
                                                              <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">assoc</span> <span class="org-string">"Body"</span> mailto<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
-                                 org-msg-greeting-fmt<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                                 <span class="org-variable-name">org-msg-greeting-fmt</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
          <span class="org-rainbow-delimiters-depth-1">(</span>headers <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">-filter</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-1">(</span>spec<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">not</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">-contains-p</span> <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-string">"To"</span> <span class="org-string">"Subject"</span> <span class="org-string">"Body"</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">car</span> spec<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span> mailto<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
     <span class="org-rainbow-delimiters-depth-3">(</span>mu4e~compose-mail to subject headers<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
@@ -7585,12 +7588,12 @@ in the file and check for exitance too.
 <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package!</span> org-msg
   <span class="org-builtin">:after</span> mu4e
   <span class="org-builtin">:config</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> org-msg-options <span class="org-string">"html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t tex:dvipng"</span>
-        org-msg-startup <span class="org-string">"hidestars indent inlineimages"</span>
-        org-msg-greeting-fmt <span class="org-string">"\nHi %s,\n\n"</span>
-        org-msg-greeting-name-limit <span class="org-highlight-numbers-number">3</span>
-        org-msg-text-plain-alternative t<span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">map!</span> <span class="org-builtin">:map</span> org-msg-edit-mode-map
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">org-msg-options</span> <span class="org-string">"html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t tex:dvipng"</span>
+        <span class="org-variable-name">org-msg-startup</span> <span class="org-string">"hidestars indent inlineimages"</span>
+        <span class="org-variable-name">org-msg-greeting-fmt</span> <span class="org-string">"\nHi %s,\n\n"</span>
+        <span class="org-variable-name">org-msg-greeting-name-limit</span> <span class="org-highlight-numbers-number">3</span>
+        <span class="org-variable-name">org-msg-text-plain-alternative</span> t<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">map!</span> <span class="org-builtin">:map</span> <span class="org-variable-name">org-msg-edit-mode-map</span>
         <span class="org-builtin">:n</span> <span class="org-string">"G"</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">org-msg-goto-body</span><span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defadvice!</span> org-msg--now-exporting <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-type">&amp;rest</span> _<span class="org-rainbow-delimiters-depth-3">)</span>
     <span class="org-builtin">:before</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">org-msg-org-to-xml</span>
@@ -7598,7 +7601,7 @@ in the file and check for exitance too.
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">defadvice!</span> org-msg--not-exporting <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-type">&amp;rest</span> _<span class="org-rainbow-delimiters-depth-3">)</span>
     <span class="org-builtin">:after</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">org-msg-org-to-xml</span>
     <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">org-msg-currently-exporting</span> nil<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> org-msg-enforce-css
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">org-msg-enforce-css</span>
         <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">let*</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">(</span>font-family <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span>font-family . <span class="org-string">"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell,\</span>
 <span class="org-string">          \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
                <span class="org-rainbow-delimiters-depth-2">(</span>monospace-font <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-3">(</span>font-family . <span class="org-string">"SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
@@ -7718,7 +7721,7 @@ To make this look a little nicer, we will overwrite the default style.
 <a href='#org-msg-restyle'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> org-msg-enforce-css
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">org-msg-enforce-css</span>
       <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let*</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-1">(</span>font-family <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-2">(</span>font-family . <span class="org-string">"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell,\</span>
 <span class="org-string">        \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
              <span class="org-rainbow-delimiters-depth-1">(</span>monospace-font <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-2">(</span>font-family . <span class="org-string">"SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -7906,19 +7909,19 @@ definition functionality (like <code>+lookup/dictionary-definition</code>).
 <p>
 Now let&rsquo;s use this instead of wordnet.
 </p>
-<details id='stardict,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<details id='lexic,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#stardict,code--2'>#</a>
+<a href='#lexic,code--2'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defadvice!</span> +lookup/dictionary-definition-cdcv <span class="org-rainbow-delimiters-depth-2">(</span>identifier <span class="org-type">&amp;optional</span> arg<span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-doc">"Look up the definition of the word at point (or selection) using `</span><span class="org-doc"><span class="org-constant">sdcv-search</span></span><span class="org-doc">'."</span>
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defadvice!</span> +lookup/dictionary-definition-lexic <span class="org-rainbow-delimiters-depth-2">(</span>identifier <span class="org-type">&amp;optional</span> arg<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-doc">"Look up the definition of the word at point (or selection) using `</span><span class="org-doc"><span class="org-constant">lexic-search</span></span><span class="org-doc">'."</span>
   <span class="org-builtin">:override</span> <span class="org-highlight-quoted-quote">#'</span><span class="org-highlight-quoted-symbol">+lookup/dictionary-definition</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span>
    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">list</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">or</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">doom-thing-at-point-or-region</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">word</span><span class="org-rainbow-delimiters-depth-2">)</span>
              <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">read-string</span> <span class="org-string">"Look up in dictionary: "</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
          <span class="org-variable-name">current-prefix-arg</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">sdcv-search</span> identifier nil nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">lexic-search</span> identifier nil nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </details>
@@ -10220,7 +10223,7 @@ Saving seconds adds up after all! (but only so much)
            <span class="org-rainbow-delimiters-depth-2">(</span>title <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">plist-get</span> xkcd-info <span class="org-builtin">:title</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
            <span class="org-rainbow-delimiters-depth-2">(</span>file <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">xkcd-download</span> img <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">string-to-number</span> num<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
       <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">cond</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">org-export-derived-backend-p</span> backend <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">html</span><span class="org-rainbow-delimiters-depth-3">)</span>
-             <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">format</span> <span class="org-string">"&lt;img class='invertible' src='%s' title=\"%s\" alt='%s'&gt;"</span> img <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">subst-char-in-string</span> ?\" ?&#8220; alt<span class="org-rainbow-delimiters-depth-1">)</span> title<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+             <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">format</span> <span class="org-string">"&lt;img class='invertible' src='%s' title=\"%s\" alt='%s'&gt;"</span> img <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">subst-char-in-string</span> ?\" ?<span class="org-warning">&#8220;</span> alt<span class="org-rainbow-delimiters-depth-1">)</span> title<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
             <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-function-name">org-export-derived-backend-p</span> backend <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">latex</span><span class="org-rainbow-delimiters-depth-3">)</span>
              <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">format</span> <span class="org-string">"\\begin{figure}[!htb]</span>
 <span class="org-string">  \\centering</span>
@@ -11421,6 +11424,9 @@ Suffice to say I&rsquo;ve snatched it, with a few of my own tweaks applied.
 
 &lt;<span class="org-function-name">link</span> <span class="org-variable-name">rel</span>=<span class="org-string">"preload"</span> <span class="org-variable-name">as</span>=<span class="org-string">"font"</span> <span class="org-variable-name">crossorigin</span>=<span class="org-string">"crossorigin"</span> <span class="org-variable-name">type</span>=<span class="org-string">"font/woff2"</span> <span class="org-variable-name">href</span>=<span class="org-string">"https://tecosaur.com/resources/org/etbookot-roman-webfont.woff2"</span>&gt;
 &lt;<span class="org-function-name">link</span> <span class="org-variable-name">rel</span>=<span class="org-string">"preload"</span> <span class="org-variable-name">as</span>=<span class="org-string">"font"</span> <span class="org-variable-name">crossorigin</span>=<span class="org-string">"crossorigin"</span> <span class="org-variable-name">type</span>=<span class="org-string">"font/woff2"</span> <span class="org-variable-name">href</span>=<span class="org-string">"https://tecosaur.com/resources/org/etbookot-italic-webfont.woff2"</span>&gt;
+&lt;<span class="org-function-name">link</span> <span class="org-variable-name">rel</span>=<span class="org-string">"preload"</span> <span class="org-variable-name">as</span>=<span class="org-string">"font"</span> <span class="org-variable-name">crossorigin</span>=<span class="org-string">"crossorigin"</span> <span class="org-variable-name">type</span>=<span class="org-string">"font/woff2"</span> <span class="org-variable-name">href</span>=<span class="org-string">"https://tecosaur.com/resources/org/Merriweather-TextRegular.woff2"</span>&gt;
+&lt;<span class="org-function-name">link</span> <span class="org-variable-name">rel</span>=<span class="org-string">"preload"</span> <span class="org-variable-name">as</span>=<span class="org-string">"font"</span> <span class="org-variable-name">crossorigin</span>=<span class="org-string">"crossorigin"</span> <span class="org-variable-name">type</span>=<span class="org-string">"font/woff2"</span> <span class="org-variable-name">href</span>=<span class="org-string">"https://tecosaur.com/resources/org/Merriweather-TextItalic.woff2"</span>&gt;
+&lt;<span class="org-function-name">link</span> <span class="org-variable-name">rel</span>=<span class="org-string">"preload"</span> <span class="org-variable-name">as</span>=<span class="org-string">"font"</span> <span class="org-variable-name">crossorigin</span>=<span class="org-string">"crossorigin"</span> <span class="org-variable-name">type</span>=<span class="org-string">"font/woff2"</span> <span class="org-variable-name">href</span>=<span class="org-string">"https://tecosaur.com/resources/org/Merriweather-TextBold.woff2"</span>&gt;
 </pre>
 </div>
 </details>
@@ -11978,10 +11984,9 @@ Thankfully this can be mitigated my adding the <code>async</code> attribute to d
 </ol>
 </div>
 </div>
-
 <div id="outline-container-exporting-latex" class="outline-5">
-<h5 id="exporting-latex"><span class="section-number-5">5.3.3.4</span> Exporting to LaTeX<a aria-hidden="true" href="#exporting-latex">#</a> </h5>
-<div class="outline-text-5" id="text-5-3-3-4">
+<h5 id="exporting-latex"><span class="section-number-5">5.3.3.5</span> Exporting to LaTeX<a aria-hidden="true" href="#exporting-latex">#</a> </h5>
+<div class="outline-text-5" id="text-5-3-3-5">
 </div>
 <div id="outline-container-org-latex-acronyms" class="outline-6">
 <h6 id="org-latex-acronyms"><span class="section-number-6">5.3.3.5.1</span> Acronyms<a aria-hidden="true" href="#org-latex-acronyms">#</a> </h6>
@@ -12041,9 +12046,12 @@ While this is the LaTeX section, it&rsquo;s convenient to also provide <span cla
 </div>
 </div>
 
-<details id='exporting-latex,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div id="outline-container-nicer-checkboxes" class="outline-6">
+<h6 id="nicer-checkboxes"><span class="section-number-6">5.3.3.5.2</span> Nicer checkboxes<a aria-hidden="true" href="#nicer-checkboxes">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-3-5-2">
+<details id='nicer-checkboxes,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#exporting-latex,code--2'>#</a>
+<a href='#nicer-checkboxes,code--1'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> org
@@ -12064,13 +12072,15 @@ While this is the LaTeX section, it&rsquo;s convenient to also provide <span cla
 </pre>
 </div>
 </details>
+</div>
+</div>
 
-<p>
-Now for a few more adjustments.
-</p>
-<details id='exporting-latex,code--3' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div id="outline-container-class-templates" class="outline-6">
+<h6 id="class-templates"><span class="section-number-6">5.3.3.5.3</span> Class templates<a aria-hidden="true" href="#class-templates">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-3-5-3">
+<details id='class-templates,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
 <div class='gutter'>
-<a href='#exporting-latex,code--3'>#</a>
+<a href='#class-templates,code--1'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> ox-latex
@@ -12245,7 +12255,12 @@ Now for a few more adjustments.
 </pre>
 </div>
 </details>
+</div>
+</div>
 
+<div id="outline-container-cleverer-preamble" class="outline-6">
+<h6 id="cleverer-preamble"><span class="section-number-6">5.3.3.5.4</span> A cleverer preamble<a aria-hidden="true" href="#cleverer-preamble">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-3-5-4">
 <p>
 We also want a particular preamble when minted is used,
 </p>
@@ -12391,9 +12406,10 @@ a bit cleverer, and handle the &ldquo;universal preamble&rdquo; while we&rsquo;r
 </div>
 </details>
 </div>
+</div>
 <div id="outline-container-chameleon-aka-match" class="outline-6">
-<h6 id="chameleon-aka-match"><span class="section-number-6">5.3.3.4.1</span> Chameleon &#x2014; aka. match theme<a aria-hidden="true" href="#chameleon-aka-match">#</a> </h6>
-<div class="outline-text-6" id="text-5-3-3-4-1">
+<h6 id="chameleon-aka-match"><span class="section-number-6">5.3.3.5.5</span> Chameleon &#x2014; aka. match theme<a aria-hidden="true" href="#chameleon-aka-match">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-3-5-5">
 <p>
 Once the idea of having the look of the LaTeX document produced match the
 current Emacs theme, I was enraptured. The result is the pseudo-class <code>chameleon</code>.
@@ -12544,8 +12560,8 @@ current Emacs theme, I was enraptured. The result is the pseudo-class <code>cham
 </div>
 </div>
 <div id="outline-container-exporting-latex-make" class="outline-6">
-<h6 id="exporting-latex-make"><span class="section-number-6">5.3.3.4.2</span> Make verbatim different to code<a aria-hidden="true" href="#exporting-latex-make">#</a> </h6>
-<div class="outline-text-6" id="text-5-3-3-4-2">
+<h6 id="exporting-latex-make"><span class="section-number-6">5.3.3.5.6</span> Make verbatim different to code<a aria-hidden="true" href="#exporting-latex-make">#</a> </h6>
+<div class="outline-text-6" id="text-5-3-3-5-6">
 <p>
 Since have just gone to so much effort above let&rsquo;s make the most of it by making
 <kbd>verbatim</kbd> use <code>verb</code> instead of <code>protectedtexttt</code> (default).
@@ -12568,8 +12584,8 @@ Since have just gone to so much effort above let&rsquo;s make the most of it by 
 </div>
 </div>
 <div id="outline-container-exporting-beamer" class="outline-5">
-<h5 id="exporting-beamer"><span class="section-number-5">5.3.3.5</span> Exporting to Beamer<a aria-hidden="true" href="#exporting-beamer">#</a> </h5>
-<div class="outline-text-5" id="text-5-3-3-5">
+<h5 id="exporting-beamer"><span class="section-number-5">5.3.3.6</span> Exporting to Beamer<a aria-hidden="true" href="#exporting-beamer">#</a> </h5>
+<div class="outline-text-5" id="text-5-3-3-6">
 <p>
 It&rsquo;s nice to use a different theme
 </p>
@@ -12611,8 +12627,8 @@ frame from <code>1</code> to <code>2</code>.
 </div>
 </div>
 <div id="outline-container-exporting-gfm" class="outline-5">
-<h5 id="exporting-gfm"><span class="section-number-5">5.3.3.6</span> Exporting to GFM<a aria-hidden="true" href="#exporting-gfm">#</a> </h5>
-<div class="outline-text-5" id="text-5-3-3-6">
+<h5 id="exporting-gfm"><span class="section-number-5">5.3.3.7</span> Exporting to <span class='acr'>GFM</span><a aria-hidden="true" href="#exporting-gfm">#</a> </h5>
+<div class="outline-text-5" id="text-5-3-3-7">
 <p>
 We just need to load <code>ox-gfm</code> for org-mode documents
 </p>
