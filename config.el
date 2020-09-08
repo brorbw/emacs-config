@@ -4569,11 +4569,6 @@ preview-default-preamble "\\fi}\"%' \"\\detokenize{\" %t \"}\""))
   (add-to-list 'TeX-view-program-selection '(output-pdf "Evince")))
 ;; SyncTeX:1 ends here
 
-;; [[file:config.org::*Evilification][Evilification:1]]
-(use-package! evil-tex
-  :hook (LaTeX-mode . evil-tex-mode))
-;; Evilification:1 ends here
-
 ;; [[file:config.org::*Fixes][Fixes:1]]
 (when EMACS28+
   (add-hook 'latex-mode-hook #'TeX-latex-mode))

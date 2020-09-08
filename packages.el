@@ -75,14 +75,9 @@
 ;; Email:2 ends here
 
 ;; [[file:config.org::*LaTeX][LaTeX:1]]
-(package! evil-tex :recipe (:host github :repo "itai33/evil-tex")
-                            :pin "925337a4d5799d48c03e0384757decb6363ab478")
-;; LaTeX:1 ends here
-
-;; [[file:config.org::*LaTeX][LaTeX:2]]
 (package! auto-latex-snippets
   :recipe (:local-repo "lisp/Auto-LaTeX-Snippets"))
-;; LaTeX:2 ends here
+;; LaTeX:1 ends here
 
 ;; [[file:config.org::*Org Mode][Org Mode:1]]
 (unpin! org)
