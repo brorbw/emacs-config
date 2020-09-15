@@ -1387,8 +1387,8 @@ Usefull for affecting some of my HTML export config.")
         :n "N" (cmd! (lexic-next-entry t))
         :n "p" #'lexic-previous-entry
         :n "P" (cmd! (lexic-previous-entry t))
-        :n "C-n" #'lexic-search-history-backwards
-        :n "C-p" #'lexic-search-history-forwards
+        :n "C-p" #'lexic-search-history-backwards
+        :n "C-n" #'lexic-search-history-forwards
         :n "/" (cmd! (call-interactively #'lexic-search))))
 ;; Lexic:1 ends here
 
