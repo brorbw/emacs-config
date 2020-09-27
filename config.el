@@ -4649,6 +4649,5 @@ preview-default-preamble "\\fi}\"%' \"\\detokenize{\" %t \"}\""))
 ;; [[file:config.org::*Authinfo][Authinfo:2]]
 (use-package! authinfo-colour-mode
   :mode ("authinfo\\.gpg\\'" . authinfo-colour-mode)
-  :config
-  (advice-add 'authinfo-mode :override #'authinfo-colour-mode))
+  :init (advice-add 'authinfo-mode :override #'authinfo-colour-mode))
 ;; Authinfo:2 ends here
