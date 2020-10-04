@@ -1497,6 +1497,37 @@ Usefull for affecting some of my HTML export config.")
    ))
 ;; Which-key:2 ends here
 
+;; [[file:config.org::*Writeroom][Writeroom:1]]
+(setq +zen-text-scale 0.6)
+;; Writeroom:1 ends here
+
+;; [[file:config.org::*Writeroom][Writeroom:2]]
+(after! writeroom-mode
+  (add-hook 'writeroom-mode-hook
+            (defun +zen-cleaner-org ()
+              (when (and (eq major-mode 'org-mode) writeroom-mode)
+                (setq-local -display-line-numbers display-line-numbers
+                            display-line-numbers nil)
+                (setq-local -org-indent-mode org-indent-mode)
+                (org-indent-mode -1)
+                (when (featurep 'org-superstar)
+                  (setq-local -org-superstar-headline-bullets-list org-superstar-headline-bullets-list
+                              org-superstar-headline-bullets-list '("​")
+                              -org-superstar-remove-leading-stars org-superstar-remove-leading-stars
+                              org-superstar-remove-leading-stars t)
+                  (org-superstar-restart)))))
+  (add-hook 'writeroom-mode-disable-hook
+            (defun +zen-dirty-org ()
+              (when (eq major-mode 'org-mode)
+                (setq-local display-line-numbers -display-line-numbers)
+                (when -org-indent-mode
+                  (org-indent-mode 1))
+                (when (featurep 'org-superstar)
+                  (setq-local org-superstar-headline-bullets-list -org-superstar-headline-bullets-list
+                              org-superstar-remove-leading-stars -org-superstar-remove-leading-stars)
+                  (org-superstar-restart))))))
+;; Writeroom:2 ends here
+
 ;; [[file:config.org::*xkcd][xkcd:1]]
 (use-package! xkcd
   :commands (xkcd-get-json xkcd-download xkcd-get
