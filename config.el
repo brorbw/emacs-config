@@ -302,15 +302,18 @@
   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 ;; Large files:2 ends here
 
-;; [[file:config.org::*LaTeX][LaTeX:3]]
-(use-package! auto-latex-snippets
-  :hook (LaTeX-mode . auto-latex-snippets-mode)
+;; [[file:config.org::*LaTeX][LaTeX:2]]
+(use-package! auto-activating-snippets
+  :hook (LaTeX-mode . auto-activating-snippets-mode)
+  :config (require 'latex-auto-activating-snippets))
+
+(use-package! latex-auto-activating-snippets
   :config
   (defun als-tex-fold-maybe ()
     (unless (equal "/" als-transient-snippet-key)
       (+latex-fold-last-macro-a)))
-  (add-hook 'als-post-snippet-expand-hook #'als-tex-fold-maybe))
-;; LaTeX:3 ends here
+  (add-hook 'aas-post-snippet-expand-hook #'als-tex-fold-maybe))
+;; LaTeX:2 ends here
 
 ;; [[file:config.org::*Extra functionality][Extra functionality:6]]
 (use-package! org-pandoc-import

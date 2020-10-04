@@ -75,8 +75,11 @@
 ;; Email:2 ends here
 
 ;; [[file:config.org::*LaTeX][LaTeX:1]]
-(package! auto-latex-snippets
-  :recipe (:local-repo "lisp/Auto-LaTeX-Snippets"))
+(package! auto-activating-snippets :recipe
+  (:host github :repo "ymarco/auto-activating-snippets")
+  :pin "0927bb5e853c9a5524b46e438c2efe2022b36ac2")
+(package! latex-auto-activating-snippets
+  :recipe (:local-repo "lisp/LaTeX-auto-activating-snippets"))
 ;; LaTeX:1 ends here
 
 ;; [[file:config.org::*Org Mode][Org Mode:1]]
@@ -84,13 +87,13 @@
 ;; Org Mode:1 ends here
 
 ;; [[file:config.org::*Improve agenda/capture][Improve agenda/capture:1]]
-(package! org-super-agenda :pin "dd0d104c269fab9ebe5af7009bc1dd2a3a8f3c12")
+(package! org-super-agenda :pin "3264255989021b8563ea42b5d26acbc2a024f14d")
 ;; Improve agenda/capture:1 ends here
 
 ;; [[file:config.org::*Improve agenda/capture][Improve agenda/capture:2]]
 (package! doct
   :recipe (:host github :repo "progfolio/doct")
-  :pin "80d291e5f1cbdabd4eb7f88c917653c59d3f14be")
+  :pin "dabb30ebea866ef225b81561c8265d740b1e81c3")
 ;; Improve agenda/capture:2 ends here
 
 ;; [[file:config.org::*Visuals][Visuals:1]]
@@ -111,7 +114,7 @@
 ;; Extra functionality:1 ends here
 
 ;; [[file:config.org::*Extra functionality][Extra functionality:2]]
-(package! org-ref :pin "9a8053f0b0e799b8edbae2376dda44704054725a")
+(package! org-ref :pin "f582e9c53e8e4c5dcc1d3889f1b5c536c9a9b524")
 ;; Extra functionality:2 ends here
 
 ;; [[file:config.org::*Extra functionality][Extra functionality:3]]
@@ -119,7 +122,7 @@
 ;; Extra functionality:3 ends here
 
 ;; [[file:config.org::*Extra functionality][Extra functionality:4]]
-(package! org-chef :pin "77f97ad07b957d6b5ea6c2a57a9e623f2ab36d04")
+(package! org-chef :pin "5b461ed7d458cdcbff0af5013fbdbe88cbfb13a4")
 ;; Extra functionality:4 ends here
 
 ;; [[file:config.org::*Extra functionality][Extra functionality:5]]
@@ -128,7 +131,7 @@
 ;; Extra functionality:5 ends here
 
 ;; [[file:config.org::*Extra functionality][Extra functionality:7]]
-(package! org-roam-server :pin "bfc70327413948fb7e631f4424fb92c3dbdeafc0")
+(package! org-roam-server :pin "8d1d143f5db415864c008b8e42e4d92279df9a81")
 ;; Extra functionality:7 ends here
 
 ;; [[file:config.org::*Systemd][Systemd:1]]
