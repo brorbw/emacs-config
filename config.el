@@ -372,8 +372,8 @@
         centaur-tabs-set-icons t
         centaur-tabs-modified-marker "o"
         centaur-tabs-close-button "×"
-        centaur-tabs-set-bar 'above)
-        centaur-tabs-gray-out-icons 'buffer
+        centaur-tabs-set-bar 'above
+        centaur-tabs-gray-out-icons 'buffer)
   (centaur-tabs-change-fonts "P22 Underground Book" 160))
 ;; (setq x-underline-at-descent-line t)
 ;; Centaur Tabs:1 ends here
