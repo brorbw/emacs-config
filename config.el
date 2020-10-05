@@ -293,7 +293,7 @@
      (replace-regexp-in-string
       "\n+" "\n"
       (mapconcat (lambda (c) (if (listp (cdr c))
-                            (cadr c))) doom-themes--colors "\n"))
+                                 (cadr c))) doom-themes--colors "\n"))
      'utf-8
      "/tmp/doom-color-theme" ))
   (gif-screencast-write-colormap)
@@ -1148,14 +1148,14 @@ Prevents a series of redisplays from being called (when set to an appropriate va
     (when (file-exists-p mu4e-lock-file)
       (let* ((pid (string-to-number (f-read-text mu4e-lock-file 'utf-8)))
              (process (process-attributes pid)))
-          (if process (cons pid process)
-            (delete-file mu4e-lock-file) nil))))
+        (if process (cons pid process)
+          (delete-file mu4e-lock-file) nil))))
 
   (defun mu4e-lock-avalible (&optional strict)
     "If the `mu4e-lock-file' is avalible (unset or owned by this emacs) return t.
 If STRICT only accept an unset lock file."
     (not (when-let* ((lock-info (mu4e-lock-pid-info))
-                (pid (car lock-info)))
+                     (pid (car lock-info)))
            (when (or strict (/= (emacs-pid) pid)) t))))
 
   (defadvice! mu4e-lock-file-delete-maybe ()
@@ -1275,9 +1275,9 @@ Else, write to this process' PID to the lock file"
 
 ;; [[file:config.org::*Smart Parentheses][Smart Parentheses:1]]
 (sp-local-pair
-     '(org-mode)
-     "<<" ">>"
-     :actions '(insert))
+ '(org-mode)
+ "<<" ">>"
+ :actions '(insert))
 ;; Smart Parentheses:1 ends here
 
 ;; [[file:config.org::*Spray][Spray:1]]
@@ -1406,7 +1406,8 @@ Else, write to this process' PID to the lock file"
 
 ;; [[file:config.org::*xkcd][xkcd:1]]
 (use-package! xkcd
-  :commands (xkcd-get-json xkcd-download xkcd-get
+  :commands (xkcd-get-json
+             xkcd-download xkcd-get
              ;; now for funcs from my extension of this pkg
              +xkcd-find-and-copy +xkcd-find-and-view
              +xkcd-fetch-info +xkcd-select)
@@ -1691,9 +1692,9 @@ SQL can be either the emacsql vector representation, or a string."
 ;; [[file:config.org::*Plaintext][Plaintext:1]]
 (after! text-mode
   (add-hook! 'text-mode-hook
-    ;; Apply ANSI color codes
-    (with-silent-modifications
-      (ansi-color-apply-on-region (point-min) (point-max)))))
+             ;; Apply ANSI color codes
+             (with-silent-modifications
+               (ansi-color-apply-on-region (point-min) (point-max)))))
 ;; Plaintext:1 ends here
 
 ;; [[file:config.org::*Tweaking defaults][Tweaking defaults:1]]
@@ -1744,8 +1745,8 @@ SQL can be either the emacsql vector representation, or a string."
       (with-current-buffer buffer
         (org-mode)))))
 (map! :leader
-  (:prefix "b"
-    :desc "New empty ORG buffer" "o" #'evil-buffer-org-new))
+      (:prefix "b"
+       :desc "New empty ORG buffer" "o" #'evil-buffer-org-new))
 ;; Org buffer creation:1 ends here
 
 ;; [[file:config.org::*List bullet sequence][List bullet sequence:1]]
@@ -1754,9 +1755,9 @@ SQL can be either the emacsql vector representation, or a string."
 
 ;; [[file:config.org::*Citation][Citation:1]]
 (use-package! org-ref
-   :after org
-   :config
-    (setq org-ref-completion-library 'org-ref-ivy-cite))
+  :after org
+  :config
+  (setq org-ref-completion-library 'org-ref-ivy-cite))
 ;; Citation:1 ends here
 
 ;; [[file:config.org::*cdlatex][cdlatex:1]]
@@ -1776,33 +1777,33 @@ SQL can be either the emacsql vector representation, or a string."
 
 ;; [[file:config.org::*LSP support in ~src~ blocks][LSP support in ~src~ blocks:1]]
 (cl-defmacro lsp-org-babel-enable (lang)
-    "Support LANG in org source code block."
-    (setq centaur-lsp 'lsp-mode)
-    (cl-check-type lang stringp)
-    (let* ((edit-pre (intern (format "org-babel-edit-prep:%s" lang)))
-           (intern-pre (intern (format "lsp--%s" (symbol-name edit-pre)))))
-      `(progn
-         (defun ,intern-pre (info)
-           (let ((file-name (->> info caddr (alist-get :file))))
-             (unless file-name
-               (setq file-name (make-temp-file "babel-lsp-")))
-             (setq buffer-file-name file-name)
-              (lsp-deferred)))
-         (put ',intern-pre 'function-documentation
-              (format "Enable lsp-mode in the buffer of org source block (%s)."
-                      (upcase ,lang)))
-         (if (fboundp ',edit-pre)
-             (advice-add ',edit-pre :after ',intern-pre)
-           (progn
-             (defun ,edit-pre (info)
-               (,intern-pre info))
-             (put ',edit-pre 'function-documentation
-                  (format "Prepare local buffer environment for org source block (%s)."
-                          (upcase ,lang))))))))
-  (defvar org-babel-lang-list
-    '("go" "python" "ipython" "bash" "sh"))
-  (dolist (lang org-babel-lang-list)
-    (eval `(lsp-org-babel-enable ,lang)))
+  "Support LANG in org source code block."
+  (setq centaur-lsp 'lsp-mode)
+  (cl-check-type lang stringp)
+  (let* ((edit-pre (intern (format "org-babel-edit-prep:%s" lang)))
+         (intern-pre (intern (format "lsp--%s" (symbol-name edit-pre)))))
+    `(progn
+       (defun ,intern-pre (info)
+         (let ((file-name (->> info caddr (alist-get :file))))
+           (unless file-name
+             (setq file-name (make-temp-file "babel-lsp-")))
+           (setq buffer-file-name file-name)
+           (lsp-deferred)))
+       (put ',intern-pre 'function-documentation
+            (format "Enable lsp-mode in the buffer of org source block (%s)."
+                    (upcase ,lang)))
+       (if (fboundp ',edit-pre)
+           (advice-add ',edit-pre :after ',intern-pre)
+         (progn
+           (defun ,edit-pre (info)
+             (,intern-pre info))
+           (put ',edit-pre 'function-documentation
+                (format "Prepare local buffer environment for org source block (%s)."
+                        (upcase ,lang))))))))
+(defvar org-babel-lang-list
+  '("go" "python" "ipython" "bash" "sh"))
+(dolist (lang org-babel-lang-list)
+  (eval `(lsp-org-babel-enable ,lang)))
 ;; LSP support in ~src~ blocks:1 ends here
 
 ;; [[file:config.org::*View exported file][View exported file:1]]
@@ -1822,7 +1823,7 @@ SQL can be either the emacsql vector representation, or a string."
         (unless output-file
           (when (file-exists-p
                  (concat dir basename "." ext))
-                 (setq output-file (concat dir basename "." ext)))))
+            (setq output-file (concat dir basename "." ext)))))
       (if output-file
           (if (member (file-name-extension output-file) org-view-external-file-extensions)
               (browse-url-xdg-open output-file)
@@ -1854,59 +1855,59 @@ SQL can be either the emacsql vector representation, or a string."
          ((agenda "" ((org-agenda-span 'day)
                       (org-super-agenda-groups
                        '((:name "Today"
-                                :time-grid t
-                                :date today
-                                :todo "TODAY"
-                                :scheduled today
-                                :order 1)))))
+                          :time-grid t
+                          :date today
+                          :todo "TODAY"
+                          :scheduled today
+                          :order 1)))))
           (alltodo "" ((org-agenda-overriding-header "")
                        (org-super-agenda-groups
                         '((:name "Next to do"
-                                 :todo "NEXT"
-                                 :order 1)
+                           :todo "NEXT"
+                           :order 1)
                           (:name "Important"
-                                 :tag "Important"
-                                 :priority "A"
-                                 :order 6)
+                           :tag "Important"
+                           :priority "A"
+                           :order 6)
                           (:name "Due Today"
-                                 :deadline today
-                                 :order 2)
+                           :deadline today
+                           :order 2)
                           (:name "Due Soon"
-                                 :deadline future
-                                 :order 8)
+                           :deadline future
+                           :order 8)
                           (:name "Overdue"
-                                 :deadline past
-                                 :face error
-                                 :order 7)
+                           :deadline past
+                           :face error
+                           :order 7)
                           (:name "Assignments"
-                                 :tag "Assignment"
-                                 :order 10)
+                           :tag "Assignment"
+                           :order 10)
                           (:name "Issues"
-                                 :tag "Issue"
-                                 :order 12)
+                           :tag "Issue"
+                           :order 12)
                           (:name "Emacs"
-                                 :tag "Emacs"
-                                 :order 13)
+                           :tag "Emacs"
+                           :order 13)
                           (:name "Projects"
-                                 :tag "Project"
-                                 :order 14)
+                           :tag "Project"
+                           :order 14)
                           (:name "Research"
-                                 :tag "Research"
-                                 :order 15)
+                           :tag "Research"
+                           :order 15)
                           (:name "To read"
-                                 :tag "Read"
-                                 :order 30)
+                           :tag "Read"
+                           :order 30)
                           (:name "Waiting"
-                                 :todo "WAITING"
-                                 :order 20)
+                           :todo "WAITING"
+                           :order 20)
                           (:name "University"
-                                 :tag "uni"
-                                 :order 32)
+                           :tag "uni"
+                           :order 32)
                           (:name "Trivial"
-                                 :priority<= "E"
-                                 :tag ("Trivial" "Unimportant")
-                                 :todo ("SOMEDAY" )
-                                 :order 90)
+                           :priority<= "E"
+                           :tag ("Trivial" "Unimportant")
+                           :todo ("SOMEDAY" )
+                           :order 90)
                           (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
 ;; Super agenda:1 ends here
 
@@ -1959,67 +1960,67 @@ SQL can be either the emacsql vector representation, or a string."
   is selected, only the bare key is returned."
     (save-window-excursion
       (let ((inhibit-quit t)
-      (buffer (org-switch-to-buffer-other-window "*Org Select*"))
-      (prompt (or prompt "Select: "))
-      case-fold-search
-      current)
+            (buffer (org-switch-to-buffer-other-window "*Org Select*"))
+            (prompt (or prompt "Select: "))
+            case-fold-search
+            current)
         (unwind-protect
-      (catch 'exit
-        (while t
-          (setq-local evil-normal-state-cursor (list nil))
-          (erase-buffer)
-          (insert title "\n\n")
-          (let ((des-keys nil)
-          (allowed-keys '("\C-g"))
-          (tab-alternatives '("\s" "\t" "\r"))
-          (cursor-type nil))
-      ;; Populate allowed keys and descriptions keys
-      ;; available with CURRENT selector.
-      (let ((re (format "\\`%s\\(.\\)\\'"
-            (if current (regexp-quote current) "")))
-            (prefix (if current (concat current " ") "")))
-        (dolist (entry table)
-          (pcase entry
-            ;; Description.
-            (`(,(and key (pred (string-match re))) ,desc)
-             (let ((k (match-string 1 key)))
-         (push k des-keys)
-         ;; Keys ending in tab, space or RET are equivalent.
-         (if (member k tab-alternatives)
-             (push "\t" allowed-keys)
-           (push k allowed-keys))
-         (insert (propertize prefix 'face 'font-lock-comment-face) (propertize k 'face 'bold) (propertize "›" 'face 'font-lock-comment-face) "  " desc "…" "\n")))
-            ;; Usable entry.
-            (`(,(and key (pred (string-match re))) ,desc . ,_)
-             (let ((k (match-string 1 key)))
-         (insert (propertize prefix 'face 'font-lock-comment-face) (propertize k 'face 'bold) "   " desc "\n")
-         (push k allowed-keys)))
-            (_ nil))))
-      ;; Insert special entries, if any.
-      (when specials
-        (insert "─────────────────────────\n")
-        (pcase-dolist (`(,key ,description) specials)
-          (insert (format "%s   %s\n" (propertize key 'face '(bold all-the-icons-red)) description))
-          (push key allowed-keys)))
-      ;; Display UI and let user select an entry or
-      ;; a sub-level prefix.
-      (goto-char (point-min))
-      (unless (pos-visible-in-window-p (point-max))
-        (org-fit-window-to-buffer))
-      (let ((pressed (org--mks-read-key allowed-keys prompt)))
-        (setq current (concat current pressed))
-        (cond
-         ((equal pressed "\C-g") (user-error "Abort"))
-         ;; Selection is a prefix: open a new menu.
-         ((member pressed des-keys))
-         ;; Selection matches an association: return it.
-         ((let ((entry (assoc current table)))
-            (and entry (throw 'exit entry))))
-         ;; Selection matches a special entry: return the
-         ;; selection prefix.
-         ((assoc current specials) (throw 'exit current))
-         (t (error "No entry available")))))))
-    (when buffer (kill-buffer buffer))))))
+            (catch 'exit
+              (while t
+                (setq-local evil-normal-state-cursor (list nil))
+                (erase-buffer)
+                (insert title "\n\n")
+                (let ((des-keys nil)
+                      (allowed-keys '("\C-g"))
+                      (tab-alternatives '("\s" "\t" "\r"))
+                      (cursor-type nil))
+                  ;; Populate allowed keys and descriptions keys
+                  ;; available with CURRENT selector.
+                  (let ((re (format "\\`%s\\(.\\)\\'"
+                                    (if current (regexp-quote current) "")))
+                        (prefix (if current (concat current " ") "")))
+                    (dolist (entry table)
+                      (pcase entry
+                        ;; Description.
+                        (`(,(and key (pred (string-match re))) ,desc)
+                         (let ((k (match-string 1 key)))
+                           (push k des-keys)
+                           ;; Keys ending in tab, space or RET are equivalent.
+                           (if (member k tab-alternatives)
+                               (push "\t" allowed-keys)
+                             (push k allowed-keys))
+                           (insert (propertize prefix 'face 'font-lock-comment-face) (propertize k 'face 'bold) (propertize "›" 'face 'font-lock-comment-face) "  " desc "…" "\n")))
+                        ;; Usable entry.
+                        (`(,(and key (pred (string-match re))) ,desc . ,_)
+                         (let ((k (match-string 1 key)))
+                           (insert (propertize prefix 'face 'font-lock-comment-face) (propertize k 'face 'bold) "   " desc "\n")
+                           (push k allowed-keys)))
+                        (_ nil))))
+                  ;; Insert special entries, if any.
+                  (when specials
+                    (insert "─────────────────────────\n")
+                    (pcase-dolist (`(,key ,description) specials)
+                      (insert (format "%s   %s\n" (propertize key 'face '(bold all-the-icons-red)) description))
+                      (push key allowed-keys)))
+                  ;; Display UI and let user select an entry or
+                  ;; a sub-level prefix.
+                  (goto-char (point-min))
+                  (unless (pos-visible-in-window-p (point-max))
+                    (org-fit-window-to-buffer))
+                  (let ((pressed (org--mks-read-key allowed-keys prompt)))
+                    (setq current (concat current pressed))
+                    (cond
+                     ((equal pressed "\C-g") (user-error "Abort"))
+                     ;; Selection is a prefix: open a new menu.
+                     ((member pressed des-keys))
+                     ;; Selection matches an association: return it.
+                     ((let ((entry (assoc current table)))
+                        (and entry (throw 'exit entry))))
+                     ;; Selection matches a special entry: return the
+                     ;; selection prefix.
+                     ((assoc current specials) (throw 'exit current))
+                     (t (error "No entry available")))))))
+          (when buffer (kill-buffer buffer))))))
   (advice-add 'org-mks :override #'org-mks-pretty)
   (setq +org-capture-uni-units (split-string (f-read-text "~/.org/.uni-units")))
   (setq +org-capture-recipies  "~/Desktop/TEC/Organisation/recipies.org")
@@ -2156,8 +2157,8 @@ SQL can be either the emacsql vector representation, or a string."
                                :extra "\nSCHEDULED: %^{Start time:}t"
                                )
                               ))
-                ("Project" :keys "p"
-                 :icon ("repo" :set "octicon" :color "silver")
+                  ("Project" :keys "p"
+                   :icon ("repo" :set "octicon" :color "silver")
                    :prepend t
                    :type entry
                    :headline "Inbox"
@@ -2208,7 +2209,7 @@ SQL can be either the emacsql vector representation, or a string."
 
 ;; [[file:config.org::*Capture][Capture:3]]
 (setf (alist-get 'height +org-capture-frame-parameters) 15)
-      ;; (alist-get 'name +org-capture-frame-parameters) "❖ Capture") ;; ATM hardcoded in other places, so changing breaks stuff
+;; (alist-get 'name +org-capture-frame-parameters) "❖ Capture") ;; ATM hardcoded in other places, so changing breaks stuff
 (setq +org-capture-fn
       (lambda ()
         (interactive)
@@ -2410,8 +2411,8 @@ made unique when necessary."
                       (org-element-property :raw-value datum)
                     (or (org-element-property :name datum)
                         (concat (org-element-property :raw-value
-                                 (org-element-property :parent
-                                  (org-element-property :parent datum)))))))
+                                                      (org-element-property :parent
+                                                                            (org-element-property :parent datum)))))))
            ;; get ascii-only form of title without needing percent-encoding
            (ref (concat (org-heading-contraction (substring-no-properties title))
                         (unless (or headline-p (org-element-property :name datum))
@@ -2663,15 +2664,15 @@ Return nil otherwise."
                      (album-artist (caar (cadr (assoc "xesam:albumArtist" track-metadata))))
                      (artist (if (or (equal album-artist "")
                                      (s-contains-p "various" album-artist t))
-                             (caar (cadr (assoc "xesam:artist" track-metadata)))
-                             album-artist))
+                                 (caar (cadr (assoc "xesam:artist" track-metadata)))
+                               album-artist))
                      (track (car (cadr (assoc "xesam:title" track-metadata))))
                      (start-time (when include-time
                                    (/ (org-music-mpris-get-property "Position") 1000000))))
                 (if full
                     (format "[[music:%s][%s by %s]]" (org-music-format-link artist track start-time) track artist)
                   (org-music-format-link artist track start-time))))
-        (t (user-error! "The specified music player: %s is not supported" org-music-player))))
+      (t (user-error! "The specified music player: %s is not supported" org-music-player))))
 
   (defun org-music-format-link (artist track &optional start-time end-time)
     (let ((artist (replace-regexp-in-string ":" "\\:" artist))
@@ -2694,8 +2695,8 @@ Return nil otherwise."
            (artist (nth 0 link-components))
            (track (nth 1 link-components))
            (durations (when (and (> (length link-components) 3)
-                                  (equal (nth 2 link-components) ""))
-                         (s-split "-" (nth 3 link-components))))
+                                 (equal (nth 2 link-components) ""))
+                        (s-split "-" (nth 3 link-components))))
            (start-time (when durations
                          (org-music-time-to-seconds (car durations))))
            (end-time (when (cdr durations)
@@ -2724,9 +2725,9 @@ This action is reversed by `org-music-time-to-seconds'."
   (defun org-music-play-track (artist title &optional start-time end-time)
     "Play the track specified by ARTIST and TITLE, optionally skipping to START-TIME in, stopping at END-TIME."
     (if-let ((file (org-music-find-track-file artist title)))
-      (case org-music-player
-        ('mpris (org-music-mpris-play file start-time end-time))
-        (t (user-error! "The specified music player: %s is not supported" org-music-player)))
+        (case org-music-player
+          ('mpris (org-music-mpris-play file start-time end-time))
+          (t (user-error! "The specified music player: %s is not supported" org-music-player)))
       (user-error! "Could not find the track '%s' by '%s'" title artist)))
 
   (add-transient-hook! #'org-music-play-track
@@ -2753,7 +2754,7 @@ This action is reversed by `org-music-time-to-seconds'."
             (org-music-mpris-call-method "Pause")
           (if (< time-delta 6)
               (run-at-time (max 0.001 (* 0.9 time-delta)) nil #'org-music-mpris-stop-at-time url end-time)
-              (run-at-time 5 nil #'org-music-mpris-stop-at-time url end-time))))))
+            (run-at-time 5 nil #'org-music-mpris-stop-at-time url end-time))))))
 
   (defun org-music-mpris-get-property (property)
     "Return the value of org.mpris.MediaPlayer2.Player.PROPERTY."
@@ -2764,8 +2765,8 @@ This action is reversed by `org-music-time-to-seconds'."
   (defun org-music-mpris-call-method (property &rest args)
     "Call org.mpris.MediaPlayer2.Player.PROPERTY with ARGS, returning the result."
     (apply #'dbus-call-method :session (concat "org.gnome." org-music-mpris-player)
-                      "/org/mpris/MediaPlayer2" "org.mpris.MediaPlayer2.Player"
-                      property args))
+           "/org/mpris/MediaPlayer2" "org.mpris.MediaPlayer2.Player"
+           property args))
 
   (defun org-music-guess-mpris-player ()
     (when-let ((players
@@ -2818,15 +2819,15 @@ This action is reversed by `org-music-time-to-seconds'."
                                      (file-directory-p file-or-folder)))
                                   (directory-files music-folder t))
                                  (list music-folder)))
-              (extension-regex (format "\\.\\(?:%s\\)\\'" (s-join "\\|" org-music-recognised-extensions)))
-              (tracks (-filter
-                       (lambda (file)
-                         (s-contains-p title (file-name-base file) t))
-                       (-flatten (mapcar (lambda (dir)
-                                           (directory-files-recursively dir extension-regex))
-                                         search-folders)))))
-        (when (> (length tracks) 1)
-          (message "Warning: multiple matches for %s by %s found" title artist))
+                (extension-regex (format "\\.\\(?:%s\\)\\'" (s-join "\\|" org-music-recognised-extensions)))
+                (tracks (-filter
+                         (lambda (file)
+                           (s-contains-p title (file-name-base file) t))
+                         (-flatten (mapcar (lambda (dir)
+                                             (directory-files-recursively dir extension-regex))
+                                           search-folders)))))
+      (when (> (length tracks) 1)
+        (message "Warning: multiple matches for %s by %s found" title artist))
       (car tracks))))
 ;; Music:1 ends here
 
@@ -2899,11 +2900,11 @@ This action is reversed by `org-music-time-to-seconds'."
                               ((org-export-derived-backend-p backend 'latex) "\\newline ")
                               (t " ")))
            (text (org-music-export-text path nil backend nil newline-str)))
-    (cond ((org-export-derived-backend-p backend 'html)
-           (format "<div class='music-track'>
+      (cond ((org-export-derived-backend-p backend 'html)
+             (format "<div class='music-track'>
     <img src='%s'> <span>%s</span>
 </div>" cover-img text)
-           )
+             )
             ((org-export-derived-backend-p backend 'latex)
              (format "\\begin{tabular}{@{\\hspace{0.3\\columnwidth}}r@{\\hspace{0.1\\columnwidth}}p{0.4\\columnwidth}}
   \\includegraphics[height=6em]{%s} & \\vspace{-0.12\\columnwidth}%s
@@ -3092,10 +3093,10 @@ allowfullscreen>%s</iframe>" path (or "" desc)))
 
 ;; [[file:config.org::*LaTeX Fragments][LaTeX Fragments:3]]
 (after! org
-;; make background of fragments transparent
-;; (let ((dvipng--plist (alist-get 'dvipng org-preview-latex-process-alist)))
-;;   (plist-put dvipng--plist :use-xcolor t)
-;;   (plist-put dvipng--plist :image-converter '("dvipng -D %D -bg 'transparent' -T tight -o %O %f")))
+  ;; make background of fragments transparent
+  ;; (let ((dvipng--plist (alist-get 'dvipng org-preview-latex-process-alist)))
+  ;;   (plist-put dvipng--plist :use-xcolor t)
+  ;;   (plist-put dvipng--plist :image-converter '("dvipng -D %D -bg 'transparent' -T tight -o %O %f")))
   (add-hook! 'doom-load-theme-hook
     (defun +org-refresh-latex-background ()
       (plist-put! org-format-latex-options
@@ -3103,7 +3104,7 @@ allowfullscreen>%s</iframe>" path (or "" desc)))
                   (face-attribute (or (cadr (assq 'default face-remapping-alist))
                                       'default)
                                   :background nil t))))
-)
+  )
 ;; LaTeX Fragments:3 ends here
 
 ;; [[file:config.org::*LaTeX Fragments][LaTeX Fragments:4]]
@@ -3347,11 +3348,11 @@ compared to the default implementation."
 (setq org-html-meta-tags
       '((lambda (_title author _info)
           (when (org-string-nw-p author)
-        (list "name" "author" author)))
+            (list "name" "author" author)))
         (lambda (_title _author info)
           (when (org-string-nw-p (plist-get info :description))
-        (list "name" "description"
-                        (plist-get info :description))))
+            (list "name" "description"
+                  (plist-get info :description))))
         ("name" "generator" "org mode")
         ("name" "theme-color" "#77aa99")
         ("property" "og:type" "article")
@@ -3375,11 +3376,11 @@ compared to the default implementation."
 (after! org
   (setq org-html-style-fancy
         (concat (f-read-text (expand-file-name "misc/org-export-header.html" doom-private-dir))
-              "<script>\n"
-              (f-read-text (expand-file-name "misc/pile-css-theme/main.js" doom-private-dir))
-              "</script>\n<style>\n"
-              (f-read-text (expand-file-name "misc/pile-css-theme/main.css" doom-private-dir))
-              "</style>")
+                "<script>\n"
+                (f-read-text (expand-file-name "misc/pile-css-theme/main.js" doom-private-dir))
+                "</script>\n<style>\n"
+                (f-read-text (expand-file-name "misc/pile-css-theme/main.css" doom-private-dir))
+                "</style>")
         org-html-style-plain org-html-style-default
         org-html-style-default  org-html-style-fancy
         org-html-htmlize-output-type 'css
@@ -3597,11 +3598,11 @@ to allow the TOC to be a collapseable tree."
 
 ;; [[file:config.org::*Change checkbox type][Change checkbox type:1]]
 (after! org
-(appendq! org-html-checkbox-types '((html-span .
-	  ((on . "<span class='checkbox'></span>")
-	  (off . "<span class='checkbox'></span>")
-	  (trans . "<span class='checkbox'></span>")))))
-(setq org-html-checkbox-type 'html-span))
+  (appendq! org-html-checkbox-types '((html-span .
+                                             ((on . "<span class='checkbox'></span>")
+                                              (off . "<span class='checkbox'></span>")
+                                              (trans . "<span class='checkbox'></span>")))))
+  (setq org-html-checkbox-type 'html-span))
 ;; Change checkbox type:1 ends here
 
 ;; [[file:config.org::*Header anchors][Header anchors:1]]
@@ -3750,44 +3751,44 @@ MathJax = {
     \\end{center}
     }
 "
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   (add-to-list 'org-latex-classes
                '("blank"
-               "[NO-DEFAULT-PACKAGES]
+                 "[NO-DEFAULT-PACKAGES]
                [NO-PACKAGES]
                [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   (add-to-list 'org-latex-classes
                '("bmc-article"
-               "\\documentclass[article,code,maths]{bmc}
+                 "\\documentclass[article,code,maths]{bmc}
                [NO-DEFAULT-PACKAGES]
                [NO-PACKAGES]
                [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   (add-to-list 'org-latex-classes
                '("bmc"
-               "\\documentclass[code,maths]{bmc}
+                 "\\documentclass[code,maths]{bmc}
                [NO-DEFAULT-PACKAGES]
                [NO-PACKAGES]
                [EXTRA]"
-               ("\\chapter{%s}" . "\\chapter*{%s}")
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   (setq org-latex-default-class "fancy-article")
 
   (after! org
@@ -3835,13 +3836,13 @@ MathJax = {
   
   \\BeforeBeginEnvironment{minted}{
     \\begin{tcolorbox}[
-      enhanced,
-      overlay={\\fill[white!90!black] (frame.south west) rectangle ([xshift=2.8em]frame.north west);},
-      colback=white!95!black,
-      colframe=white!95!black, % make frame colour same as background
-      breakable,% Allow white breaks
-      arc=0pt,outer arc=0pt,sharp corners, % sharp corners
-      boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt % no margin/paddding
+    enhanced,
+    overlay={\\fill[white!90!black] (frame.south west) rectangle ([xshift=2.8em]frame.north west);},
+    colback=white!95!black,
+    colframe=white!95!black, % make frame colour same as background
+    breakable,% Allow white breaks
+    arc=0pt,outer arc=0pt,sharp corners, % sharp corners
+    boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt % no margin/paddding
     ]
   }
   \\AfterEndEnvironment{minted}{\\end{tcolorbox}}
@@ -4022,12 +4023,13 @@ MathJax = {
 ;; Chameleon --- aka. match theme:1 ends here
 
 ;; [[file:config.org::*Make verbatim different to code][Make verbatim different to code:1]]
-(setq org-latex-text-markup-alist '((bold . "\\textbf{%s}")
-           (code . protectedtexttt)
-           (italic . "\\emph{%s}")
-           (strike-through . "\\sout{%s}")
-           (underline . "\\uline{%s}")
-           (verbatim . verb)))
+(setq org-latex-text-markup-alist
+      '((bold . "\\textbf{%s}")
+        (code . protectedtexttt)
+        (italic . "\\emph{%s}")
+        (strike-through . "\\sout{%s}")
+        (underline . "\\uline{%s}")
+        (verbatim . verb)))
 ;; Make verbatim different to code:1 ends here
 
 ;; [[file:config.org::*Exporting to Beamer][Exporting to Beamer:1]]
@@ -4054,9 +4056,8 @@ MathJax = {
 ;; [[file:config.org::*Babel][Babel:2]]
 (defun tec-org-python ()
   (if (eq major-mode 'python-mode)
-   (progn (anaconda-mode t)
-          (company-mode t)))
-  )
+      (progn (anaconda-mode t)
+             (company-mode t))))
 (add-hook 'org-src-mode-hook 'tec-org-python)
 ;; Babel:2 ends here
 
@@ -4065,18 +4066,19 @@ MathJax = {
 ;; ESS:1 ends here
 
 ;; [[file:config.org::*ESS][ESS:2]]
-(setq ess-R-font-lock-keywords '((ess-R-fl-keyword:keywords . t)
- (ess-R-fl-keyword:constants . t)
- (ess-R-fl-keyword:modifiers . t)
- (ess-R-fl-keyword:fun-defs . t)
- (ess-R-fl-keyword:assign-ops . t)
- (ess-R-fl-keyword:%op% . t)
- (ess-fl-keyword:fun-calls . t)
- (ess-fl-keyword:numbers . t)
- (ess-fl-keyword:operators . t)
- (ess-fl-keyword:delimiters . t)
- (ess-fl-keyword:= . t)
- (ess-R-fl-keyword:F&T . t)))
+(setq ess-R-font-lock-keywords
+      '((ess-R-fl-keyword:keywords . t)
+        (ess-R-fl-keyword:constants . t)
+        (ess-R-fl-keyword:modifiers . t)
+        (ess-R-fl-keyword:fun-defs . t)
+        (ess-R-fl-keyword:assign-ops . t)
+        (ess-R-fl-keyword:%op% . t)
+        (ess-fl-keyword:fun-calls . t)
+        (ess-fl-keyword:numbers . t)
+        (ess-fl-keyword:operators . t)
+        (ess-fl-keyword:delimiters . t)
+        (ess-fl-keyword:= . t)
+        (ess-R-fl-keyword:F&T . t)))
 ;; ESS:2 ends here
 
 ;; [[file:config.org::*Compilation][Compilation:1]]
@@ -4123,8 +4125,8 @@ MathJax = {
 
 (defun tec/yas-latex-preamble-if ()
   "Based on class choice prompt for insertion of default preamble"
-    (if (equal tec/yas-latex-class-choice "bmc") 'nil
-             (eq (read-char-choice "Include default preamble? [Type y/n]" '(?y ?n)) ?y)))
+  (if (equal tec/yas-latex-class-choice "bmc") 'nil
+    (eq (read-char-choice "Include default preamble? [Type y/n]" '(?y ?n)) ?y)))
 ;; Template:2 ends here
 
 ;; [[file:config.org::*Deliminators][Deliminators:1]]
@@ -4216,8 +4218,8 @@ MathJax = {
         ;; known commands
         ("" ("phantom"))
         (,(lambda (num den) (if (and (TeX-string-single-token-p num) (TeX-string-single-token-p den))
-                           (concat num "／" den)
-                         (concat "❪" num "／" den "❫"))) ("frac"))
+                                (concat num "／" den)
+                              (concat "❪" num "／" den "❫"))) ("frac"))
         (,(lambda (arg) (concat "√" (TeX-fold-parenthesize-as-neccesary arg))) ("sqrt"))
         (,(lambda (arg) (concat "⭡" (TeX-fold-parenthesize-as-neccesary arg))) ("vec"))
         ("‘{1}’" ("text"))
@@ -4248,7 +4250,7 @@ MathJax = {
         ("[i]" ("index" "glossary"))
         ("..." ("dots"))
         ("{1}" ("emph" "textit" "textsl" "textmd" "textrm" "textsf" "texttt"
-            "textbf" "textsc" "textup"))
+                "textbf" "textsc" "textup"))
         ;; tweaked defaults
         ("©" ("copyright"))
         ("®" ("textregistered"))
@@ -4268,8 +4270,8 @@ MathJax = {
 
 (defun string-offset-roman-chars (offset word)
   "Shift the codepoint of each charachter in WORD by OFFSET with an extra -6 shift if the letter is lowercase"
-    (apply 'string
-       (mapcar (lambda (c) (+ (if (>= c 97) (- c 6) c) offset)) word)))
+  (apply 'string
+         (mapcar (lambda (c) (+ (if (>= c 97) (- c 6) c) offset)) word)))
 
 (defun TeX-fold-parenthesize-as-neccesary (tokens &optional suppress-left suppress-right)
   "Add ❪ ❫ parenthesis as if multiple LaTeX tokens appear to be present"
@@ -4280,7 +4282,7 @@ MathJax = {
 
 (defun TeX-string-single-token-p (teststring)
   "Return t if TESTSTRING appears to be a single token, nil otherwise"
- (if (string-match-p "^\\\\?\\w+$" teststring) t nil))
+  (if (string-match-p "^\\\\?\\w+$" teststring) t nil))
 ;; Editor visuals:2 ends here
 
 ;; [[file:config.org::*Editor visuals][Editor visuals:3]]
