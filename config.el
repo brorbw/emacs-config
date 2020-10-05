@@ -1295,6 +1295,14 @@ Else, write to this process' PID to the lock file"
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")) ;; default + 
 ;; Tramp:1 ends here
 
+;; [[file:config.org::*Guix][Guix:1]]
+(after! tramp
+  (appendq! tramp-remote-path
+            '("~/.guix-profile/bin" "~/.guix-profile/sbin"
+              "/run/current-system/profile/bin"
+              "/run/current-system/profile/sbin")))
+;; Guix:1 ends here
+
 ;; [[file:config.org::*Treemacs][Treemacs:1]]
 (after! treemacs
   (defvar treemacs-file-ignore-extensions '()
