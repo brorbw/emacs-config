@@ -754,7 +754,9 @@ Affects behaviour of `emacs-anywhere--finalise-content'")
 ;; Eros-eval:1 ends here
 
 ;; [[file:config.org::*EVIL][EVIL:1]]
-(after! evil (evil-escape-mode nil))
+(after! evil
+  (setq evil-ex-substitute-global t) ; I like my s/../.. to by global by default
+  (evil-escape-mode nil))
 ;; EVIL:1 ends here
 
 ;; [[file:config.org::*Flyspell][Flyspell:1]]
