@@ -889,7 +889,7 @@ Affects behaviour of `emacs-anywhere--finalise-content'")
   (when emacs-anywhere--active-markdown
     (fundamental-mode)
     (goto-char (point-min))
-    (insert "#+OPTIONS: toc:nil\n")
+    (insert "#+options: toc:nil\n")
     (rename-buffer "*EA Pre Export*")
     (org-export-to-buffer 'gfm ea--buffer-name)
     (kill-buffer "*EA Pre Export*"))
@@ -3027,22 +3027,22 @@ allowfullscreen>%s</iframe>" path (or "" desc)))
     :pending       "[-]"
     :checkedbox    "[X]"
     :list_property "::"
-    :results       "#+RESULTS:"
-    :property      "#+PROPERTY:"
+    :results       "#+results:"
+    :property      "#+property:"
     :property      ":PROPERTIES:"
     :end           ":END:"
-    :options       "#+OPTIONS:"
-    :title         "#+TITLE:"
-    :subtitle      "#+SUBTITLE:"
-    :author        "#+AUTHOR:"
-    :date          "#+DATE:"
-    :latex_class   "#+LATEX_CLASS:"
-    :latex_header  "#+LATEX_HEADER:"
-    :beamer_header "#+BEAMER_HEADER:"
-    :begin_quote   "#+BEGIN_QUOTE"
-    :end_quote     "#+END_QUOTE"
-    :begin_export  "#+BEGIN_EXPORT"
-    :end_export    "#+END_EXPORT"
+    :options       "#+options:"
+    :title         "#+title:"
+    :subtitle      "#+subtitle:"
+    :author        "#+author:"
+    :date          "#+date:"
+    :latex_class   "#+latex_class:"
+    :latex_header  "#+latex_header:"
+    :beamer_header "#+beamer_header:"
+    :begin_quote   "#+begin_quote"
+    :end_quote     "#+end_quote"
+    :begin_export  "#+begin_export"
+    :end_export    "#+end_export"
     :priority_a    "[#A]"
     :priority_b    "[#B]"
     :priority_c    "[#C]"
