@@ -1253,6 +1253,10 @@ Else, write to this process' PID to the lock file"
         :n "N" (cmd! (lexic-next-entry t))
         :n "p" #'lexic-previous-entry
         :n "P" (cmd! (lexic-previous-entry t))
+        :n "E" (cmd! (lexic-return-from-lexic) ; expand
+                     (switch-to-buffer (lexic-get-buffer)))
+        :n "M" (cmd! (lexic-return-from-lexic) ; minimise
+                     (lexic-goto-lexic))
         :n "C-p" #'lexic-search-history-backwards
         :n "C-n" #'lexic-search-history-forwards
         :n "/" (cmd! (call-interactively #'lexic-search))))
