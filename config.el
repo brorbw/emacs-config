@@ -58,16 +58,16 @@
 ;; [[file:config.org::*Windows][Windows:4]]
 (map! :map evil-window-map
       "SPC" #'rotate-layout
-       ;; Navigation
-       "<left>"     #'evil-window-left
-       "<down>"     #'evil-window-down
-       "<up>"       #'evil-window-up
-       "<right>"    #'evil-window-right
-       ;; Swapping windows
-       "C-<left>"       #'+evil/window-move-left
-       "C-<down>"       #'+evil/window-move-down
-       "C-<up>"         #'+evil/window-move-up
-       "C-<right>"      #'+evil/window-move-right)
+      ;; Navigation
+      "<left>"     #'evil-window-left
+      "<down>"     #'evil-window-down
+      "<up>"       #'evil-window-up
+      "<right>"    #'evil-window-right
+      ;; Swapping windows
+      "C-<left>"       #'+evil/window-move-left
+      "C-<down>"       #'+evil/window-move-down
+      "C-<up>"         #'+evil/window-move-up
+      "C-<right>"      #'+evil/window-move-right)
 ;; Windows:4 ends here
 
 ;; [[file:config.org::*Buffer defaults][Buffer defaults:1]]
@@ -121,15 +121,15 @@
 
 ;; [[file:config.org::*Window title][Window title:1]]
 (setq frame-title-format
-    '(""
-      (:eval
-       (if (s-contains-p org-roam-directory (or buffer-file-name ""))
-           (replace-regexp-in-string ".*/[0-9]*-?" "🢔 " buffer-file-name)
-         "%b"))
-      (:eval
-       (let ((project-name (projectile-project-name)))
-         (unless (string= "-" project-name)
-           (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string ".*/[0-9]*-?" "🢔 " buffer-file-name)
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 ;; Window title:1 ends here
 
 ;; [[file:config.org::*Splash screen][Splash screen:1]]
@@ -141,15 +141,15 @@
   "An image to use at minimum size, usually a transparent pixel")
 
 (setq fancy-splash-sizes
-  `((:height 500 :min-height 50 :padding (0 . 4) :template ,(expand-file-name "misc/splash-images/blackhole-lines-0.svg" doom-private-dir))
-    (:height 440 :min-height 42 :padding (1 . 4) :template ,(expand-file-name "misc/splash-images/blackhole-lines-0.svg" doom-private-dir))
-    (:height 400 :min-height 38 :padding (1 . 4) :template ,(expand-file-name "misc/splash-images/blackhole-lines-1.svg" doom-private-dir))
-    (:height 350 :min-height 36 :padding (1 . 3) :template ,(expand-file-name "misc/splash-images/blackhole-lines-2.svg" doom-private-dir))
-    (:height 300 :min-height 34 :padding (1 . 3) :template ,(expand-file-name "misc/splash-images/blackhole-lines-3.svg" doom-private-dir))
-    (:height 250 :min-height 32 :padding (1 . 2) :template ,(expand-file-name "misc/splash-images/blackhole-lines-4.svg" doom-private-dir))
-    (:height 200 :min-height 30 :padding (1 . 2) :template ,(expand-file-name "misc/splash-images/blackhole-lines-5.svg" doom-private-dir))
-    (:height 100 :min-height 24 :padding (1 . 2) :template ,(expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir))
-    (:height 0   :min-height 0  :padding (0 . 0) :file ,fancy-splash-image-nil)))
+      `((:height 500 :min-height 50 :padding (0 . 4) :template ,(expand-file-name "misc/splash-images/blackhole-lines-0.svg" doom-private-dir))
+        (:height 440 :min-height 42 :padding (1 . 4) :template ,(expand-file-name "misc/splash-images/blackhole-lines-0.svg" doom-private-dir))
+        (:height 400 :min-height 38 :padding (1 . 4) :template ,(expand-file-name "misc/splash-images/blackhole-lines-1.svg" doom-private-dir))
+        (:height 350 :min-height 36 :padding (1 . 3) :template ,(expand-file-name "misc/splash-images/blackhole-lines-2.svg" doom-private-dir))
+        (:height 300 :min-height 34 :padding (1 . 3) :template ,(expand-file-name "misc/splash-images/blackhole-lines-3.svg" doom-private-dir))
+        (:height 250 :min-height 32 :padding (1 . 2) :template ,(expand-file-name "misc/splash-images/blackhole-lines-4.svg" doom-private-dir))
+        (:height 200 :min-height 30 :padding (1 . 2) :template ,(expand-file-name "misc/splash-images/blackhole-lines-5.svg" doom-private-dir))
+        (:height 100 :min-height 24 :padding (1 . 2) :template ,(expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir))
+        (:height 0   :min-height 0  :padding (0 . 0) :file ,fancy-splash-image-nil)))
 
 (defvar fancy-splash-sizes
   `((:height 500 :min-height 50 :padding (0 . 2))
@@ -383,7 +383,7 @@
   (setq company-idle-delay 0.5
         company-minimum-prefix-length 2)
   (setq company-show-numbers t)
-(add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+  (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 ;; Company:1 ends here
 
 ;; [[file:config.org::*Company][Company:2]]
@@ -392,12 +392,14 @@
 ;; Company:2 ends here
 
 ;; [[file:config.org::*Plain Text][Plain Text:1]]
-(set-company-backend! '(text-mode
-                        markdown-mode
-                        gfm-mode)
-  '(:seperate company-ispell
-              company-files
-              company-yasnippet))
+(set-company-backend!
+  '(text-mode
+    markdown-mode
+    gfm-mode)
+  '(:seperate
+    company-ispell
+    company-files
+    company-yasnippet))
 ;; Plain Text:1 ends here
 
 ;; [[file:config.org::*ESS][ESS:1]]
@@ -662,8 +664,8 @@
 (defun markdown-window-p (window-title)
   "Judges from WINDOW-TITLE whether the current window likes markdown"
   (if (string-match-p (rx (or "Stack Exchange" "Stack Overflow"
-                          "Pull Request" "Issue" "Discord"))
-                  window-title) t nil))
+                              "Pull Request" "Issue" "Discord"))
+                      window-title) t nil))
 ;; [[https://github.com/zachcurry/emacs-anywhere][Emacs Anywhere]] configuration:2 ends here
 
 ;; [[file:config.org::*\[\[https:/github.com/zachcurry/emacs-anywhere\]\[Emacs Anywhere\]\] configuration][[[https://github.com/zachcurry/emacs-anywhere][Emacs Anywhere]] configuration:3]]
@@ -686,13 +688,15 @@ Affects behaviour of `emacs-anywhere--finalise-content'")
   :init-value nil
   :keymap (list
            ;; Finish edit, but be smart in org mode
-           (cons (kbd "C-c C-c") (cmd! (if (and (eq major-mode 'org-mode)
-                                                   (org-in-src-block-p))
-                                              (org-ctrl-c-ctrl-c)
-                                            (delete-frame))))
+           (cons (kbd "C-c C-c")
+                 (cmd! (if (and (eq major-mode 'org-mode)
+                                (org-in-src-block-p))
+                           (org-ctrl-c-ctrl-c)
+                         (delete-frame))))
            ;; Abort edit. emacs-anywhere saves the current edit for next time.
-           (cons (kbd "C-c C-k") (cmd! (setq ea-on nil)
-                                          (delete-frame))))
+           (cons (kbd "C-c C-k")
+                 (cmd! (setq ea-on nil)
+                       (delete-frame))))
   (when emacs-anywhere-mode
     ;; line breaking
     (turn-off-auto-fill)
@@ -824,25 +828,27 @@ Prevents a series of redisplays from being called (when set to an appropriate va
       (delete-file mu4e-reindex-request-file))
     (mu4e-reindex-request--add-watcher))
 
-    (defun mu4e-file-reindex-request (event)
-      "Act based on the existance of `mu4e-reindex-request-file'"
-      (if mu4e-reindex-request--file-just-deleted
-          (mu4e-reindex-request--add-watcher)
-        (when (equal (nth 1 event) 'created)
-          (delete-file mu4e-reindex-request-file)
-          (setq mu4e-reindex-request--file-just-deleted t)
-          (mu4e-reindex-maybe t))))
+  (defun mu4e-file-reindex-request (event)
+    "Act based on the existance of `mu4e-reindex-request-file'"
+    (if mu4e-reindex-request--file-just-deleted
+        (mu4e-reindex-request--add-watcher)
+      (when (equal (nth 1 event) 'created)
+        (delete-file mu4e-reindex-request-file)
+        (setq mu4e-reindex-request--file-just-deleted t)
+        (mu4e-reindex-maybe t))))
 
-    (defun mu4e-reindex-maybe (&optional new-request)
-      "Run `mu4e~proc-index' if it's been more than `mu4e-reindex-request-min-seperation' seconds since the last request,"
-      (let ((time-since-last-request (- (float-time) mu4e-reindex-request--last-time)))
+  (defun mu4e-reindex-maybe (&optional new-request)
+    "Run `mu4e~proc-index' if it's been more than
+`mu4e-reindex-request-min-seperation'seconds since the last request,"
+    (let ((time-since-last-request (- (float-time)
+                                      mu4e-reindex-request--last-time)))
+      (when new-request
+        (setq mu4e-reindex-request--last-time (float-time)))
+      (if (> time-since-last-request mu4e-reindex-request-min-seperation)
+          (mu4e~proc-index nil t)
         (when new-request
-          (setq mu4e-reindex-request--last-time (float-time)))
-        (if (> time-since-last-request mu4e-reindex-request-min-seperation)
-            (mu4e~proc-index nil t)
-          (when new-request
-            (run-at-time (* 1.1 mu4e-reindex-request-min-seperation) nil
-                         #'mu4e-reindex-maybe))))))
+          (run-at-time (* 1.1 mu4e-reindex-request-min-seperation) nil
+                       #'mu4e-reindex-maybe))))))
 ;; Rebuild mail index while using mu4e:1 ends here
 
 ;; [[file:config.org::*Viewing Mail][Viewing Mail:1]]
@@ -1030,10 +1036,10 @@ clicked."
 ;; [[file:config.org::*Sending Mail][Sending Mail:1]]
 (after! mu4e
   (setq sendmail-program "/usr/bin/msmtp"
-        send-mail-function 'smtpmail-send-it
+        send-mail-function #'smtpmail-send-it
         message-sendmail-f-is-evil t
         message-sendmail-extra-arguments '("--read-envelope-from"); , "--read-recipients")
-        message-send-mail-function 'message-send-mail-with-sendmail))
+        message-send-mail-function #'message-send-mail-with-sendmail))
 ;; Sending Mail:1 ends here
 
 ;; [[file:config.org::*Sending Mail][Sending Mail:2]]
@@ -3117,7 +3123,7 @@ allowfullscreen>%s</iframe>" path (or "" desc)))
           (?E . 'all-the-icons-blue))))
 ;; Symbols:1 ends here
 
-;; [[file:/tmp/config.org.tWzFRd::*Symbols][Symbols:2]]
+;; [[file:config.org::*Symbols][Symbols:2]]
 (after! org
   (appendq! +ligatures-extra-symbols
             `(:checkbox      "☐"
@@ -3945,7 +3951,7 @@ MathJax = {
   )
 ;; Acronyms:1 ends here
 
-;; [[file:config.org::*Exporting to LaTeX][Exporting to LaTeX:2]]
+;; [[file:config.org::*Nicer checkboxes][Nicer checkboxes:1]]
 (after! org
   (defun tec/org-export-latex-fancy-item-checkboxes (text backend info)
     (when (org-export-derived-backend-p backend 'latex)
@@ -3961,9 +3967,9 @@ MathJax = {
 
   (add-to-list 'org-export-filter-item-functions
                'tec/org-export-latex-fancy-item-checkboxes))
-;; Exporting to LaTeX:2 ends here
+;; Nicer checkboxes:1 ends here
 
-;; [[file:config.org::*Exporting to LaTeX][Exporting to LaTeX:3]]
+;; [[file:config.org::*Class templates][Class templates:1]]
 (after! ox-latex
   (add-to-list 'org-latex-classes
                '("fancy-article"
@@ -4133,7 +4139,7 @@ MathJax = {
 \\urlstyle{same}\n")
   (setq org-latex-pdf-process
         '("latexmk -shell-escape -interaction=nonstopmode -f -pdf -output-directory=%o %f")))
-;; Exporting to LaTeX:3 ends here
+;; Class templates:1 ends here
 
 ;; [[file:config.org::*Chameleon --- aka. match theme][Chameleon --- aka. match theme:1]]
 (after! ox
