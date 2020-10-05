@@ -3040,7 +3040,7 @@ CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options. Adds a few extra things to the body
 compared to the default implementation."
   :around #'org-html-template
-  (if (not org-fancy-html-export-mode)
+  (if (or (not org-fancy-html-export-mode) (bound-and-true-p org-msg-currently-exporting))
       (funcall orig-fn contents info)
     (concat
      (when (and (not (org-html-html5-p info)) (org-html-xhtml-p info))
@@ -3225,7 +3225,7 @@ INFO is a plist used as a communication channel."
 (defadvice! org-html-src-block-collapsable (orig-fn src-block contents info)
   "Wrap the usual <pre> block in a <details>"
   :around #'org-html-src-block
-  (if (not org-fancy-html-export-mode)
+  (if (or (not org-fancy-html-export-mode) (bound-and-true-p org-msg-currently-exporting))
       (funcall orig-fn src-block contents info)
     (let* ((properties (cadr src-block))
            (lang (mode-name-to-lang-name
@@ -3343,7 +3343,7 @@ INFO is a plist used as a communication channel."
 (after! org
   (defun org-html-block-collapsable (orig-fn block contents info)
     "Wrap the usual block in a <details>"
-    (if (not org-fancy-html-export-mode)
+    (if (or (not org-fancy-html-export-mode) (bound-and-true-p org-msg-currently-exporting))
         (funcall orig-fn block contents info)
       (let ((ref (org-export-get-reference block info))
             (type (case (car block)
@@ -3379,7 +3379,7 @@ INFO is a plist used as a communication channel."
 (defadvice! org-html-table-wrapped (orig-fn table contents info)
   "Wrap the usual <table> in a <div>"
   :around #'org-html-table
-  (if (not org-fancy-html-export-mode)
+  (if (or (not org-fancy-html-export-mode) (bound-and-true-p org-msg-currently-exporting))
       (funcall orig-fn table contents info)
     (let* ((name (plist-get (cadr table) :name))
            (ref (org-export-get-reference table info)))
@@ -3401,7 +3401,7 @@ INFO is a plist used as a communication channel."
   "Add a label and checkbox to `org-html--format-toc-headline's usual output,
 to allow the TOC to be a collapseable tree."
   :around #'org-html--format-toc-headline
-  (if (not org-fancy-html-export-mode)
+  (if (or (not org-fancy-html-export-mode) (bound-and-true-p org-msg-currently-exporting))
       (funcall orig-fn headline info)
     (let ((id (or (org-element-property :CUSTOM_ID headline)
                   (org-export-get-reference headline info))))
@@ -3413,7 +3413,7 @@ to allow the TOC to be a collapseable tree."
 (defadvice! org-html--toc-text-stripped-leaves (orig-fn toc-entries)
   "Remove label"
   :around #'org-html--toc-text
-  (if (not org-fancy-html-export-mode)
+  (if (or (not org-fancy-html-export-mode) (bound-and-true-p org-msg-currently-exporting))
       (funcall orig-fn toc-entries)
     (replace-regexp-in-string "<input [^>]+><label [^>]+>\\(.+?\\)</label></li>" "\\1</li>"
                               (funcall orig-fn toc-entries))))
@@ -3443,7 +3443,7 @@ to allow the TOC to be a collapseable tree."
   (defun org-export-html-headline-anchor (text backend info)
     (when (and (org-export-derived-backend-p backend 'html)
                org-fancy-html-export-mode)
-      (unless org-msg-currently-exporting
+      (unless (bound-and-true-p org-msg-currently-exporting)
         (replace-regexp-in-string
          "<h\\([0-9]\\) id=\"\\([a-z0-9-]+\\)\">\\(.*[^ ]\\)<\\/h[0-9]>" ; this is quite restrictive, but due to `org-heading-contraction' I can do this
          "<h\\1 id=\"\\2\">\\3<a aria-hidden=\"true\" href=\"#\\2\">#</a> </h\\1>"
