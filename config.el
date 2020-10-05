@@ -184,17 +184,18 @@
   (message "Cache cleared!"))
 
 (defun fancy-splash-generate-image (template height)
-  "Read TEMPLATE and create an image if HEIGHT with colour substitutions as  ;described by `fancy-splash-template-colours' for the current theme"
-    (with-temp-buffer
-      (insert-file-contents template)
-      (re-search-forward "$height" nil t)
-      (replace-match (number-to-string height) nil nil)
-      (dolist (substitution fancy-splash-template-colours)
-        (beginning-of-buffer)
-        (while (re-search-forward (car substitution) nil t)
-          (replace-match (doom-color (cdr substitution)) nil nil)))
-      (write-region nil nil
-                    (fancy-splash-filename (symbol-name doom-theme) height) nil nil)))
+  "Read TEMPLATE and create an image if HEIGHT with colour substitutions as
+   described by `fancy-splash-template-colours' for the current theme"
+  (with-temp-buffer
+    (insert-file-contents template)
+    (re-search-forward "$height" nil t)
+    (replace-match (number-to-string height) nil nil)
+    (dolist (substitution fancy-splash-template-colours)
+      (goto-char (point-min))
+      (while (re-search-forward (car substitution) nil t)
+        (replace-match (doom-color (cdr substitution)) nil nil)))
+    (write-region nil nil
+                  (fancy-splash-filename (symbol-name doom-theme) height) nil nil)))
 
 (defun fancy-splash-generate-images ()
   "Perform `fancy-splash-generate-image' in bulk"
@@ -219,7 +220,7 @@
 
 (setq fancy-splash-last-size nil)
 (setq fancy-splash-last-theme nil)
-(defun set-appropriate-splash (&optional frame)
+(defun set-appropriate-splash (&rest _)
   (let ((appropriate-image (get-appropriate-splash)))
     (unless (and (equal appropriate-image fancy-splash-last-size)
                  (equal doom-theme fancy-splash-last-theme)))
@@ -3484,7 +3485,7 @@ MathJax = {
   }
 };
 </script>
-<script type=\"text/javascript\" id=\"MathJax-script\" async
+<script id=\"MathJax-script\" async
         src=\"%PATH\"></script>"))
 ;; MathJax:1 ends here
 
