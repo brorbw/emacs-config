@@ -1,18 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;; This file controls what Doom modules are enabled and what order they load in.
-;; Remember to run 'doom sync' after modifying it!
-
-;; NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
-;;      documentation. There you'll find a "Module Index" link where you'll find
-;;      a comprehensive list of Doom's modules and what flags they support.
-
-;; NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
-;;      'C-c c k' for non-vim users) to view its documentation. This works on
-;;      flags as well (those symbols that start with a plus).
-;;
-;;      Alternatively, press 'gd' (or 'C-c g d') on a module to browse its
-;;      directory (for easy access to its source code).
+;; Press 'K' on a module to view its documentation, and 'gd' to browse its directory.
 
 (doom! :completion
        (company                     ; the ultimate code completion backend
@@ -31,7 +20,7 @@
        ;;fill-column                ; a `fill-column' indicator
        hl-todo                      ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra                      ; quick documentation for related commands
-       ;; indent-guides             ; highlighted indent columns, notoriously slow
+       ;;indent-guides              ; highlighted indent columns, notoriously slow
        ligatures                    ; ligatures and symbols to make your code pretty again
        ;;minimap                    ; show a map of the code on the side
        modeline                     ; snazzy, Atom-inspired modeline, plus API
@@ -42,8 +31,8 @@
         +all                        ; catch all popups that start with an asterix
         +defaults)                  ; default popup rules
        pretty-code                  ; replace bits of code with pretty symbols
-       ;; (tabs                     ; an tab bar for Emacs
-       ;;   +centaur-tabs)          ; ... with prettier tabs
+       ;;(tabs                      ; an tab bar for Emacs
+       ;;  +centaur-tabs)           ; ... with prettier tabs
        treemacs                     ; a project drawer, like neotree but cooler
        ;;unicode                    ; extended unicode support for various languages
        vc-gutter                    ; vcs diff in the fringe
@@ -85,10 +74,10 @@
        grammar                      ; tasing grammar mistake every you make
 
        :tools
-       ansible
+       ansible                      ; a crucible for infrastructure as code
        debugger                     ; FIXME stepping through code, to help you add bugs
-       ;;direnv
-       ;;docker
+       ;;direnv                     ; be direct about your environment
+       ;;docker                     ; port everything to containers
        ;;editorconfig               ; let someone else argue about tabs vs spaces
        ;;ein                        ; tame Jupyter notebooks with emacs
        (eval +overlay)              ; run code, run (also, repls)
@@ -144,8 +133,8 @@
         +latexmk                    ; what else would you use?
         +cdlatex                    ; quick maths symbols
         +fold)                      ; fold the clutter away nicities
-       ;;lean
-       ;;factor
+       ;;lean                       ; proof that mathematicians need help
+       ;;factor                     ; for when scripts are stacked against you
        ledger                       ; an accounting system in Emacs
        lua                          ; one-based indices? one-based indices
        markdown                     ; writing docs for people to ignore
@@ -176,7 +165,7 @@
        ;;scala                      ; java, but good
        scheme                       ; a fully conniving family of lisps
        sh                           ; she sells {ba,z,fi}sh shells on the C xor
-       ;;sml
+       ;;sml                        ; no, the /other/ ML
        ;;solidity                   ; do you need a blockchain? No.
        ;;swift                      ; who asked for emoji variables?
        ;;terra                      ; Earth and Moon in alignment for performance.
@@ -196,4 +185,5 @@
 
        :config
        literate
-       (default +bindings +smartparens))
+       (default +bindings +smartparens)
+       )

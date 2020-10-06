@@ -2769,14 +2769,22 @@ MathJax = {
 </li>
 <li><input type='checkbox' id='toc--doom-configuration'/><label for='toc--doom-configuration'><a href="#doom-configuration">2.3. Doom configuration</a></label>
 <ul>
-<li><input type='checkbox' id='toc--visual-settings'/><label for='toc--visual-settings'><a href="#visual-settings">2.3.1. Visual Settings</a></label>
+<li><input type='checkbox' id='toc--modules'/><label for='toc--modules'><a href="#modules">2.3.1. Modules</a></label>
 <ul>
-<li><a href="#font-face">2.3.1.1. Font Face</a></li>
-<li><a href="#theme-modeline">2.3.1.2. Theme and modeline</a></li>
-<li><a href="#miscellaneous">2.3.1.3. Miscellaneous</a></li>
+<li><a href="#structure">2.3.1.1. Structure</a></li>
+<li><a href="#interface">2.3.1.2. Interface</a></li>
+<li><a href="#language-support">2.3.1.3. Language support</a></li>
+<li><a href="#everything-emacs">2.3.1.4. Everything in Emacs</a></li>
 </ul>
 </li>
-<li><a href="#some-helper-macros">2.3.2. Some helper macros</a></li>
+<li><input type='checkbox' id='toc--visual-settings'/><label for='toc--visual-settings'><a href="#visual-settings">2.3.2. Visual Settings</a></label>
+<ul>
+<li><a href="#font-face">2.3.2.1. Font Face</a></li>
+<li><a href="#theme-modeline">2.3.2.2. Theme and modeline</a></li>
+<li><a href="#miscellaneous">2.3.2.3. Miscellaneous</a></li>
+</ul>
+</li>
+<li><a href="#some-helper-macros">2.3.3. Some helper macros</a></li>
 </ul>
 </li>
 <li><input type='checkbox' id='toc--other-things'/><label for='toc--other-things'><a href="#other-things">2.4. Other things</a></label>
@@ -3780,13 +3788,389 @@ just need to resort to <kbd>SPC b o</kbd> for now.
 <h3 id="doom-configuration"><span class="section-number-3">2.3</span> Doom configuration<a aria-hidden="true" href="#doom-configuration">#</a> </h3>
 <div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-visual-settings" class="outline-4">
-<h4 id="visual-settings"><span class="section-number-4">2.3.1</span> Visual Settings<a aria-hidden="true" href="#visual-settings">#</a> </h4>
+<div id="outline-container-modules" class="outline-4">
+<h4 id="modules"><span class="section-number-4">2.3.1</span> Modules<a aria-hidden="true" href="#modules">#</a> </h4>
 <div class="outline-text-4" id="text-2-3-1">
+<p>
+Doom has this lovely <i>modular configuration base</i> that takes a lot of work out of
+configuring Emacs. Each module (when enabled) can provide a list of packages to
+install (on <code>doom sync</code>) and configuration to be applied. The modules can also
+have flags applied to tweak their behaviour.
+</p>
+
+<details id='initel' class='code' open><summary class='named'><span class='name'>init.el</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#initel'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">init.el -*- lexical-binding: t; -*-</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This file controls what Doom modules are enabled and what order they load in.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Press 'K' on a module to view its documentation, and 'gd' to browse its directory.</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">doom!</span> <span class="org-builtin">:completion</span>
+       &lt;&lt;doom-completion&gt;&gt;
+
+       <span class="org-builtin">:ui</span>
+       &lt;&lt;doom-ui&gt;&gt;
+
+       <span class="org-builtin">:editor</span>
+       &lt;&lt;doom-editor&gt;&gt;
+
+       <span class="org-builtin">:emacs</span>
+       &lt;&lt;doom-emacs&gt;&gt;
+
+       <span class="org-builtin">:term</span>
+       &lt;&lt;doom-term&gt;&gt;
+
+       <span class="org-builtin">:checkers</span>
+       &lt;&lt;doom-checkers&gt;&gt;
+
+       <span class="org-builtin">:tools</span>
+       &lt;&lt;doom-tools&gt;&gt;
+
+       <span class="org-builtin">:os</span>
+       &lt;&lt;doom-os&gt;&gt;
+
+       <span class="org-builtin">:lang</span>
+       &lt;&lt;doom-lang&gt;&gt;
+
+       <span class="org-builtin">:email</span>
+       &lt;&lt;doom-email&gt;&gt;
+
+       <span class="org-builtin">:app</span>
+       &lt;&lt;doom-app&gt;&gt;
+
+       <span class="org-builtin">:config</span>
+       &lt;&lt;doom-config&gt;&gt;
+       <span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+</div>
+
+<div id="outline-container-structure" class="outline-5">
+<h5 id="structure"><span class="section-number-5">2.3.1.1</span> Structure<a aria-hidden="true" href="#structure">#</a> </h5>
+<div class="outline-text-5" id="text-2-3-1-1">
+<p>
+As you may have noticed by this point, this is a <a href="https://en.wikipedia.org/wiki/Literate_programming">literate</a> configuration. Doom
+has good support for this which we access though the <code>literate</code> module.
+</p>
+
+<p>
+While we&rsquo;re in the <code>:config</code> section, we&rsquo;ll use Dooms nicer defaults, along with
+the bindings and smartparens behaviour (the flags aren&rsquo;t documented, but they exist).
+</p>
+<details id='doom-config' class='code' open><summary class='named'><span class='name'>doom-config</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-config'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">literate
+<span class="org-rainbow-delimiters-depth-1">(</span>default +bindings +smartparens<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+
+<div id="outline-container-interface" class="outline-5">
+<h5 id="interface"><span class="section-number-5">2.3.1.2</span> Interface<a aria-hidden="true" href="#interface">#</a> </h5>
+<div class="outline-text-5" id="text-2-3-1-2">
+<p>
+There&rsquo;s a lot that can be done to enhance Emacs&rsquo; capabilities.
+I reckon enabling half the modules Doom provides should do it.
+</p>
+
+<details id='doom-completion' class='code' open><summary class='named'><span class='name'>doom-completion</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-completion'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span>company                     <span class="org-comment-delimiter">; </span><span class="org-comment">the ultimate code completion backend</span>
+ +childframe<span class="org-rainbow-delimiters-depth-1">)</span>                <span class="org-comment-delimiter">; </span><span class="org-comment">... when your children are better than you</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">helm                       ; the *other* search engine for love and life</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">ido                        ; the other *other* search engine...</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>ivy                         <span class="org-comment-delimiter">; </span><span class="org-comment">a search engine for love and life</span>
+ +icons                      <span class="org-comment-delimiter">; </span><span class="org-comment">... icons are nice</span>
+ +prescient<span class="org-rainbow-delimiters-depth-1">)</span>                 <span class="org-comment-delimiter">; </span><span class="org-comment">... I know what I want(ed)</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-ui' class='code' open><summary class='named'><span class='name'>doom-ui</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-ui'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">deft                       ; notational velocity for Emacs</span>
+doom                         <span class="org-comment-delimiter">; </span><span class="org-comment">what makes DOOM look the way it does</span>
+doom-dashboard               <span class="org-comment-delimiter">; </span><span class="org-comment">a nifty splash screen for Emacs</span>
+doom-quit                    <span class="org-comment-delimiter">; </span><span class="org-comment">DOOM quit-message prompts when you quit Emacs</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">fill-column                ; a `</span><span class="org-comment"><span class="org-constant">fill-column</span></span><span class="org-comment">' indicator</span>
+hl-todo                      <span class="org-comment-delimiter">; </span><span class="org-comment">highlight </span><span class="org-bold"><span class="org-warning">TODO</span></span><span class="org-comment">/</span><span class="org-bold"><span class="org-error">FIXME</span></span><span class="org-comment">/</span><span class="org-bold"><span class="org-success">NOTE</span></span><span class="org-comment">/</span><span class="org-bold"><span class="org-doc">DEPRECATED</span></span><span class="org-comment">/</span><span class="org-bold"><span class="org-constant">HACK</span></span><span class="org-comment">/</span><span class="org-bold"><span class="org-keyword">REVIEW</span></span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">hydra                      ; quick documentation for related commands</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">indent-guides              ; highlighted indent columns, notoriously slow</span>
+ligatures                    <span class="org-comment-delimiter">; </span><span class="org-comment">ligatures and symbols to make your code pretty again</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">minimap                    ; show a map of the code on the side</span>
+modeline                     <span class="org-comment-delimiter">; </span><span class="org-comment">snazzy, Atom-inspired modeline, plus API</span>
+nav-flash                    <span class="org-comment-delimiter">; </span><span class="org-comment">blink the current line after jumping</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">neotree                    ; a project drawer, like NERDTree for vim</span>
+ophints                      <span class="org-comment-delimiter">; </span><span class="org-comment">highlight the region an operation acts on</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>popup                       <span class="org-comment-delimiter">; </span><span class="org-comment">tame sudden yet inevitable temporary windows</span>
+ +all                        <span class="org-comment-delimiter">; </span><span class="org-comment">catch all popups that start with an asterix</span>
+ +defaults<span class="org-rainbow-delimiters-depth-1">)</span>                  <span class="org-comment-delimiter">; </span><span class="org-comment">default popup rules</span>
+pretty-code                  <span class="org-comment-delimiter">; </span><span class="org-comment">replace bits of code with pretty symbols</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(tabs                      ; an tab bar for Emacs</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">+centaur-tabs)           ; ... with prettier tabs</span>
+treemacs                     <span class="org-comment-delimiter">; </span><span class="org-comment">a project drawer, like neotree but cooler</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">unicode                    ; extended unicode support for various languages</span>
+vc-gutter                    <span class="org-comment-delimiter">; </span><span class="org-comment">vcs diff in the fringe</span>
+vi-tilde-fringe              <span class="org-comment-delimiter">; </span><span class="org-comment">fringe tildes to mark beyond EOB</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>window-select +numbers<span class="org-rainbow-delimiters-depth-1">)</span>     <span class="org-comment-delimiter">; </span><span class="org-comment">visually switch windows</span>
+workspaces                   <span class="org-comment-delimiter">; </span><span class="org-comment">tab emulation, persistence &amp; separate workspaces</span>
+zen                          <span class="org-comment-delimiter">; </span><span class="org-comment">distraction-free coding or writing</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-editor' class='code' open><summary class='named'><span class='name'>doom-editor</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-editor'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span>evil +everywhere<span class="org-rainbow-delimiters-depth-1">)</span>           <span class="org-comment-delimiter">; </span><span class="org-comment">come to the dark side, we have cookies</span>
+file-templates               <span class="org-comment-delimiter">; </span><span class="org-comment">auto-snippets for empty files</span>
+fold                         <span class="org-comment-delimiter">; </span><span class="org-comment">(nigh) universal code folding</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">format</span> +onsave<span class="org-rainbow-delimiters-depth-1">)</span>             <span class="org-comment-delimiter">; </span><span class="org-comment">automated prettiness</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">god                        ; run Emacs commands without modifier keys</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">lispy                      ; vim for lisp, for people who don't like vim</span>
+multiple-cursors             <span class="org-comment-delimiter">; </span><span class="org-comment">editing in many places at once</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">objed                      ; text object editing for the innocent</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">parinfer                   ; turn lisp into python, sort of</span>
+rotate-text                  <span class="org-comment-delimiter">; </span><span class="org-comment">cycle region at point between text candidates</span>
+snippets                     <span class="org-comment-delimiter">; </span><span class="org-comment">my elves. They type so I don't have to</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">word-wrap                  ; soft wrapping with language-aware indent</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-emacs' class='code' open><summary class='named'><span class='name'>doom-emacs</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-emacs'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">dired</span> +icons<span class="org-rainbow-delimiters-depth-1">)</span>               <span class="org-comment-delimiter">; </span><span class="org-comment">making dired pretty [functional]</span>
+electric                     <span class="org-comment-delimiter">; </span><span class="org-comment">smarter, keyword-based electric-indent</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">ibuffer</span> +icons<span class="org-rainbow-delimiters-depth-1">)</span>             <span class="org-comment-delimiter">; </span><span class="org-comment">interactive buffer management</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">undo</span> +tree<span class="org-rainbow-delimiters-depth-1">)</span>                 <span class="org-comment-delimiter">; </span><span class="org-comment">persistent, smarter undo for your inevitable mistakes</span>
+vc                           <span class="org-comment-delimiter">; </span><span class="org-comment">version-control and Emacs, sitting in a tree</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-term' class='code' open><summary class='named'><span class='name'>doom-term</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-term'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">eshell                     ; the elisp shell that works everywhere</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">shell                      ; simple shell REPL for Emacs</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">term                       ; basic terminal emulator for Emacs</span>
+vterm                        <span class="org-comment-delimiter">; </span><span class="org-comment">the best terminal emulation in Emacs</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-checkers' class='code' open><summary class='named'><span class='name'>doom-checkers</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-checkers'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">syntax                       <span class="org-comment-delimiter">; </span><span class="org-comment">tasing you for every semicolon you forget</span>
+spell                        <span class="org-comment-delimiter">; </span><span class="org-comment">tasing you for misspelling mispelling</span>
+grammar                      <span class="org-comment-delimiter">; </span><span class="org-comment">tasing grammar mistake every you make</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-tools' class='code' open><summary class='named'><span class='name'>doom-tools</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-tools'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">ansible                      <span class="org-comment-delimiter">; </span><span class="org-comment">a crucible for infrastructure as code</span>
+<span class="org-variable-name">debugger</span>                     <span class="org-comment-delimiter">; </span><span class="org-bold"><span class="org-error">FIXME</span></span><span class="org-comment"> stepping through code, to help you add bugs</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">direnv                     ; be direct about your environment</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">docker                     ; port everything to containers</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">editorconfig               ; let someone else argue about tabs vs spaces</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">ein                        ; tame Jupyter notebooks with emacs</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">eval</span> +overlay<span class="org-rainbow-delimiters-depth-1">)</span>              <span class="org-comment-delimiter">; </span><span class="org-comment">run code, run (also, repls)</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">gist                       ; interacting with github gists</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>lookup                      <span class="org-comment-delimiter">; </span><span class="org-comment">helps you navigate your code and documentation</span>
+ +dictionary                 <span class="org-comment-delimiter">; </span><span class="org-comment">dictionary/thesaurus is nice</span>
+ +docsets<span class="org-rainbow-delimiters-depth-1">)</span>                   <span class="org-comment-delimiter">; </span><span class="org-comment">...or in Dash docsets locally</span>
+lsp                          <span class="org-comment-delimiter">; </span><span class="org-comment">Language Server Protocol</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">macos                      ; MacOS-specific commands</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">magit</span>                       <span class="org-comment-delimiter">; </span><span class="org-comment">a git porcelain for Emacs</span>
+ +forge<span class="org-rainbow-delimiters-depth-1">)</span>                     <span class="org-comment-delimiter">; </span><span class="org-comment">interface with git forges</span>
+make                         <span class="org-comment-delimiter">; </span><span class="org-comment">run make tasks from Emacs</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">pass                       ; password manager for nerds</span>
+pdf                          <span class="org-comment-delimiter">; </span><span class="org-comment">pdf enhancements</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">prodigy                    ; </span><span class="org-bold"><span class="org-error">FIXME</span></span><span class="org-comment"> managing external services &amp; code builders</span>
+rgb                          <span class="org-comment-delimiter">; </span><span class="org-comment">creating color strings</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">taskrunner                 ; taskrunner for all your projects</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">terraform                  ; infrastructure as code</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">tmux                       ; an API for interacting with tmux</span>
+upload                       <span class="org-comment-delimiter">; </span><span class="org-comment">map local to remote projects via ssh/ftp</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-os' class='code' open><summary class='named'><span class='name'>doom-os</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-os'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">tty                          <span class="org-comment-delimiter">; </span><span class="org-comment">improve the terminal Emacs experience</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+
+<div id="outline-container-language-support" class="outline-5">
+<h5 id="language-support"><span class="section-number-5">2.3.1.3</span> Language support<a aria-hidden="true" href="#language-support">#</a> </h5>
+<div class="outline-text-5" id="text-2-3-1-3">
+<p>
+We can be rather liberal with enabling support for languages as the associated
+packages/configuration are (usually) only loaded when first opening an
+associated file.
+</p>
+
+<details id='doom-lang' class='code' open><summary class='named'><span class='name'>doom-lang</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-lang'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">agda                       ; types of types of types of types...</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">cc                         ; C/C++/Obj-C madness</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">clojure                    ; java with a lisp</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">common-lisp                ; if you've seen one lisp, you've seen them all</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">coq                        ; proofs-as-programs</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">crystal                    ; ruby at the speed of c</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">csharp                     ; unity, .NET, and mono shenanigans</span>
+data                         <span class="org-comment-delimiter">; </span><span class="org-comment">config/data formats</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(dart +flutter)            ; paint ui and not much else</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">elixir                     ; erlang done right</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">elm                        ; care for a cup of TEA?</span>
+emacs-lisp                   <span class="org-comment-delimiter">; </span><span class="org-comment">drown in parentheses</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">erlang                     ; an elegant language for a more civilized age</span>
+ess                          <span class="org-comment-delimiter">; </span><span class="org-comment">emacs speaks statistics</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">faust                      ; dsp, but you get to keep your soul</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">fsharp                     ; ML stands for Microsoft's Language</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">fstar                      ; (dependent) types and (monadic) effects and Z3</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(go +lsp)                  ; the hipster dialect</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(haskell +dante)           ; a language that's lazier than I am</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">hy                         ; readability of scheme w/ speed of python</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">idris                      ;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">json                       ; At least it ain't XML</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(java +meghanada)          ; the poster child for carpal tunnel syndrome</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>javascript +lsp<span class="org-rainbow-delimiters-depth-1">)</span>            <span class="org-comment-delimiter">; </span><span class="org-comment">all(hope(abandon(ye(who(enter(here))))))</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">julia                      ; a better, faster MATLAB</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">kotlin                     ; a better, slicker Java(Script)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>latex                       <span class="org-comment-delimiter">; </span><span class="org-comment">writing papers in Emacs has never been so fun</span>
+ +latexmk                    <span class="org-comment-delimiter">; </span><span class="org-comment">what else would you use?</span>
+ +cdlatex                    <span class="org-comment-delimiter">; </span><span class="org-comment">quick maths symbols</span>
+ +fold<span class="org-rainbow-delimiters-depth-1">)</span>                      <span class="org-comment-delimiter">; </span><span class="org-comment">fold the clutter away nicities</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">lean                       ; proof that mathematicians need help</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">factor                     ; for when scripts are stacked against you</span>
+ledger                       <span class="org-comment-delimiter">; </span><span class="org-comment">an accounting system in Emacs</span>
+lua                          <span class="org-comment-delimiter">; </span><span class="org-comment">one-based indices? one-based indices</span>
+markdown                     <span class="org-comment-delimiter">; </span><span class="org-comment">writing docs for people to ignore</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">nim                        ; python + lisp at the speed of c</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">nix                        ; I hereby declare "nix geht mehr!"</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">ocaml                      ; an objective camel</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>org                         <span class="org-comment-delimiter">; </span><span class="org-comment">organize your plain life in plain text</span>
+ +pretty                     <span class="org-comment-delimiter">; </span><span class="org-comment">yessss my pretties! (nice unicode symbols)</span>
+ +dragndrop                  <span class="org-comment-delimiter">; </span><span class="org-comment">drag &amp; drop files/images into org buffers</span>
+ <span class="org-comment-delimiter">;;</span><span class="org-comment">+hugo                     ; use Emacs for hugo blogging</span>
+ +jupyter                    <span class="org-comment-delimiter">; </span><span class="org-comment">ipython/jupyter support for babel</span>
+ +pandoc                     <span class="org-comment-delimiter">; </span><span class="org-comment">export-with-pandoc support</span>
+ +gnuplot                    <span class="org-comment-delimiter">; </span><span class="org-comment">who doesn't like pretty pictures</span>
+ <span class="org-comment-delimiter">;;</span><span class="org-comment">+pomodoro                 ; be fruitful with the tomato technique</span>
+ +present                    <span class="org-comment-delimiter">; </span><span class="org-comment">using org-mode for presentations</span>
+ +roam<span class="org-rainbow-delimiters-depth-1">)</span>                      <span class="org-comment-delimiter">; </span><span class="org-comment">wander around notes</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">perl                       ; write code no one else can comprehend</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">php                        ; perl's insecure younger brother</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">plantuml                   ; diagrams for confusing people more</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">purescript                 ; javascript, but functional</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>python +lsp<span class="org-rainbow-delimiters-depth-1">)</span>                <span class="org-comment-delimiter">; </span><span class="org-comment">beautiful is better than ugly</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">qt                         ; the 'cutest' gui framework ever</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">racket                     ; a DSL for DSLs</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">rest                       ; Emacs as a REST client</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">rst                        ; ReST in peace</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(ruby +rails)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>rust +lsp<span class="org-rainbow-delimiters-depth-1">)</span>                  <span class="org-comment-delimiter">; </span><span class="org-comment">Fe2O3.unwrap().unwrap().unwrap().unwrap()</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">scala                      ; java, but good</span>
+scheme                       <span class="org-comment-delimiter">; </span><span class="org-comment">a fully conniving family of lisps</span>
+sh                           <span class="org-comment-delimiter">; </span><span class="org-comment">she sells {ba,z,fi}sh shells on the C xor</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">sml                        ; no, the /other/ ML</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">solidity                   ; do you need a blockchain? No.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">swift                      ; who asked for emoji variables?</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">terra                      ; Earth and Moon in alignment for performance.</span>
+web                          <span class="org-comment-delimiter">; </span><span class="org-comment">the tubes</span>
+yaml                         <span class="org-comment-delimiter">; </span><span class="org-comment">JSON, but readable</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+
+<div id="outline-container-everything-emacs" class="outline-5">
+<h5 id="everything-emacs"><span class="section-number-5">2.3.1.4</span> Everything in Emacs<a aria-hidden="true" href="#everything-emacs">#</a> </h5>
+<div class="outline-text-5" id="text-2-3-1-4">
+<p>
+It&rsquo;s just too convenient being able to have everything in Emacs.
+I couldn&rsquo;t resist the Email and Feed modules.
+</p>
+
+<details id='doom-email' class='code' open><summary class='named'><span class='name'>doom-email</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-email'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">mu4e</span> +gmail<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">notmuch</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(wanderlust +gmail)</span>
+</pre>
+</div>
+</details>
+
+<details id='doom-app' class='code' open><summary class='named'><span class='name'>doom-app</span><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#doom-app'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">calendar</span>
+irc                          <span class="org-comment-delimiter">; </span><span class="org-comment">how neckbeards socialize</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>rss +org<span class="org-rainbow-delimiters-depth-1">)</span>                   <span class="org-comment-delimiter">; </span><span class="org-comment">emacs as an RSS reader</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">twitter                    ; twitter client https://twitter.com/vnought</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-visual-settings" class="outline-4">
+<h4 id="visual-settings"><span class="section-number-4">2.3.2</span> Visual Settings<a aria-hidden="true" href="#visual-settings">#</a> </h4>
+<div class="outline-text-4" id="text-2-3-2">
 </div>
 <div id="outline-container-font-face" class="outline-5">
-<h5 id="font-face"><span class="section-number-5">2.3.1.1</span> Font Face<a aria-hidden="true" href="#font-face">#</a> </h5>
-<div class="outline-text-5" id="text-2-3-1-1">
+<h5 id="font-face"><span class="section-number-5">2.3.2.1</span> Font Face<a aria-hidden="true" href="#font-face">#</a> </h5>
+<div class="outline-text-5" id="text-2-3-2-1">
 <p>
 &rsquo;Fira Code&rsquo; is nice, and &rsquo;Overpass&rsquo; makes for a nice sans companion. We just need to
 fiddle with the font sizes a tad so that they visually match. Just for fun I&rsquo;m
@@ -3815,8 +4199,8 @@ aspects are nice, but on others I prefer Fira.
 </div>
 
 <div id="outline-container-theme-modeline" class="outline-5">
-<h5 id="theme-modeline"><span class="section-number-5">2.3.1.2</span> Theme and modeline<a aria-hidden="true" href="#theme-modeline">#</a> </h5>
-<div class="outline-text-5" id="text-2-3-1-2">
+<h5 id="theme-modeline"><span class="section-number-5">2.3.2.2</span> Theme and modeline<a aria-hidden="true" href="#theme-modeline">#</a> </h5>
+<div class="outline-text-5" id="text-2-3-2-2">
 <p>
 <code>doom-one</code> is nice and all, but I find the <code>vibrant</code> variant nicer. Oh, and with the
 nice selection doom provides there&rsquo;s no reason for me to want the defaults.
@@ -3867,8 +4251,8 @@ thus not worth noting in the modeline. So, let&rsquo;s conditionally hide it.
 </div>
 </div>
 <div id="outline-container-miscellaneous" class="outline-5">
-<h5 id="miscellaneous"><span class="section-number-5">2.3.1.3</span> Miscellaneous<a aria-hidden="true" href="#miscellaneous">#</a> </h5>
-<div class="outline-text-5" id="text-2-3-1-3">
+<h5 id="miscellaneous"><span class="section-number-5">2.3.2.3</span> Miscellaneous<a aria-hidden="true" href="#miscellaneous">#</a> </h5>
+<div class="outline-text-5" id="text-2-3-2-3">
 <p>
 Relative line numbers are fantastic for knowing how far away line numbers are,
 then <kbd>ESC 12 &lt;UP&gt;</kbd> gets you exactly where you think.
@@ -3911,8 +4295,8 @@ There&rsquo;s a bug with the modeline in insert mode for org documents (<a href=
 </div>
 </div>
 <div id="outline-container-some-helper-macros" class="outline-4">
-<h4 id="some-helper-macros"><span class="section-number-4">2.3.2</span> Some helper macros<a aria-hidden="true" href="#some-helper-macros">#</a> </h4>
-<div class="outline-text-4" id="text-2-3-2">
+<h4 id="some-helper-macros"><span class="section-number-4">2.3.3</span> Some helper macros<a aria-hidden="true" href="#some-helper-macros">#</a> </h4>
+<div class="outline-text-4" id="text-2-3-3">
 <p>
 There are a few handy macros added by doom, namely
 </p>
