@@ -111,7 +111,7 @@
        upload                       ; map local to remote projects via ssh/ftp
 
        :os
-       ;;tty                        ; improve the terminal Emacs experience
+       tty                          ; improve the terminal Emacs experience
 
        :lang
        ;;agda                       ; types of types of types of types...
@@ -147,7 +147,7 @@
        ;;lean
        ;;factor
        ledger                       ; an accounting system in Emacs
-       ;;lua                        ; one-based indices? one-based indices
+       lua                          ; one-based indices? one-based indices
        markdown                     ; writing docs for people to ignore
        ;;nim                        ; python + lisp at the speed of c
        ;;nix                        ; I hereby declare "nix geht mehr!"
@@ -174,7 +174,7 @@
        ;;(ruby +rails)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)                  ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala                      ; java, but good
-       ;;scheme                     ; a fully conniving family of lisps
+       scheme                       ; a fully conniving family of lisps
        sh                           ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity                   ; do you need a blockchain? No.
@@ -191,7 +191,7 @@
        :app
        ;;calendar
        irc                          ; how neckbeards socialize
-       ;;(rss +org)                 ; emacs as an RSS reader
+       (rss +org)                   ; emacs as an RSS reader
        ;;twitter                    ; twitter client https://twitter.com/vnought
 
        :config
