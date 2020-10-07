@@ -36,10 +36,6 @@
 (package! gif-screencast)
 ;; Fun:9 ends here
 
-;; [[file:config.org::*Flyspell-lazy][Flyspell-lazy:1]]
-(package! flyspell-lazy :pin "3ebf68cc9eb10c972a2de8d7861cbabbbce69570")
-;; Flyspell-lazy:1 ends here
-
 ;; [[file:config.org::*CalcTeX][CalcTeX:1]]
 (package! calctex :recipe (:host github :repo "johnbcoughlin/calctex"
                                  :files ("*.el")) :pin "7fa2673c64e259e04aef684ccf09ef85570c388b")

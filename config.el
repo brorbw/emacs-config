@@ -975,10 +975,6 @@ Affects behaviour of `emacs-anywhere--finalise-content'")
   (evil-escape-mode nil))
 ;; EVIL:1 ends here
 
-;; [[file:config.org::*Flyspell][Flyspell:1]]
-(after! flyspell (require 'flyspell-lazy) (flyspell-lazy-mode 1))
-;; Flyspell:1 ends here
-
 ;; [[file:config.org::*Info colors][Info colors:1]]
 (use-package! info-colors
   :commands (info-colors-fontify-node))
@@ -1355,10 +1351,6 @@ Else, write to this process' PID to the lock file"
         "*/_region_.log"
         "*/_region_.tex"))
 ;; Treemacs:2 ends here
-
-;; [[file:config.org::*VTerm][VTerm:1]]
-(setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
-;; VTerm:1 ends here
 
 ;; [[file:config.org::*Which-key][Which-key:1]]
 (setq which-key-idle-delay 0.5) ;; I need the help, I really do
