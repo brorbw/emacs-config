@@ -1325,33 +1325,35 @@ Else, write to this process' PID to the lock file"
 ;; Treemacs:1 ends here
 
 ;; [[file:config.org::*Treemacs][Treemacs:2]]
-(setq treemacs-file-ignore-extensions '(;; LaTeX
-                                        "aux"
-                                        "ptc"
-                                        "fdb_latexmk"
-                                        "fls"
-                                        "synctex.gz"
-                                        "toc"
-                                        ;; LaTeX - glossary
-                                        "glg"
-                                        "glo"
-                                        "gls"
-                                        "glsdefs"
-                                        "ist"
-                                        "acn"
-                                        "acr"
-                                        "alg"
-                                        ;; LaTeX - pgfplots
-                                        "mw"
-                                        ;; LaTeX - pdfx
-                                        "pdfa.xmpi"
-                                        ))
-(setq treemacs-file-ignore-globs '(;; LaTeX
-                                   "*/_minted-*"
-                                   ;; AucTeX
-                                   "*/.auctex-auto"
-                                   "*/_region_.log"
-                                   "*/_region_.tex"))
+(setq treemacs-file-ignore-extensions
+      '(;; LaTeX
+        "aux"
+        "ptc"
+        "fdb_latexmk"
+        "fls"
+        "synctex.gz"
+        "toc"
+        ;; LaTeX - glossary
+        "glg"
+        "glo"
+        "gls"
+        "glsdefs"
+        "ist"
+        "acn"
+        "acr"
+        "alg"
+        ;; LaTeX - pgfplots
+        "mw"
+        ;; LaTeX - pdfx
+        "pdfa.xmpi"
+        ))
+(setq treemacs-file-ignore-globs
+      '(;; LaTeX
+        "*/_minted-*"
+        ;; AucTeX
+        "*/.auctex-auto"
+        "*/_region_.log"
+        "*/_region_.tex"))
 ;; Treemacs:2 ends here
 
 ;; [[file:config.org::*VTerm][VTerm:1]]
@@ -1708,14 +1710,15 @@ SQL can be either the emacsql vector representation, or a string."
 ;; Tweaking defaults:1 ends here
 
 ;; [[file:config.org::*Tweaking defaults][Tweaking defaults:2]]
-(setq org-babel-default-header-args '((:session . "none")
-                                      (:results . "replace")
-                                      (:exports . "code")
-                                      (:cache . "no")
-                                      (:noweb . "no")
-                                      (:hlines . "no")
-                                      (:tangle . "no")
-                                      (:comments . "link")))
+(setq org-babel-default-header-args
+      '((:session . "none")
+        (:results . "replace")
+        (:exports . "code")
+        (:cache . "no")
+        (:noweb . "no")
+        (:hlines . "no")
+        (:tangle . "no")
+        (:comments . "link")))
 ;; Tweaking defaults:2 ends here
 
 ;; [[file:config.org::*Tweaking defaults][Tweaking defaults:3]]
@@ -2223,12 +2226,13 @@ SQL can be either the emacsql vector representation, or a string."
 
 ;; [[file:config.org::*Graph Behaviour][Graph Behaviour:2]]
 (after! org-roam
-  (setq org-roam-graph-node-extra-config '(("shape"      . "underline")
-                                           ("style"      . "rounded,filled")
-                                           ("fillcolor"  . "#EEEEEE")
-                                           ("color"      . "#C9C9C9")
-                                           ("fontcolor"  . "#111111")
-                                           ("fontname"   . "Overpass")))
+  (setq org-roam-graph-node-extra-config
+        '(("shape"      . "underline")
+          ("style"      . "rounded,filled")
+          ("fillcolor"  . "#EEEEEE")
+          ("color"      . "#C9C9C9")
+          ("fontcolor"  . "#111111")
+          ("fontname"   . "Overpass")))
 
   (setq +org-roam-graph--html-template
         (replace-regexp-in-string "%\\([^s]\\)" "%%\\1"
@@ -2909,9 +2913,7 @@ This action is reversed by `org-music-time-to-seconds'."
              (format "\\begin{tabular}{@{\\hspace{0.3\\columnwidth}}r@{\\hspace{0.1\\columnwidth}}p{0.4\\columnwidth}}
   \\includegraphics[height=6em]{%s} & \\vspace{-0.12\\columnwidth}%s
 \\end{tabular}" cover-img text))
-            (t text))))
-
-  )
+            (t text)))))
 ;; Music:2 ends here
 
 ;; [[file:config.org::*YouTube][YouTube:1]]
@@ -3598,10 +3600,11 @@ to allow the TOC to be a collapseable tree."
 
 ;; [[file:config.org::*Change checkbox type][Change checkbox type:1]]
 (after! org
-  (appendq! org-html-checkbox-types '((html-span .
-                                             ((on . "<span class='checkbox'></span>")
-                                              (off . "<span class='checkbox'></span>")
-                                              (trans . "<span class='checkbox'></span>")))))
+  (appendq! org-html-checkbox-types
+            '((html-span
+               ((on . "<span class='checkbox'></span>")
+                (off . "<span class='checkbox'></span>")
+                (trans . "<span class='checkbox'></span>")))))
   (setq org-html-checkbox-type 'html-span))
 ;; Change checkbox type:1 ends here
 
