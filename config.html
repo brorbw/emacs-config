@@ -3168,7 +3168,7 @@ workflow may settle, with the potential for rich integrations between them &#x20
 
 
 <figure id="org1475fdc">
-<object type="image/svg+xml" data="misc/emacs-platform.svg" class="invertible" alt="Graph of possible Emacs task integrations">
+<object type="image/svg+xml" data="misc/emacs-platform.svg" class="invertible" alt="Graph of possible Emacs task integrations" style="max-width:min(24em,100%)">
 Sorry, your browser does not support SVG.</object>
 
 <figcaption><span class="figure-number">Figure 1: </span>Some sample workflow integrations that can be used within Emacs</figcaption>
@@ -8650,6 +8650,52 @@ I really like org mode, I&rsquo;ve given some thought to why, and below is the r
 <img src="https://tecosaur.com/lfs/emacs-config/document-format-comparison.png" alt="Radar chart comparing my opinions of document formats." class="invertible">
 
 </figure>
+
+<p>
+Beyond the elegance in the markup language, tremendously rich integrations with
+Emacs allow for some fantastic <a href="https://orgmode.org/features.html">features</a>, such as what seems to be the best
+support for <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a> of any currently available technology.
+</p>
+
+<p>
+An <kbd>.org</kbd> file can contain blocks of code (with <a href="https://en.wikipedia.org/wiki/Noweb">noweb</a> templating support), which
+can be <a href="https://orgmode.org/manual/Extracting-Source-Code.html">tangled</a> to dedicated source code files, and <a href="https://orgmode.org/manual/Extracting-Source-Code.html">woven</a> into a document
+(report, documentation, presentation, etc.) through various (<i>extensible</i>) methods.
+These source blocks may even create images or other content to be included in
+the document, or generate source code.
+</p>
+
+<details id='orga32e4fb' class='code' open>
+<summary></summary>
+<div class='gutter'><a href='#orga32e4fb'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<pre class="example" style="line-height:1.13;" id="orga32e4fb">
+                   ╭───────────────────────────────────▶ .pdf ⎫
+                  pdfLaTeX ▶╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╮                 ⎪
+                   ╿     ╿                  ┊                 ⎪
+                   │     ┊                  ┊                 ⎪
+                 .tex    ┊                  ┊                 ⎪
+                   ╿     ┊                  ┊                 ⎪
+                ╭──┴╌╌╮  ┊                  ┊ style.scss      ⎬ Weaving
+graphc.png ─╮   │  embedded TeX             ┊      ╽          ⎪
+image.jpeg ─┤ filters   ╿                   ┊    .css         ⎪
+            ╎     ╿     ┊                   ┊     ▾╎          ⎪
+figure.png╶─╧─▶ PROJECT.ORG ▶───╴filters╶───╧──────╪──▶ .html ⎪
+     ╿           ╿┊ ║ │ ╰╌╌╌▷╌╌ embedded html ▶╌╌╌╌╯          ⎪
+     ├╌╌╌╌╌╌╌▷╌╌╌╯┊ ║ │                                       ⎪
+    result ╌╌╌╌╌╮ ┊ ║ ├──────╴filters╶────────────────▶ .txt  ⎪
+     ┊▴         ┊ ┊ ║ │                                       ⎪
+    execution   ┊ ┊ ║ ╰──────╴filters╶────────────────▶ .md   ⎭
+     ┊▴         ┊ ┊ ║
+    code blocks◀╯ ┊ ╟─────▶ .c  ⎫
+     ╰╌╌╌╌◁╌╌╌╌╌╌╌╯ ╟────▶ .el  ⎪
+                    ╟───▶ .sh   ⎬ Tangling
+                    ╟──▶ .py    ⎪
+                    ╟─▶ .hs     ⎭
+                   etc.
+</pre>
+
+</details>
 </div>
 
 <div id="outline-container-system-config" class="outline-4">
