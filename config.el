@@ -4386,6 +4386,16 @@ preview-default-preamble "\\fi}\"%' \"\\detokenize{\" %t \"}\""))
     :multiply "%*%"))
 ;; Editor Visuals:1 ends here
 
+;; [[file:config.org::*Graphviz][Graphviz:1]]
+(use-package! graphviz-dot-mode
+  :mode ("\\.dot\\'" "\\.gz\\'")
+  :config
+  (set-company-backend! 'graphviz-dot-mode 'company-graphviz-dot-backend))
+
+(use-package! company-graphviz-dot
+  :after graphviz-dot-mode)
+;; Graphviz:1 ends here
+
 ;; [[file:config.org::*hledger][hledger:1]]
 (setq ledger-mode-should-check-version nil
       ledger-report-links-in-register nil

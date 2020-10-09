@@ -133,3 +133,7 @@
 ;; [[file:config.org::*Systemd][Systemd:1]]
 (package! systemd :pin "51c148e09a129ddf33d95276aa0e89d4ef6f8dd2")
 ;; Systemd:1 ends here
+
+;; [[file:config.org::*Graphviz][Graphviz:1]]
+(package! graphviz-dot-mode :pin "3642a0a5f41a80c8ecef7c6143d514200b80e194")
+;; Graphviz:1 ends here

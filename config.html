@@ -2838,6 +2838,7 @@ MathJax = {
 </ul>
 </li>
 <li><a href="#systemd">3.3.3. Systemd</a></li>
+<li><a href="#graphviz">3.3.4. Graphviz</a></li>
 </ul>
 </li>
 </ul>
@@ -3046,10 +3047,11 @@ MathJax = {
 <li><a href="#r-editor-visuals">5.6.1. Editor Visuals</a></li>
 </ul>
 </li>
-<li><a href="#hledger">5.7. hledger</a></li>
-<li><a href="#markdown">5.8. Markdown</a></li>
-<li><a href="#beancount">5.9. Beancount</a></li>
-<li><a href="#authinfo">5.10. Authinfo</a></li>
+<li><a href="#language-configuration-graphviz">5.7. Graphviz</a></li>
+<li><a href="#hledger">5.8. hledger</a></li>
+<li><a href="#markdown">5.9. Markdown</a></li>
+<li><a href="#beancount">5.10. Beancount</a></li>
+<li><a href="#authinfo">5.11. Authinfo</a></li>
 </ul>
 </li>
 </ul>
@@ -5439,6 +5441,24 @@ For editing systemd unit files
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">package!</span> systemd <span class="org-builtin">:pin</span> <span class="org-string">"51c148e09a..."</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+<div id="outline-container-graphviz" class="outline-4">
+<h4 id="graphviz"><span class="section-number-4">3.3.4</span> Graphviz<a aria-hidden="true" href="#graphviz">#</a> </h4>
+<div class="outline-text-4" id="text-3-3-4">
+<p>
+Graphviz is a nice method of visualising simple graphs, based on plaintext
+<kbd>.dot</kbd> / <kbd>.gv</kbd> files.
+</p>
+<details id='graphviz,code--1' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#graphviz,code--1'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">package!</span> graphviz-dot-mode <span class="org-builtin">:pin</span> <span class="org-string">"3642a0a5f4..."</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </details>
@@ -12866,9 +12886,27 @@ priority of <kbd>mypyls</kbd>
 </div>
 </div>
 </div>
-<div id="outline-container-hledger" class="outline-3">
-<h3 id="hledger"><span class="section-number-3">5.7</span> hledger<a aria-hidden="true" href="#hledger">#</a> </h3>
+<div id="outline-container-language-configuration-graphviz" class="outline-3">
+<h3 id="language-configuration-graphviz"><span class="section-number-3">5.7</span> Graphviz<a aria-hidden="true" href="#language-configuration-graphviz">#</a> </h3>
 <div class="outline-text-3" id="text-5-7">
+<details id='graphviz,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#graphviz,code--2'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package!</span> graphviz-dot-mode
+  <span class="org-builtin">:mode</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-string">"\\.dot\\'"</span> <span class="org-string">"\\.gz\\'"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">use-package!</span> company-graphviz-dot
+  <span class="org-builtin">:after</span> graphviz-dot-mode<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+</div>
+</div>
+<div id="outline-container-hledger" class="outline-3">
+<h3 id="hledger"><span class="section-number-3">5.8</span> hledger<a aria-hidden="true" href="#hledger">#</a> </h3>
+<div class="outline-text-3" id="text-5-8">
 <p>
 <code>ledger-mode</code> is great and all, but <code>hledger</code> seems to be more actively maintained.
 For example, from 2018&#x2013;2020, the most prolific contributor to <code>ledger</code> produced
@@ -12895,8 +12933,8 @@ and produced by John Wiegley &#x2014; author of <code>ledger</code> and current 
 </div>
 </div>
 <div id="outline-container-markdown" class="outline-3">
-<h3 id="markdown"><span class="section-number-3">5.8</span> Markdown<a aria-hidden="true" href="#markdown">#</a> </h3>
-<div class="outline-text-3" id="text-5-8">
+<h3 id="markdown"><span class="section-number-3">5.9</span> Markdown<a aria-hidden="true" href="#markdown">#</a> </h3>
+<div class="outline-text-3" id="text-5-9">
 <p>
 Let&rsquo;s use mixed pitch, because it&rsquo;s great
 </p>
@@ -12953,8 +12991,8 @@ sixth greyed out. Since the sixth level is so small, I&rsquo;ll turn up the bold
 </div>
 </div>
 <div id="outline-container-beancount" class="outline-3">
-<h3 id="beancount"><span class="section-number-3">5.9</span> Beancount<a aria-hidden="true" href="#beancount">#</a> </h3>
-<div class="outline-text-3" id="text-5-9">
+<h3 id="beancount"><span class="section-number-3">5.10</span> Beancount<a aria-hidden="true" href="#beancount">#</a> </h3>
+<div class="outline-text-3" id="text-5-10">
 <p>
 The <a href="https://bitbucket.org/blais/beancount/src/tip/editors/emacs/beancount.el">beancount package</a> online has been put into <code>./lisp</code>, we just need to load and
 enable it for <code>.beancount</code> files.
@@ -12985,8 +13023,8 @@ enable it for <code>.beancount</code> files.
 </div>
 
 <div id="outline-container-authinfo" class="outline-3">
-<h3 id="authinfo"><span class="section-number-3">5.10</span> Authinfo<a aria-hidden="true" href="#authinfo">#</a> </h3>
-<div class="outline-text-3" id="text-5-10">
+<h3 id="authinfo"><span class="section-number-3">5.11</span> Authinfo<a aria-hidden="true" href="#authinfo">#</a> </h3>
+<div class="outline-text-3" id="text-5-11">
 <p>
 I just like syntax highlighting. So, let&rsquo;s define a mode with some simple font
 locking.
