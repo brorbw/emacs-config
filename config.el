@@ -3247,8 +3247,10 @@ the vast majority of the change in behaviour comes from switch statements in:
   :init-value t
   (if org-fancy-html-export-mode
       (setq org-html-style-default org-html-style-fancy
+            org-html-meta-tags org-html-meta-tags-fancy
             org-html-checkbox-type 'html-span)
     (setq org-html-style-default org-html-style-plain
+          org-html-meta-tags org-html-meta-tags-plain
           org-html-checkbox-type 'html)))
 ;; Exporting to HTML:1 ends here
 
@@ -3339,31 +3341,35 @@ compared to the default implementation."
 ;; Extra header content:1 ends here
 
 ;; [[file:config.org::*Extra header content][Extra header content:2]]
-(setq org-html-meta-tags
-      '((lambda (_title author _info)
-          (when (org-string-nw-p author)
-            (list "name" "author" author)))
-        (lambda (_title _author info)
-          (when (org-string-nw-p (plist-get info :description))
-            (list "name" "description"
-                  (plist-get info :description))))
-        ("name" "generator" "org mode")
-        ("name" "theme-color" "#77aa99")
-        ("property" "og:type" "article")
-        (lambda (title _author _info)
-          (list "property" "og:title" title))
-        ("property" "og:image" "https://tecosaur.com/resources/org/nib.png")
-        (lambda (_title author _info)
-          (when (org-string-nw-p author)
-            (list "property" "og:article:author:first_name" (car (s-split-up-to " " author 2)))))
-        (lambda (_title author _info)
-          (when (and (org-string-nw-p author) (s-contains-p " " author))
-            (list "property" "og:article:author:last_name" (cadr (s-split-up-to " " author 2)))))
-        (lambda (&rest _)
-          (list "property" "og:article:published_time" (format-time-string "%FT%T%z")))
-        (lambda (_title _author info)
-          (when (org-string-nw-p (plist-get info :subtitle))
-            (list "property" "og:description" (plist-get info :subtitle))))))
+(after! ox-html
+  (setq org-html-meta-tags-plain org-html-meta-tags
+        org-html-meta-tags-fancy
+        '((lambda (_title author _info)
+            (when (org-string-nw-p author)
+              (list "name" "author" author)))
+          (lambda (_title _author info)
+            (when (org-string-nw-p (plist-get info :description))
+              (list "name" "description"
+                    (plist-get info :description))))
+          ("name" "generator" "org mode")
+          ("name" "theme-color" "#77aa99")
+          ("property" "og:type" "article")
+          (lambda (title _author _info)
+            (list "property" "og:title" title))
+          (lambda (_title _author info)
+            (let ((subtitle (org-export-data (plist-get info :subtitle) info)))
+              (when (org-string-nw-p subtitle)
+                (list "property" "og:description" subtitle))))
+          ("property" "og:image" "https://tecosaur.com/resources/org/nib.png")
+          (lambda (_title author _info)
+            (when (org-string-nw-p author)
+              (list "property" "og:article:author:first_name" (car (s-split-up-to " " author 2)))))
+          (lambda (_title author _info)
+            (when (and (org-string-nw-p author) (s-contains-p " " author))
+              (list "property" "og:article:author:last_name" (cadr (s-split-up-to " " author 2)))))
+          (lambda (&rest _)
+            (list "property" "og:article:published_time" (format-time-string "%FT%T%z"))))
+        org-html-meta-tags org-html-meta-tags-fancy))
 ;; Extra header content:2 ends here
 
 ;; [[file:config.org::*Custom CSS/JS][Custom CSS/JS:2]]
