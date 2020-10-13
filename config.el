@@ -173,7 +173,7 @@
 
 (defun fancy-splash-filename (theme-name height)
   (expand-file-name (concat (file-name-as-directory "theme-splashes")
-                            (symbol-name theme-name)
+                            theme-name
                             "-" (number-to-string height) ".svg")
                     doom-cache-dir))
 
