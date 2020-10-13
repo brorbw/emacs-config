@@ -240,19 +240,19 @@
 
 ;; [[file:config.org::*Systemd daemon][Systemd daemon:4]]
 (defun greedily-do-daemon-setup ()
-  (when (daemonp)
-    (require 'org)
-    (when (require 'mu4e nil t)
-      (setq mu4e-confirm-quit t)
-      (setq mu4e-lock-greedy t)
-      (setq mu4e-lock-relaxed t)
-      (mu4e-lock-add-watcher)
-      (when (mu4e-lock-avalible t)
-        (mu4e~start)))
-    (when (require 'elfeed nil t)
-      (run-at-time nil (* 8 60 60) #'elfeed-update))))
+  (require 'org)
+  (when (require 'mu4e nil t)
+    (setq mu4e-confirm-quit t)
+    (setq +mu4e-lock-greedy t)
+    (setq +mu4e-lock-relaxed t)
+    (+mu4e-lock-add-watcher)
+    (when (+mu4e-lock-avalible t)
+      (mu4e~start)))
+  (when (require 'elfeed nil t)
+    (run-at-time nil (* 8 60 60) #'elfeed-update)))
 
-(add-hook 'emacs-startup-hook #'greedily-do-daemon-setup)
+(when (daemonp)
+  (add-hook 'emacs-startup-hook #'greedily-do-daemon-setup))
 ;; Systemd daemon:4 ends here
 
 ;; [[file:config.org::*Fun][Fun:8]]
@@ -1079,7 +1079,7 @@ Prevents a series of redisplays from being called (when set to an appropriate va
             (lambda (msg)
               (let ((maildir
                      (mu4e-message-field msg :maildir)))
-                (mu4e-header-colourise (replace-regexp-in-string "^gmail" (propertize "g" 'face 'bold-italic)
+                (+mu4e-header-colourise (replace-regexp-in-string "^gmail" (propertize "g" 'face 'bold-italic)
                                                                  (format "%s"
                                                                          (substring maildir 1
                                                                                     (string-match-p "/" maildir 1)))))))))
@@ -1088,7 +1088,7 @@ Prevents a series of redisplays from being called (when set to an appropriate va
             (lambda (msg)
               (let ((maildir
                      (mu4e-message-field msg :maildir)))
-                (mu4e-header-colourise (replace-regexp-in-string "\\`.*/" "" maildir))))))
+                (+mu4e-header-colourise (replace-regexp-in-string "\\`.*/" "" maildir))))))
           (:recipnum .
            (:name "Number of recipients"
             :shortname " ⭷"
