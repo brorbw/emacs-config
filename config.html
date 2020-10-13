@@ -2905,7 +2905,6 @@ MathJax = {
 <ul>
 <li><a href="#viewing-mail">4.15.4.1. Viewing Mail</a></li>
 <li><a href="#sending-mail">4.15.4.2. Sending Mail</a></li>
-<li><a href="#process-control">4.15.4.3. Process control</a></li>
 </ul>
 </li>
 <li><a href="#org-msg">4.15.5. Org Msg</a></li>
@@ -2992,33 +2991,33 @@ MathJax = {
 <li><a href="#stolen-from-scimax">5.3.3.1.4. Stolen from scimax (semi-working right now)</a></li>
 </ul>
 </li>
-<li><a href="#exporting-general">5.3.3.3. Exporting (general)</a></li>
-<li><input type='checkbox' id='toc--exporting-html'/><label for='toc--exporting-html'><a href="#exporting-html">5.3.3.4. Exporting to HTML</a></label>
+<li><a href="#exporting-general">5.3.3.2. Exporting (general)</a></li>
+<li><input type='checkbox' id='toc--exporting-html'/><label for='toc--exporting-html'><a href="#exporting-html">5.3.3.3. Exporting to HTML</a></label>
 <ul>
-<li><a href="#extra-header-content">5.3.3.4.1. Extra header content</a></li>
-<li><a href="#custom-css-js">5.3.3.4.2. Custom CSS/JS</a></li>
-<li><a href="#collapsable-src-example">5.3.3.4.3. Collapsable src and example blocks</a></li>
-<li><a href="#handle-table-overflow">5.3.3.4.4. Handle table overflow</a></li>
-<li><a href="#toc-as-collapsable">5.3.3.4.5. TOC as a collapsable tree</a></li>
-<li><a href="#make-verbatim-different">5.3.3.4.6. Make verbatim different to code</a></li>
-<li><a href="#change-checkbox-type">5.3.3.4.7. Change checkbox type</a></li>
-<li><a href="#header-anchors">5.3.3.4.8. Header anchors</a></li>
-<li><a href="#acronyms">5.3.3.4.9. Acronyms</a></li>
-<li><a href="#latex-rendering">5.3.3.4.10. LaTeX Rendering</a></li>
+<li><a href="#extra-header-content">5.3.3.3.1. Extra header content</a></li>
+<li><a href="#custom-css-js">5.3.3.3.2. Custom CSS/JS</a></li>
+<li><a href="#collapsable-src-example">5.3.3.3.3. Collapsable src and example blocks</a></li>
+<li><a href="#handle-table-overflow">5.3.3.3.4. Handle table overflow</a></li>
+<li><a href="#toc-as-collapsable">5.3.3.3.5. TOC as a collapsable tree</a></li>
+<li><a href="#make-verbatim-different">5.3.3.3.6. Make verbatim different to code</a></li>
+<li><a href="#change-checkbox-type">5.3.3.3.7. Change checkbox type</a></li>
+<li><a href="#header-anchors">5.3.3.3.8. Header anchors</a></li>
+<li><a href="#acronyms">5.3.3.3.9. Acronyms</a></li>
+<li><a href="#latex-rendering">5.3.3.3.10. LaTeX Rendering</a></li>
 </ul>
 </li>
-<li><input type='checkbox' id='toc--exporting-latex'/><label for='toc--exporting-latex'><a href="#exporting-latex">5.3.3.5. Exporting to LaTeX</a></label>
+<li><input type='checkbox' id='toc--exporting-latex'/><label for='toc--exporting-latex'><a href="#exporting-latex">5.3.3.4. Exporting to LaTeX</a></label>
 <ul>
-<li><a href="#org-latex-acronyms">5.3.3.5.1. Acronyms</a></li>
-<li><a href="#nicer-checkboxes">5.3.3.5.2. Nicer checkboxes</a></li>
-<li><a href="#class-templates">5.3.3.5.3. Class templates</a></li>
-<li><a href="#cleverer-preamble">5.3.3.5.4. A cleverer preamble</a></li>
-<li><a href="#chameleon-aka-match">5.3.3.5.5. Chameleon &#x2014; aka. match theme</a></li>
-<li><a href="#exporting-latex-make">5.3.3.5.6. Make verbatim different to code</a></li>
+<li><a href="#org-latex-acronyms">5.3.3.4.1. Acronyms</a></li>
+<li><a href="#nicer-checkboxes">5.3.3.4.2. Nicer checkboxes</a></li>
+<li><a href="#class-templates">5.3.3.4.3. Class templates</a></li>
+<li><a href="#cleverer-preamble">5.3.3.4.4. A cleverer preamble</a></li>
+<li><a href="#chameleon-aka-match">5.3.3.4.5. Chameleon &#x2014; aka. match theme</a></li>
+<li><a href="#exporting-latex-make">5.3.3.4.6. Make verbatim different to code</a></li>
 </ul>
 </li>
-<li><a href="#exporting-beamer">5.3.3.6. Exporting to Beamer</a></li>
-<li><a href="#exporting-gfm">5.3.3.7. Exporting to GFM</a></li>
+<li><a href="#exporting-beamer">5.3.3.5. Exporting to Beamer</a></li>
+<li><a href="#exporting-gfm">5.3.3.6. Exporting to GFM</a></li>
 </ul>
 </li>
 <li><a href="#babel">5.3.4. Babel</a></li>
@@ -6856,7 +6855,7 @@ This script also supports the following flags
 
 <span class="org-variable-name">mbsyncFile</span> = Path(<span class="org-string">"~/.mbsyncrc"</span>).expanduser()
 
-<span class="org-variable-name">imapnotifyConfigFolder</span> = Path(<span class="org-string">"~/.imapnotify/"</span>).expanduser()
+<span class="org-variable-name">imapnotifyConfigFolder</span> = Path(<span class="org-string">"~/.config/imapnotify/"</span>).expanduser()
 imapnotifyConfigFolder.mkdir(exist_ok=<span class="org-constant">True</span>)
 <span class="org-variable-name">imapnotifyConfigFilename</span> = <span class="org-string">"notify.conf"</span>
 
@@ -6904,7 +6903,7 @@ imapnotifyConfigFolder.mkdir(exist_ok=<span class="org-constant">True</span>)
     <span class="org-keyword">if</span> parameter == <span class="org-string">"IMAPAccount"</span>:
         <span class="org-keyword">if</span> currentAccountNumber &gt; <span class="org-highlight-numbers-number">0</span>:
             finaliseAccount()
-            newAccount(value)
+        newAccount(value)
     <span class="org-keyword">elif</span> parameter <span class="org-keyword">in</span> mbsyncInotifyMapping.keys():
         <span class="org-variable-name">parser</span>, <span class="org-variable-name">key</span> = mbsyncInotifyMapping[parameter]
         <span class="org-variable-name">currentAccountData</span>[key] = parser(value)
@@ -7132,29 +7131,33 @@ imapnotifyConfigFolder.mkdir(exist_ok=<span class="org-constant">True</span>)
 
 
 <span class="org-keyword">if</span> <span class="org-builtin">len</span>(sys.argv) &gt; <span class="org-highlight-numbers-number">1</span>:
-    <span class="org-keyword">if</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] == <span class="org-string">"--enable"</span>:
+    <span class="org-keyword">if</span> sys.argv[<span class="org-highlight-numbers-number">1</span>]   <span class="org-keyword">in</span> [<span class="org-string">"-e"</span>, <span class="org-string">"--enable"</span>]:
         enableAccountSystemdServices(oldAccounts)
         <span class="org-constant">exit</span>()
-    <span class="org-keyword">elif</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] == <span class="org-string">"--disable"</span>:
+    <span class="org-keyword">elif</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] <span class="org-keyword">in</span> [<span class="org-string">"-d"</span>, <span class="org-string">"--disable"</span>]:
         disableAccountSystemdServices(oldAccounts)
         <span class="org-constant">exit</span>()
-    <span class="org-keyword">elif</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] == <span class="org-string">"--status"</span>:
+    <span class="org-keyword">elif</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] <span class="org-keyword">in</span> [<span class="org-string">"-r"</span>, <span class="org-string">"--restart"</span>]:
+        restartAccountSystemdServices(oldAccounts)
+        <span class="org-constant">exit</span>()
+    <span class="org-keyword">elif</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] <span class="org-keyword">in</span> [<span class="org-string">"-s"</span>, <span class="org-string">"--status"</span>]:
         getAccountServiceStates(oldAccounts)
         <span class="org-constant">exit</span>()
-    <span class="org-keyword">elif</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] == <span class="org-string">"--help"</span>:
+    <span class="org-keyword">elif</span> sys.argv[<span class="org-highlight-numbers-number">1</span>] <span class="org-keyword">in</span> [<span class="org-string">"-h"</span>, <span class="org-string">"--help"</span>]:
         <span class="org-keyword">print</span>(<span class="org-string">"""\033[1;37mMbsync to IMAP Notify config generator.\033[0;37m</span>
 
 <span class="org-string">Usage: mbsync-imapnotify [options]</span>
 
 <span class="org-string">Options:</span>
-<span class="org-string">    --enable       enable all services</span>
-<span class="org-string">    --disable      disable all services</span>
-<span class="org-string">    --status       fetch the status for all services</span>
-<span class="org-string">    --help         show this help</span>
+<span class="org-string">    -e, --enable       enable all services</span>
+<span class="org-string">    -d, --disable      disable all services</span>
+<span class="org-string">    -r, --restart      restart all services</span>
+<span class="org-string">    -s, --status       fetch the status for all services</span>
+<span class="org-string">    -h, --help         show this help</span>
 <span class="org-string">"""</span>, end=<span class="org-string">''</span>)
         <span class="org-constant">exit</span>()
     <span class="org-keyword">else</span>:
-        <span class="org-keyword">print</span>(f<span class="org-string">"\033[0;31mFlag {sys.argv[1]} not recognised\033[0;37m"</span>)
+        <span class="org-keyword">print</span>(f<span class="org-string">"\033[0;31mFlag {sys.argv[1]} not recognised, try --help\033[0;37m"</span>)
         <span class="org-constant">exit</span>()
 
 
@@ -7209,11 +7212,11 @@ We&rsquo;ll use a template service file so we can enable a unit per-account.
 <div class="org-src-container">
 <pre class="src src-systemd"><span class="org-type">[Unit]</span>
 <span class="org-keyword">Description</span>=IMAP notifier using IDLE, golang version.
-<span class="org-keyword">ConditionPathExists</span>=<span class="org-constant">%h</span>/.imapnotify/<span class="org-constant">%I</span>/notify.conf
+<span class="org-keyword">ConditionPathExists</span>=<span class="org-constant">%h</span>/.config/imapnotify/<span class="org-constant">%I</span>/notify.conf
 <span class="org-keyword">After</span>=network.target
 
 <span class="org-type">[Service]</span>
-<span class="org-keyword">ExecStart</span>=<span class="org-constant">%h</span>/.local/bin/goimapnotify -conf <span class="org-constant">%h</span>/.imapnotify/<span class="org-constant">%I</span>/notify.conf
+<span class="org-keyword">ExecStart</span>=<span class="org-constant">%h</span>/.local/bin/goimapnotify -conf <span class="org-constant">%h</span>/.config/imapnotify/<span class="org-constant">%I</span>/notify.conf
 <span class="org-keyword">Restart</span>=<span class="org-builtin">always</span>
 <span class="org-keyword">RestartSec</span>=<span class="org-highlight-numbers-number">30</span>
 
