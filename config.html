@@ -8544,6 +8544,18 @@ Emacs allow for some fantastic <a href="https://orgmode.org/features.html">featu
 support for <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a> of any currently available technology.
 </p>
 
+<details id='org0424ed6' class='code' open>
+<summary></summary>
+<div class='gutter'><a href='#org0424ed6'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<pre class="example" style="line-height:1.13;" id="org0424ed6">
+      ╭─╴Code╶─╮            ╭─╴Raw Code╶─▶ Computer
+Ideas╺┥        ┝━▶ Org Mode╺┥
+      ╰─╴Text╶─╯            ╰─╴Document╶─▶ People
+</pre>
+
+</details>
+
 <p>
 An <kbd>.org</kbd> file can contain blocks of code (with <a href="https://en.wikipedia.org/wiki/Noweb">noweb</a> templating support), which
 can be <a href="https://orgmode.org/manual/Extracting-Source-Code.html">tangled</a> to dedicated source code files, and <a href="https://orgmode.org/manual/Extracting-Source-Code.html">woven</a> into a document
@@ -8564,22 +8576,20 @@ the document, or generate source code.
                  .tex    ┊                  ┊                 ⎪
                    ╿     ┊                  ┊                 ⎪
                 ╭──┴╌╌╮  ┊                  ┊ style.scss      ⎬ Weaving
-graphc.png ─╮   │  embedded TeX             ┊      ╽          ⎪
+graphc.png ─╮   │  embedded TeX             ┊      ╽          ⎪ (Documents)
 image.jpeg ─┤ filters   ╿                   ┊    .css         ⎪
             ╎     ╿     ┊                   ┊     ▾╎          ⎪
 figure.png╶─╧─▶ PROJECT.ORG ▶───╴filters╶───╧──────╪──▶ .html ⎪
      ╿           ╿┊ ║ │ ╰╌╌╌▷╌╌ embedded html ▶╌╌╌╌╯          ⎪
      ├╌╌╌╌╌╌╌▷╌╌╌╯┊ ║ │                                       ⎪
-    result ╌╌╌╌╌╮ ┊ ║ ├──────╴filters╶────────────────▶ .txt  ⎪
+    result╶╌╌╌╌╌╮ ┊ ║ ├──────╴filters╶────────────────▶ .txt  ⎪
      ┊▴         ┊ ┊ ║ │                                       ⎪
     execution   ┊ ┊ ║ ╰──────╴filters╶────────────────▶ .md   ⎭
      ┊▴         ┊ ┊ ║
-    code blocks◀╯ ┊ ╟─────▶ .c  ⎫
-     ╰╌╌╌╌◁╌╌╌╌╌╌╌╯ ╟────▶ .el  ⎪
-                    ╟───▶ .sh   ⎬ Tangling
-                    ╟──▶ .py    ⎪
-                    ╟─▶ .hs     ⎭
-                   etc.
+    code blocks◀╯ ┊ ╟─────────────────────────────────▶ .c    ⎫
+     ╰╌╌╌╌◁╌╌╌╌╌╌╌╯ ╟─────────────────────────────────▶ .sh   ⎬ Tangling
+                    ╟─────────────────────────────────▶ .hs   ⎪ (Code)
+                    ╙─────────────────────────────────▶ .el   ⎭
 </pre>
 
 </details>
