@@ -970,10 +970,12 @@ Affects behaviour of `emacs-anywhere--finalise-content'")
 ;; Eros-eval:1 ends here
 
 ;; [[file:config.org::*EVIL][EVIL:1]]
-(after! evil
-  (setq evil-ex-substitute-global t) ; I like my s/../.. to by global by default
-  (evil-escape-mode nil))
+(after! evil-escape (evil-escape-mode -1))
 ;; EVIL:1 ends here
+
+;; [[file:config.org::*EVIL][EVIL:2]]
+(after! evil (setq evil-ex-substitute-global t)) ; I like my s/../.. to by global by default
+;; EVIL:2 ends here
 
 ;; [[file:config.org::*Info colors][Info colors:1]]
 (use-package! info-colors

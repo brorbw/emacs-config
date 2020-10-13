@@ -6445,9 +6445,21 @@ contributes a typing delay. I&rsquo;m not sure it&rsquo;s much, but it is an ext
 <a href='#evil,code--1'>#</a>
 <button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> evil
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">evil-ex-substitute-global</span> t<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">I like my s/../.. to by global by default</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-variable-name">evil-escape-mode</span> nil<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> evil-escape <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-variable-name">evil-escape-mode</span> <span class="org-highlight-numbers-number">-1</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</details>
+
+<p>
+When I want to make a substitution, I want it to be global more often than not
+&#x2014; so let&rsquo;s make that the default.
+</p>
+<details id='evil,code--2' class='code' open><summary><span class='lang'>Emacs Lisp</span></summary>
+<div class='gutter'>
+<a href='#evil,code--2'>#</a>
+<button title='Copy to clipboard' onclick='copyPreToClipdord(this)'>⎘</button></div>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">after!</span> evil <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">setq</span> <span class="org-variable-name">evil-ex-substitute-global</span> t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">I like my s/../.. to by global by default</span>
 </pre>
 </div>
 </details>
