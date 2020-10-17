@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-10-05 Mon 19:02 -->
+<!-- 2020-10-17 Sat 15:45 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Doom Emacs Configuration</title>
@@ -13,7 +13,7 @@
 <meta property="og:description" content="The Methods, Management, and Menagerie of Madness" />
 <meta property="og:image" content="https://tecosaur.com/resources/org/nib.png" />
 <meta property="og:article:author:first_name" content="tecosaur" />
-<meta property="og:article:published_time" content="2020-10-05T19:02:47+0800" />
+<meta property="og:article:published_time" content="2020-10-17T15:45:54+0800" />
 <link rel="icon" href="https://tecosaur.com/resources/org/nib.ico" type="image/ico" />
 
 <link rel="preload" as="font" crossorigin="anonymous" type="font/woff2" href="https://tecosaur.com/resources/org/etbookot-roman-webfont.woff2">
@@ -2724,7 +2724,7 @@ MathJax = {
 </head>
 <body>
 <input type='checkbox' id='theme-switch'><div id='page'><label id='switch-label' for='theme-switch'></label><div id="content">
-<div class='page-header'><div class='page-meta'>2020-10-05 Monday 7:02PM, tecosaur</div><h1 class="title">Doom Emacs Configuration<p class="subtitle">The Methods, Management, and Menagerie of Madness</p>
+<div class='page-header'><div class='page-meta'>2020-10-17 Saturday 3:45PM, tecosaur</div><h1 class="title">Doom Emacs Configuration<p class="subtitle">The Methods, Management, and Menagerie of Madness</p>
 </h1></div>
 <nav id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -12632,7 +12632,50 @@ Let&rsquo;s enhance <code>TeX-fold-math</code> a bit
 <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">string-offset-roman-chars</span> <span class="org-rainbow-delimiters-depth-2">(</span>offset word<span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-doc">"Shift the codepoint of each charachter in WORD by OFFSET with an extra -6 shift if the letter is lowercase"</span>
   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">apply</span> <span class="org-highlight-quoted-quote">'</span><span class="org-highlight-quoted-symbol">string</span>
-         <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">mapcar</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-2">(</span>c<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">+</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">&gt;=</span> c <span class="org-highlight-numbers-number">97</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">-</span> c <span class="org-highlight-numbers-number">6</span><span class="org-rainbow-delimiters-depth-1">)</span> c<span class="org-rainbow-delimiters-depth-3">)</span> offset<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span> word<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+         <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">mapcar</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-2">(</span>c<span class="org-rainbow-delimiters-depth-2">)</span>
+                   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-function-name">string-offset-apply-roman-char-exceptions</span>
+                    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">+</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">&gt;=</span> c <span class="org-highlight-numbers-number">97</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-constant">-</span> c <span class="org-highlight-numbers-number">6</span><span class="org-rainbow-delimiters-depth-2">)</span> c<span class="org-rainbow-delimiters-depth-1">)</span> offset<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                 word<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defvar</span> <span class="org-variable-name">string-offset-roman-char-exceptions</span>
+  <span class="org-highlight-quoted-quote">'</span><span class="org-rainbow-delimiters-depth-2">(</span><span class="org-comment-delimiter">;; </span><span class="org-comment">lowercase serif</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119892</span> .  <span class="org-highlight-numbers-number">8462</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8462;</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">lowercase caligraphic</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119994</span> . <span class="org-highlight-numbers-number">8495</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8495;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119996</span> . <span class="org-highlight-numbers-number">8458</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8458;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120004</span> . <span class="org-highlight-numbers-number">8500</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8500;</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">caligraphic</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119965</span> . <span class="org-highlight-numbers-number">8492</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8492;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119968</span> . <span class="org-highlight-numbers-number">8496</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8496;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119969</span> . <span class="org-highlight-numbers-number">8497</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8497;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119971</span> . <span class="org-highlight-numbers-number">8459</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8459;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119972</span> . <span class="org-highlight-numbers-number">8464</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8464;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119975</span> . <span class="org-highlight-numbers-number">8466</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8466;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119976</span> . <span class="org-highlight-numbers-number">8499</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8499;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">119981</span> . <span class="org-highlight-numbers-number">8475</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8475;</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">fraktur</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120070</span> . <span class="org-highlight-numbers-number">8493</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8493;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120075</span> . <span class="org-highlight-numbers-number">8460</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8460;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120076</span> . <span class="org-highlight-numbers-number">8465</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8465;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120085</span> . <span class="org-highlight-numbers-number">8476</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8476;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120092</span> . <span class="org-highlight-numbers-number">8488</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8488;</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">blackboard</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120122</span> . <span class="org-highlight-numbers-number">8450</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8450;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120127</span> . <span class="org-highlight-numbers-number">8461</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8461;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120133</span> . <span class="org-highlight-numbers-number">8469</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8469;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120135</span> . <span class="org-highlight-numbers-number">8473</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8473;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120136</span> . <span class="org-highlight-numbers-number">8474</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8474;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120137</span> . <span class="org-highlight-numbers-number">8477</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8477;</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-highlight-numbers-number">120145</span> . <span class="org-highlight-numbers-number">8484</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-comment-delimiter">; </span><span class="org-comment">&#8484;</span>
+    <span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-doc">"An alist of deceptive codepoints, and then where the glyph actually resides."</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">string-offset-apply-roman-char-exceptions</span> <span class="org-rainbow-delimiters-depth-2">(</span>char<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-doc">"Sometimes the codepoint doesn't contain the char you expect.</span>
+<span class="org-doc">Such special cases should be remapped to another value, as given in `</span><span class="org-doc"><span class="org-constant">string-offset-roman-char-exceptions</span></span><span class="org-doc">'."</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">assoc</span> char <span class="org-variable-name">string-offset-roman-char-exceptions</span><span class="org-rainbow-delimiters-depth-3">)</span>
+      <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-constant">cdr</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-constant">assoc</span> char <span class="org-variable-name">string-offset-roman-char-exceptions</span><span class="org-rainbow-delimiters-depth-1">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+    char<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 
 <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">TeX-fold-parenthesize-as-neccesary</span> <span class="org-rainbow-delimiters-depth-2">(</span>tokens <span class="org-type">&amp;optional</span> suppress-left suppress-right<span class="org-rainbow-delimiters-depth-2">)</span>
   <span class="org-doc">"Add &#10090; &#10091; parenthesis as if multiple LaTeX tokens appear to be present"</span>
@@ -13075,7 +13118,7 @@ Now we just need to load it appropriately.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: tecosaur</p>
-<p class="date">Created: 2020-10-05 Mon 19:02</p>
+<p class="date">Created: 2020-10-17 Sat 15:45</p>
 </div>
 </div>
 </body>
